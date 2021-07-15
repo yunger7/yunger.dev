@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/templates/:match*",
+      "destination": "https://templates.yunger.dev/:match*"
+    }
+  ]
+}
