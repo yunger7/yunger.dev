@@ -1,5 +1,5 @@
 {
-  "rewrites": [
+  "redirects": [
     {
       "source": "/templates/:match*",
       "destination": "https://templates.yunger.dev/:match*"
