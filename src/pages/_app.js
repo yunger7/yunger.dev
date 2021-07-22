@@ -1,12 +1,11 @@
 import "../styles/globals.css";
 
-import type { AppProps } from "next/app";
 import { CssBaseline } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/core/styles";
 
 import { nordDark } from "../theme";
 
-function MyApp({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps }) {
 	return (
     <ThemeProvider theme={nordDark}>
       <CssBaseline />
@@ -14,4 +13,3 @@ function MyApp({ Component, pageProps }: AppProps) {
     </ThemeProvider>
   );
 }
-export default MyApp;
