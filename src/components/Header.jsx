@@ -16,6 +16,11 @@ const useStyles = makeStyles(theme => ({
 	root: {
 		flexGrow: 1,
 	},
+	toolbar: {
+		width: "100%",
+		maxWidth: theme.breakpoints.values.lg,
+		margin: "0 auto",
+	},
 	breadcrumbs: {
 		flexGrow: 1,
 	},
@@ -52,7 +57,7 @@ export function Header() {
 
 	return (
 		<AppBar className={classes.root} position="sticky" color="inherit">
-			<Toolbar>
+			<Toolbar className={classes.toolbar}>
 				<Breadcrumbs className={classes.breadcrumbs} aria-label="breadcrumb">
 					<Link href="/">
 						<MuiLink
