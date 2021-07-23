@@ -1,16 +1,31 @@
+import Link from "next/link";
 import Image from "next/image";
-import { Container, Card, CardContent, Typography } from "@material-ui/core";
+import {
+	Container,
+  Grid,
+	Card,
+	CardContent,
+	Typography,
+	Divider,
+} from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
+import {
+	ShoppingCart as ShoppingCartIcon,
+	LiveTv as LiveTvIcon,
+  Description as DescriptionIcon,
+  KeyboardArrowRight as KeyboardArrowRightIcon,
+} from "@material-ui/icons";
 
 import { Header } from "../components/Header";
+import { SquareLink } from "../components/SquareLink";
 
 import nordicWallpaper from "../../public/nordic-wallpaper.jpg";
 import profilePicture from "../../public/profile-picture.jpg";
 
 const useStyles = makeStyles(theme => ({
-  page: {
-    paddingTop: theme.spacing(7.5),
-  },
+	page: {
+		paddingTop: theme.spacing(6),
+	},
 	introductionCard: {
 		width: "100%",
 	},
@@ -19,7 +34,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	profile: {
 		display: "flex",
-    maxHeight: 100,
+		maxHeight: 100,
 	},
 	profileName: {
 		display: "flex",
@@ -33,11 +48,21 @@ const useStyles = makeStyles(theme => ({
 			borderRadius: theme.shape.borderRadius,
 		},
 	},
+	projects: {
+		marginTop: theme.spacing(5),
+	},
+	squareLinksWrapper: {
+    marginTop: theme.spacing(2),
+	},
+  squareLink: {
+    width: 200,
+    height: 200,
+  },
 }));
 
 export default function Home() {
 	const classes = useStyles();
-  const theme = useTheme();
+	const theme = useTheme();
 
 	return (
 		<>
@@ -49,7 +74,7 @@ export default function Home() {
 						alt="Snow mountain wallpaper"
 						width={theme.breakpoints.values.lg}
 						height={300}
-            placeholder="blur"
+						placeholder="blur"
 						objectFit="cover"
 					/>
 					<CardContent className={classes.introductionCardContent}>
@@ -64,14 +89,44 @@ export default function Home() {
 						</div>
 						<div>
 							<Typography variant="body1">
-								Hello world 👋 <br /> I'm <strong>Luís</strong>, a programmer, musician and coffee
-								enthusiast. I taught myself how to code to turn my dumb ideas
-								into reality, and I've created this place to share them with the
-								world.
+								Hello world 👋 <br /> I'm <strong>Luís</strong>, a programmer,
+								musician and coffee enthusiast. I taught myself how to code to
+								turn my dumb ideas into reality, and I've created this place to
+								share them with the world.
 							</Typography>
 						</div>
 					</CardContent>
 				</Card>
+
+				<section className={classes.projects}>
+					<Typography variant="h4" component="h2">
+						Projects
+					</Typography>
+					<Divider />
+
+					<Grid container className={classes.squareLinksWrapper} justifyContent="space-between" spacing={4}>
+            <Grid item md={3} sm={6} xs={12} className={classes.squareLink}>
+              <Link href="/shop" passHref>
+                <SquareLink icon={ShoppingCartIcon}>Shop</SquareLink>
+              </Link>
+            </Grid>
+            <Grid item md={3} sm={6} xs={12} className={classes.squareLink}>
+              <Link href="/blog" passHref>
+                <SquareLink icon={DescriptionIcon}>Blog</SquareLink>
+              </Link>
+            </Grid>
+            <Grid item md={3} sm={6} xs={12} className={classes.squareLink}>
+              <Link href="/animelist" passHref>
+                <SquareLink icon={LiveTvIcon}>Animelist</SquareLink>
+              </Link>
+            </Grid>
+            <Grid item md={3} sm={6} xs={12} className={classes.squareLink}>
+              <Link href="/projects" passHref>
+                <SquareLink icon={KeyboardArrowRightIcon}>More projects</SquareLink>
+              </Link>
+            </Grid>
+					</Grid>
+				</section>
 			</Container>
 		</>
 	);

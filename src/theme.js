@@ -1,6 +1,6 @@
 import { createTheme } from "@material-ui/core/styles";
 
-const nordPalette = {
+export const nordPalette = {
   nord0: "#2E3440",
   nord1: "#3B4252",
   nord2: "#434C5E",
