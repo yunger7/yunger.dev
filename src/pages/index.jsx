@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import {
 	Container,
-  Grid,
+	Grid,
 	Card,
 	CardContent,
 	Typography,
@@ -12,8 +12,8 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import {
 	ShoppingCart as ShoppingCartIcon,
 	LiveTv as LiveTvIcon,
-  Description as DescriptionIcon,
-  KeyboardArrowRight as KeyboardArrowRightIcon,
+	Description as DescriptionIcon,
+	KeyboardArrowRight as KeyboardArrowRightIcon,
 } from "@material-ui/icons";
 
 import { Header } from "../components/Header";
@@ -52,12 +52,12 @@ const useStyles = makeStyles(theme => ({
 		marginTop: theme.spacing(5),
 	},
 	squareLinksWrapper: {
-    marginTop: theme.spacing(2),
+		marginTop: theme.spacing(2),
 	},
-  squareLink: {
-    width: 200,
-    height: 200,
-  },
+	squareLink: {
+		width: 200,
+		height: 200,
+	},
 }));
 
 export default function Home() {
@@ -80,7 +80,13 @@ export default function Home() {
 					<CardContent className={classes.introductionCardContent}>
 						<div className={classes.profile}>
 							<div className={classes.profileImage}>
-								<Image src={profilePicture} width={175} height={175} priority />
+								<Image
+									src={profilePicture}
+									alt="yunger profile image"
+									width={175}
+									height={175}
+									priority
+								/>
 							</div>
 							<div className={classes.profileName}>
 								<Typography variant="h3">Luís Galete</Typography>
@@ -89,9 +95,9 @@ export default function Home() {
 						</div>
 						<div>
 							<Typography variant="body1">
-								Hello world 👋 <br /> I'm <strong>Luís</strong>, a programmer,
+								Hello world 👋 <br /> I&apos;m <strong>Luís</strong>, a programmer,
 								musician and coffee enthusiast. I taught myself how to code to
-								turn my dumb ideas into reality, and I've created this place to
+								turn my dumb ideas into reality, and I&apos;ve created this place to
 								share them with the world.
 							</Typography>
 						</div>
@@ -104,27 +110,34 @@ export default function Home() {
 					</Typography>
 					<Divider />
 
-					<Grid container className={classes.squareLinksWrapper} justifyContent="space-between" spacing={4}>
-            <Grid item md={3} sm={6} xs={12} className={classes.squareLink}>
-              <Link href="/shop" passHref>
-                <SquareLink icon={ShoppingCartIcon}>Shop</SquareLink>
-              </Link>
-            </Grid>
-            <Grid item md={3} sm={6} xs={12} className={classes.squareLink}>
-              <Link href="/blog" passHref>
-                <SquareLink icon={DescriptionIcon}>Blog</SquareLink>
-              </Link>
-            </Grid>
-            <Grid item md={3} sm={6} xs={12} className={classes.squareLink}>
-              <Link href="/animelist" passHref>
-                <SquareLink icon={LiveTvIcon}>Animelist</SquareLink>
-              </Link>
-            </Grid>
-            <Grid item md={3} sm={6} xs={12} className={classes.squareLink}>
-              <Link href="/projects" passHref>
-                <SquareLink icon={KeyboardArrowRightIcon}>More projects</SquareLink>
-              </Link>
-            </Grid>
+					<Grid
+						container
+						className={classes.squareLinksWrapper}
+						justifyContent="space-between"
+						spacing={4}
+					>
+						<Grid item md={3} sm={6} xs={12} className={classes.squareLink}>
+							<Link href="/shop" passHref>
+								<SquareLink icon={ShoppingCartIcon}>Shop</SquareLink>
+							</Link>
+						</Grid>
+						<Grid item md={3} sm={6} xs={12} className={classes.squareLink}>
+							<Link href="/blog" passHref>
+								<SquareLink icon={DescriptionIcon}>Blog</SquareLink>
+							</Link>
+						</Grid>
+						<Grid item md={3} sm={6} xs={12} className={classes.squareLink}>
+							<Link href="/animelist" passHref>
+								<SquareLink icon={LiveTvIcon}>Animelist</SquareLink>
+							</Link>
+						</Grid>
+						<Grid item md={3} sm={6} xs={12} className={classes.squareLink}>
+							<Link href="/projects" passHref>
+								<SquareLink icon={KeyboardArrowRightIcon}>
+									More projects
+								</SquareLink>
+							</Link>
+						</Grid>
 					</Grid>
 				</section>
 			</Container>

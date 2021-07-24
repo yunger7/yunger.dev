@@ -59,7 +59,7 @@ export function Header() {
 		<AppBar className={classes.root} position="sticky" color="inherit">
 			<Toolbar className={classes.toolbar}>
 				<Breadcrumbs className={classes.breadcrumbs} aria-label="breadcrumb">
-					<Link href="/">
+					<Link href="/" passHref>
 						<MuiLink
 							className={cs(classes.link, {
 								[classes.linkDisabled]: !pathnames.length,
@@ -83,7 +83,7 @@ export function Header() {
 								{_.capitalize(path)}
 							</MuiLink>
 						) : (
-							<Link href={href} key={href}>
+							<Link href={href} key={href} passHref>
 								<MuiLink className={classes.link} color="inherit">
 									{_.capitalize(path)}
 								</MuiLink>

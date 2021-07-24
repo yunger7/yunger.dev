@@ -51,3 +51,5 @@ export const SquareLink = React.forwardRef((props, ref) => {
 		</Paper>
 	);
 });
+
+SquareLink.displayName = "SquareLink";
