@@ -21,6 +21,7 @@ import { getNordColor } from "../utils/getNordColor";
 
 import { Header } from "../components/Header";
 import { SquareLink } from "../components/SquareLink";
+import { BlogPost } from "../components/BlogPost";
 
 import nordicWallpaper from "../../public/nordic-wallpaper.jpg";
 import profilePicture from "../../public/profile-picture.jpg";
@@ -28,6 +29,9 @@ import profilePicture from "../../public/profile-picture.jpg";
 const useStyles = makeStyles(theme => ({
 	page: {
 		paddingTop: theme.spacing(6),
+	},
+	sectionTitle: {
+		marginBottom: theme.spacing(2),
 	},
 	introductionCard: {
 		width: "100%",
@@ -54,16 +58,18 @@ const useStyles = makeStyles(theme => ({
 	projects: {
 		marginTop: theme.spacing(5),
 	},
-	squareLinksWrapper: {
-		marginTop: theme.spacing(2),
-	},
 	squareLink: {
 		width: 200,
 		height: 200,
 	},
+	posts: {
+		marginTop: theme.spacing(5),
+	},
+	featuredPosts: {},
+	latestPosts: {},
 }));
 
-export default function Home() {
+export default function Home({ posts }) {
 	const classes = useStyles();
 	const theme = useTheme();
 
@@ -108,14 +114,15 @@ export default function Home() {
 				</Card>
 
 				<section className={classes.projects}>
-					<Typography variant="h4" component="h2">
-						Projects
-					</Typography>
-					<Divider />
+					<div className={classes.sectionTitle}>
+						<Typography variant="h4" component="h2">
+							Projects
+						</Typography>
+						<Divider />
+					</div>
 
 					<Grid
 						container
-						className={classes.squareLinksWrapper}
 						justifyContent="space-between"
 						spacing={4}
 					>
@@ -142,6 +149,29 @@ export default function Home() {
 							</Link>
 						</Grid>
 					</Grid>
+				</section>
+
+				<section className={classes.posts}>
+					<div className={classes.sectionTitle}>
+						<Typography variant="h4" component="h2">
+							Blog posts
+						</Typography>
+						<Divider />
+					</div>
+
+					<div className={classes.featuredPosts}>
+
+					</div>
+
+					<div className={classes.latestPosts}>
+						<Grid container spacing={4}>
+							{posts.latest.map((post) => (
+								<Grid item md={4} sm={6} xs={12} key={post.id}>
+									<BlogPost post={post} />
+								</Grid>
+							))}
+						</Grid>
+					</div>
 				</section>
 			</Container>
 		</>
@@ -207,8 +237,6 @@ export async function getStaticProps() {
 			};
 		}
 	});
-
-	console.dir(posts, { depth: null });
 
 	return {
 		props: {

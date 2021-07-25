@@ -76,6 +76,9 @@ export const nordDark = createTheme({
     body1: {
       fontFamily: "Inter",
     },
+    body2: {
+      fontFamily: "Inter",
+    },
     button: {
       fontSize: "1rem",
       fontWeight: 400,
