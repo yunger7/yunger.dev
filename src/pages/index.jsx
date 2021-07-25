@@ -16,6 +16,9 @@ import {
 	KeyboardArrowRight as KeyboardArrowRightIcon,
 } from "@material-ui/icons";
 
+import { notion } from "../services/notion";
+import { getNordColor } from "../utils/getNordColor";
+
 import { Header } from "../components/Header";
 import { SquareLink } from "../components/SquareLink";
 
@@ -95,10 +98,10 @@ export default function Home() {
 						</div>
 						<div>
 							<Typography variant="body1">
-								Hello world 👋 <br /> I&apos;m <strong>Luís</strong>, a programmer,
-								musician and coffee enthusiast. I taught myself how to code to
-								turn my dumb ideas into reality, and I&apos;ve created this place to
-								share them with the world.
+								Hello world 👋 <br /> I&apos;m <strong>Luís</strong>, a
+								programmer, musician and coffee enthusiast. I taught myself how
+								to code to turn my dumb ideas into reality, and I&apos;ve
+								created this place to share them with the world.
 							</Typography>
 						</div>
 					</CardContent>
@@ -143,4 +146,73 @@ export default function Home() {
 			</Container>
 		</>
 	);
+}
+
+export async function getStaticProps() {
+	const blogDatabaseId = process.env.NOTION_BLOG_DATABASE_ID;
+
+	const response = await notion.databases.query({
+		database_id: blogDatabaseId,
+		filter: {
+			property: "Status",
+			select: {
+				equals: "Published",
+			},
+		},
+		sorts: [
+			{
+				property: "Created at",
+				direction: "descending",
+			},
+		],
+	});
+
+	const posts = {
+		featured: [],
+		latest: [],
+	};
+
+	response.results.forEach(page => {
+		const isFeatured = page.properties.Featured.checkbox;
+
+		if (isFeatured) {
+			const post = buildPostFromPage(page);
+			posts.featured.push(post);
+		} else {
+			const post = buildPostFromPage(page);
+			posts.latest.push(post);
+		}
+
+		function buildPostFromPage(page) {
+			const { id, created_time, properties } = page;
+
+			return {
+				id,
+				createdAt: created_time,
+				title: properties.Name.title,
+				description: properties.Description.rich_text,
+				tags: properties.Tags.multi_select.map(option => ({
+					id: option.id,
+					name: option.name,
+					color: getNordColor(option.color),
+				})),
+				language: properties.Language
+					? properties.Language.select.name
+					: null,
+				// Temporarily hosting images on Imgur since Notion's API doesn't support files yet.
+				coverImageUrl: properties["Cover Image"].files.length
+					? properties["Cover Image"].files[0].name
+					: null,
+				notionUrl: page.url,
+			};
+		}
+	});
+
+	console.dir(posts, { depth: null });
+
+	return {
+		props: {
+			posts,
+		},
+	};
 }
