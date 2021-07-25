@@ -1,7 +1,7 @@
 import Link from "next/link";
 import cs from "classnames";
 
-import { Typography, Link as MuiLink } from "@material-ui/core";
+import { Link as MuiLink } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { getNordColor } from "../utils/getNordColor";
@@ -37,7 +37,7 @@ export function RichText({ text }) {
 			text,
 		} = value;
 		return (
-			<Typography
+			<span
         className={cs(
           {[classes.bold]: bold},
           {[classes.code]: code},
@@ -55,7 +55,7 @@ export function RichText({ text }) {
 				) : (
 					text.content
 				)}
-			</Typography>
+			</span>
 		);
 	});
 }
