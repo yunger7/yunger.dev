@@ -25,11 +25,11 @@ const useStyles = makeStyles({
 });
 
 export function RichText({ text }) {
+	const classes = useStyles();
+
 	if (!text) {
 		return null;
 	}
-
-	const classes = useStyles();
 
 	return text.map((value, index) => {
 		const {
