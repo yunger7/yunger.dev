@@ -31,8 +31,6 @@ export function BlogPost({ post }) {
 	const classes = useStyles();
 	const { title, image, description, createdAt, tags } = post;
 
-	console.log(image);
-
 	return (
 		<Card className={classes.root}>
       <div className={classes.image}>

@@ -15,6 +15,9 @@ import {
 	LiveTv as LiveTvIcon,
 	Description as DescriptionIcon,
 	KeyboardArrowRight as KeyboardArrowRightIcon,
+	Info as InfoIcon,
+	Book as BookIcon,
+	ContactMail as ContactMailIcon,
 } from "@material-ui/icons";
 
 import Carousel from "react-material-ui-carousel";
@@ -72,6 +75,9 @@ const useStyles = makeStyles(theme => ({
 		marginTop: theme.spacing(5),
 	},
 	latestPosts: {
+		marginTop: theme.spacing(5),
+	},
+	more: {
 		marginTop: theme.spacing(5),
 	},
 }));
@@ -199,6 +205,33 @@ export default function Home({ posts }) {
 							))}
 						</Grid>
 					</div>
+				</section>
+			
+				<section className={classes.more}>
+					<div className={classes.sectionTitle}>
+						<Typography variant="h4" component="h2">
+							More
+						</Typography>
+						<Divider />
+					</div>
+
+					<Grid container justifyContent="space-between" spacing={4}>
+						<Grid item sm={4} xs={12} className={classes.squareLink}>
+							<Link href="/about" passHref>
+								<SquareLink icon={InfoIcon}>About me</SquareLink>
+							</Link>
+						</Grid>
+						<Grid item sm={4} xs={12} className={classes.squareLink}>
+							<Link href="/notes" passHref>
+								<SquareLink icon={BookIcon}>Random notes</SquareLink>
+							</Link>
+						</Grid>
+						<Grid item sm={4} xs={12} className={classes.squareLink}>
+							<Link href="/contact" passHref>
+								<SquareLink icon={ContactMailIcon}>Contact me</SquareLink>
+							</Link>
+						</Grid>
+					</Grid>
 				</section>
 			</Container>
 		</>
