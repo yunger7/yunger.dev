@@ -29,17 +29,31 @@ const useStyles = makeStyles(theme => ({
 
 export function BlogPost({ post }) {
 	const classes = useStyles();
-	const { title, coverImageUrl, description, createdAt, tags } = post;
+	const { title, image, description, createdAt, tags } = post;
+
+	console.log(image);
 
 	return (
 		<Card className={classes.root}>
       <div className={classes.image}>
-        <Image
-          src={coverImageUrl ? coverImageUrl : placeholder1}
-          alt="Post cover"
-          layout="fill"
-          objectFit="cover"
-        />
+				{image ? (
+					<Image
+						src={image.src}
+						alt="Post cover"
+						layout="fill"
+						objectFit="cover"
+						placeholder="blur"
+						blurDataURL={image.blurDataURL}
+					/>
+					) : (
+					<Image
+						src={placeholder1}
+						alt="Post cover"
+						layout="fill"
+						objectFit="cover"
+						placeholder="blur"
+					/>
+				)}
       </div>
 			<CardContent>
 				<Typography variant="h6" gutterBottom>

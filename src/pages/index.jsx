@@ -16,7 +16,9 @@ import {
 	Description as DescriptionIcon,
 	KeyboardArrowRight as KeyboardArrowRightIcon,
 } from "@material-ui/icons";
+
 import Carousel from "react-material-ui-carousel";
+import { getPlaiceholder } from "plaiceholder";
 
 import { notion } from "../services/notion";
 import { getNordColor } from "../utils/getNordColor";
@@ -80,10 +82,10 @@ const carouselProps = {
 		style: {
 			color: nordPalette.nord1,
 			"&:hover": {
-				backgroundColor: nordPalette.nord1
+				backgroundColor: nordPalette.nord1,
 			},
 			"&:active": {
-				backgroundColor: nordPalette.nord1
+				backgroundColor: nordPalette.nord1,
 			},
 		},
 	},
@@ -91,8 +93,8 @@ const carouselProps = {
 		style: {
 			color: nordPalette.nord9,
 		},
-	}
-}
+	},
+};
 
 export default function Home({ posts }) {
 	const classes = useStyles();
@@ -146,11 +148,7 @@ export default function Home({ posts }) {
 						<Divider />
 					</div>
 
-					<Grid
-						container
-						justifyContent="space-between"
-						spacing={4}
-					>
+					<Grid container justifyContent="space-between" spacing={4}>
 						<Grid item md={3} sm={6} xs={12} className={classes.squareLink}>
 							<Link href="/shop" passHref>
 								<SquareLink icon={ShoppingCartIcon}>Shop</SquareLink>
@@ -184,13 +182,13 @@ export default function Home({ posts }) {
 						<Divider />
 					</div>
 
-					{!!posts.featured.length && (
+					{/* {!!posts.featured.length && (
 						<Carousel {...carouselProps}>
 							{posts.featured.map(post => (
 								<FeaturedBlog key={post.id} post={post} />
 							))}
 						</Carousel>
-					)}
+					)} */}
 
 					<div className={classes.latestPosts}>
 						<Grid container spacing={4}>
@@ -231,22 +229,24 @@ export async function getStaticProps() {
 		latest: [],
 	};
 
-	response.results.forEach(page => {
+	for (const page of response.results) {
 		const isFeatured = page.properties.Featured.checkbox;
 
 		if (isFeatured) {
-			const post = buildPostFromPage(page);
+			const post = await buildPostFromPage(page);
 			posts.featured.push(post);
 		} else {
-			const post = buildPostFromPage(page);
+			const post = await buildPostFromPage(page);
 			posts.latest.push(post);
 		}
 
-		function buildPostFromPage(page) {
+		async function buildPostFromPage(page) {
 			const { id, created_time, properties } = page;
+			const image = await getCoverImage(page);
 
 			return {
 				id,
+				image,
 				createdAt: created_time,
 				title: properties.Name.title,
 				description: properties.Description.rich_text,
@@ -255,17 +255,27 @@ export async function getStaticProps() {
 					name: option.name,
 					color: getNordColor(option.color),
 				})),
-				language: properties.Language
-					? properties.Language.select.name
-					: null,
-				// Temporarily hosting images on Imgur since Notion's API doesn't support files yet.
-				coverImageUrl: properties["Cover Image"].files.length
-					? properties["Cover Image"].files[0].name
-					: null,
+				language: properties.Language ? properties.Language.select.name : null,
 				notionUrl: page.url,
 			};
 		}
-	});
+
+		// Temporarily hosting images on Imgur since Notion's API doesn't support files yet.
+		async function getCoverImage(page) {
+			const files = page.properties["Cover Image"].files;
+
+			if (files.length) {
+				const { base64, img } = await getPlaiceholder(files[0].name);
+	
+				return {
+					...img,
+					blurDataURL: base64,
+				};
+			}
+
+			return null;
+		}
+	}
 
 	return {
 		props: {
