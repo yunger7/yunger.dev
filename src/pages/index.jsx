@@ -45,12 +45,22 @@ const useStyles = makeStyles(theme => ({
 	introductionCard: {
 		width: "100%",
 	},
+	introductionWallpaper: {
+		width: "100%",
+		height: 250,
+		position: "relative",
+	},
 	introductionCardContent: {
 		padding: `${theme.spacing(2)}px ${theme.spacing(5)}px`,
 	},
 	profile: {
 		display: "flex",
-		maxHeight: 100,
+		[theme.breakpoints.down("sm")]: {
+			flexDirection: "column",
+			alignItems: "center",
+			textAlign: "center",
+			marginBottom: theme.spacing(2),
+		},
 	},
 	profileName: {
 		display: "flex",
@@ -59,9 +69,13 @@ const useStyles = makeStyles(theme => ({
 	profileImage: {
 		position: "relative",
 		bottom: 100,
+		maxHeight: 100,
 		marginRight: theme.spacing(2.5),
 		"& img": {
 			borderRadius: theme.shape.borderRadius,
+		},
+		[theme.breakpoints.down("sm")]: {
+			marginRight: 0,
 		},
 	},
 	projects: {
@@ -111,14 +125,15 @@ export default function Home({ posts }) {
 			<Header />
 			<Container className={classes.page} maxWidth="lg">
 				<Card className={classes.introductionCard}>
-					<Image
-						src={nordicWallpaper}
-						alt="Snow mountain wallpaper"
-						width={theme.breakpoints.values.lg}
-						height={300}
-						placeholder="blur"
-						objectFit="cover"
-					/>
+					<div className={classes.introductionWallpaper}>
+						<Image
+							src={nordicWallpaper}
+							alt="Snow mountain wallpaper"
+							layout="fill"
+							placeholder="blur"
+							objectFit="cover"
+						/>
+					</div>
 					<CardContent className={classes.introductionCardContent}>
 						<div className={classes.profile}>
 							<div className={classes.profileImage}>
