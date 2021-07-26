@@ -57,12 +57,29 @@ const useStyles = makeStyles(theme => ({
 export function FeaturedBlog({ post }) {
   const classes = useStyles();
 
-  const { coverImageUrl, title, description, createdAt, tags } = post;
+  const { title, image, description, createdAt, tags } = post;
 
   return (
     <div className={classes.root}>
       <div className={classes.image}>
-        <Image src={coverImageUrl ? coverImageUrl : placeholder3} alt="" layout="fill" objectFit="cover" />
+        {image ? (
+          <Image
+						src={image.src}
+						alt="Post cover"
+						layout="fill"
+						objectFit="cover"
+						placeholder="blur"
+						blurDataURL={image.blurDataURL}
+					/>
+        ) : (
+          <Image
+						src={placeholder3}
+						alt="Post cover"
+						layout="fill"
+						objectFit="cover"
+						placeholder="blur"
+					/>
+        )}
       </div>
       <div className={classes.information}>
         <Chip className={classes.featuredChip} icon={<StarIcon />} label="Featured" size="small" color="primary" />

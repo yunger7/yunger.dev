@@ -182,13 +182,13 @@ export default function Home({ posts }) {
 						<Divider />
 					</div>
 
-					{/* {!!posts.featured.length && (
+					{!!posts.featured.length && (
 						<Carousel {...carouselProps}>
 							{posts.featured.map(post => (
 								<FeaturedBlog key={post.id} post={post} />
 							))}
 						</Carousel>
-					)} */}
+					)}
 
 					<div className={classes.latestPosts}>
 						<Grid container spacing={4}>
