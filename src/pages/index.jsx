@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+
 import {
 	Container,
 	Grid,
@@ -15,12 +16,15 @@ import {
 	Description as DescriptionIcon,
 	KeyboardArrowRight as KeyboardArrowRightIcon,
 } from "@material-ui/icons";
+import Carousel from "react-material-ui-carousel";
 
 import { notion } from "../services/notion";
 import { getNordColor } from "../utils/getNordColor";
+import { nordPalette } from "../theme";
 
 import { Header } from "../components/Header";
 import { SquareLink } from "../components/SquareLink";
+import { FeaturedBlog } from "../components/FeaturedBlog";
 import { BlogPost } from "../components/BlogPost";
 
 import nordicWallpaper from "../../public/nordic-wallpaper.jpg";
@@ -65,13 +69,36 @@ const useStyles = makeStyles(theme => ({
 	posts: {
 		marginTop: theme.spacing(5),
 	},
-	featuredPosts: {},
-	latestPosts: {},
+	latestPosts: {
+		marginTop: theme.spacing(5),
+	},
 }));
+
+const carouselProps = {
+	navButtonsAlwaysInvisible: true,
+	indicatorIconButtonProps: {
+		style: {
+			color: nordPalette.nord1,
+			"&:hover": {
+				backgroundColor: nordPalette.nord1
+			},
+			"&:active": {
+				backgroundColor: nordPalette.nord1
+			},
+		},
+	},
+	activeIndicatorIconButtonProps: {
+		style: {
+			color: nordPalette.nord9,
+		},
+	}
+}
 
 export default function Home({ posts }) {
 	const classes = useStyles();
 	const theme = useTheme();
+
+	console.log(posts);
 
 	return (
 		<>
@@ -159,13 +186,17 @@ export default function Home({ posts }) {
 						<Divider />
 					</div>
 
-					<div className={classes.featuredPosts}>
-
-					</div>
+					{!!posts.featured.length && (
+						<Carousel {...carouselProps}>
+							{posts.featured.map(post => (
+								<FeaturedBlog key={post.id} post={post} />
+							))}
+						</Carousel>
+					)}
 
 					<div className={classes.latestPosts}>
 						<Grid container spacing={4}>
-							{posts.latest.map((post) => (
+							{posts.latest.map(post => (
 								<Grid item md={4} sm={6} xs={12} key={post.id}>
 									<BlogPost post={post} />
 								</Grid>

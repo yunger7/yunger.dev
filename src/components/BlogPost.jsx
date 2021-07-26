@@ -13,6 +13,7 @@ const useStyles = makeStyles(theme => ({
   image: {
     height: 200,
     position: "relative",
+		borderRadius: theme.shape.borderRadius,
   },
 	date: {
 		marginTop: theme.spacing(1),
