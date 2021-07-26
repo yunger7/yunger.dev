@@ -11,21 +11,33 @@ import placeholder3 from "../../public/placeholder3.jpg";
 const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
-    height: 400,
+    minHeight: 400,
 		display: "flex",
 		alignItems: "center",
 		gap: theme.spacing(2.5),
+    [theme.breakpoints.down("sm")]: {
+      flexDirection: "column",
+      alignItems: "stretch",
+    },
   },
   image: {
 		position: "relative",
 		width: "50%",
-		height: "100%",
+		height: 400,
     "& img": {
       borderRadius: theme.shape.borderRadius,
-    }
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "100%",
+      height: 200,
+    },
 	},
 	information: {
     width: "50%",
+    [theme.breakpoints.down("sm")]: {
+      width: "100%",
+      height: "50%",
+    },
 	},
   featuredChip: {
 		marginBottom: theme.spacing(1),

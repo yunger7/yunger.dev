@@ -98,8 +98,6 @@ export default function Home({ posts }) {
 	const classes = useStyles();
 	const theme = useTheme();
 
-	console.log(posts);
-
 	return (
 		<>
 			<Header />
