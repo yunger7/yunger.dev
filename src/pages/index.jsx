@@ -49,6 +49,9 @@ const useStyles = makeStyles(theme => ({
 	},
 	introduction: {
 		paddingBottom: theme.spacing(5),
+		[theme.breakpoints.down("sm")]: {
+			paddingBottom: theme.spacing(10),
+		},
 	},
 	introductionCard: {
 		width: "100%",
@@ -90,6 +93,9 @@ const useStyles = makeStyles(theme => ({
 		paddingTop: theme.spacing(2.5),
 		paddingBottom: theme.spacing(10),
 		backgroundColor: "#292e39",
+		[theme.breakpoints.down("sm")]: {
+			paddingTop: theme.spacing(5),
+		},
 	},
 	squareLink: {
 		width: 200,
@@ -97,6 +103,9 @@ const useStyles = makeStyles(theme => ({
 	},
 	posts: {
 		paddingBottom: theme.spacing(10),
+		[theme.breakpoints.down("sm")]: {
+			paddingTop: theme.spacing(5),
+		},
 	},
 	latestPosts: {
 		marginTop: theme.spacing(5),
@@ -104,6 +113,9 @@ const useStyles = makeStyles(theme => ({
 	more: {
 		backgroundColor: "#292e39",
 		paddingBottom: theme.spacing(10),
+		[theme.breakpoints.down("sm")]: {
+			paddingTop: theme.spacing(5),
+		},
 	},
 }));
 
