@@ -31,6 +31,11 @@ import { Header } from "../components/Header";
 import { SquareLink } from "../components/SquareLink";
 import { FeaturedBlog } from "../components/FeaturedBlog";
 import { BlogPost } from "../components/BlogPost";
+import { Footer } from "../components/Footer";
+import { WaveDivider1 } from "../components/dividers/WaveDivider1";
+import { WaveDivider3 } from "../components/dividers/WaveDivider3";
+import { WaveDivider4 } from "../components/dividers/WaveDivider4";
+import { WaveDivider5 } from "../components/dividers/WaveDivider5";
 
 import nordicWallpaper from "../../public/nordic-wallpaper.jpg";
 import profilePicture from "../../public/profile-picture.jpg";
@@ -41,6 +46,9 @@ const useStyles = makeStyles(theme => ({
 	},
 	sectionTitle: {
 		marginBottom: theme.spacing(2),
+	},
+	introduction: {
+		paddingBottom: theme.spacing(5),
 	},
 	introductionCard: {
 		width: "100%",
@@ -79,20 +87,23 @@ const useStyles = makeStyles(theme => ({
 		},
 	},
 	projects: {
-		marginTop: theme.spacing(5),
+		paddingTop: theme.spacing(2.5),
+		paddingBottom: theme.spacing(10),
+		backgroundColor: "#292e39",
 	},
 	squareLink: {
 		width: 200,
 		height: 200,
 	},
 	posts: {
-		marginTop: theme.spacing(5),
+		paddingBottom: theme.spacing(10),
 	},
 	latestPosts: {
 		marginTop: theme.spacing(5),
 	},
 	more: {
-		marginTop: theme.spacing(5),
+		backgroundColor: "#292e39",
+		paddingBottom: theme.spacing(10),
 	},
 }));
 
@@ -122,132 +133,148 @@ export default function Home({ posts }) {
 	return (
 		<>
 			<Header />
-			<Container className={classes.page} maxWidth="lg">
-				<Card className={classes.introductionCard}>
-					<div className={classes.introductionWallpaper}>
-						<Image
-							src={nordicWallpaper}
-							alt="Snow mountain wallpaper"
-							layout="fill"
-							placeholder="blur"
-							objectFit="cover"
-						/>
-					</div>
-					<CardContent className={classes.introductionCardContent}>
-						<div className={classes.profile}>
-							<div className={classes.profileImage}>
+			<main className={classes.page}>
+				<section className={classes.introduction}>
+					<Container maxWidth="lg">
+						<Card className={classes.introductionCard}>
+							<div className={classes.introductionWallpaper}>
 								<Image
-									src={profilePicture}
-									alt="yunger profile image"
-									width={175}
-									height={175}
-									priority
+									src={nordicWallpaper}
+									alt="Snow mountain wallpaper"
+									layout="fill"
+									placeholder="blur"
+									objectFit="cover"
 								/>
 							</div>
-							<div className={classes.profileName}>
-								<Typography variant="h3">Luís Galete</Typography>
-								<Typography variant="subtitle1">yunger</Typography>
-							</div>
-						</div>
-						<div>
-							<Typography variant="body1">
-								Hello world 👋 <br /> I&apos;m <strong>Luís</strong>, a
-								programmer, musician and coffee enthusiast. I taught myself how
-								to code to turn my dumb ideas into reality, and I&apos;ve
-								created this place to share them with the world.
-							</Typography>
-						</div>
-					</CardContent>
-				</Card>
+							<CardContent className={classes.introductionCardContent}>
+								<div className={classes.profile}>
+									<div className={classes.profileImage}>
+										<Image
+											src={profilePicture}
+											alt="yunger profile image"
+											width={175}
+											height={175}
+											priority
+										/>
+									</div>
+									<div className={classes.profileName}>
+										<Typography variant="h3">Luís Galete</Typography>
+										<Typography variant="subtitle1">yunger</Typography>
+									</div>
+								</div>
+								<div>
+									<Typography variant="body1">
+										Hello world 👋 <br /> I&apos;m <strong>Luís</strong>, a
+										programmer, musician and coffee enthusiast. I taught myself how
+										to code to turn my dumb ideas into reality, and I&apos;ve
+										created this place to share them with the world.
+									</Typography>
+								</div>
+							</CardContent>
+						</Card>
+					</Container>
+				</section>
+
+				<WaveDivider1 color="#292e39" />
 
 				<section className={classes.projects}>
-					<div className={classes.sectionTitle}>
-						<Typography variant="h4" component="h2">
-							Projects
-						</Typography>
-						<Divider />
-					</div>
-
-					<Grid container justifyContent="space-between" spacing={4}>
-						<Grid item md={3} sm={6} xs={12} className={classes.squareLink}>
-							<Link href="/shop" passHref>
-								<SquareLink icon={ShoppingCartIcon}>Shop</SquareLink>
-							</Link>
+					<Container maxWidth="lg">
+						<div className={classes.sectionTitle}>
+							<Typography variant="h4" component="h2">
+								Projects
+							</Typography>
+							<Divider />
+						</div>
+						<Grid container justifyContent="space-between" spacing={4}>
+							<Grid item md={3} sm={6} xs={12} className={classes.squareLink}>
+								<Link href="/shop" passHref>
+									<SquareLink icon={ShoppingCartIcon}>Shop</SquareLink>
+								</Link>
+							</Grid>
+							<Grid item md={3} sm={6} xs={12} className={classes.squareLink}>
+								<Link href="/blog" passHref>
+									<SquareLink icon={DescriptionIcon}>Blog</SquareLink>
+								</Link>
+							</Grid>
+							<Grid item md={3} sm={6} xs={12} className={classes.squareLink}>
+								<Link href="/animelist" passHref>
+									<SquareLink icon={LiveTvIcon}>Animelist</SquareLink>
+								</Link>
+							</Grid>
+							<Grid item md={3} sm={6} xs={12} className={classes.squareLink}>
+								<Link href="/projects" passHref>
+									<SquareLink icon={KeyboardArrowRightIcon}>
+										More projects
+									</SquareLink>
+								</Link>
+							</Grid>
 						</Grid>
-						<Grid item md={3} sm={6} xs={12} className={classes.squareLink}>
-							<Link href="/blog" passHref>
-								<SquareLink icon={DescriptionIcon}>Blog</SquareLink>
-							</Link>
-						</Grid>
-						<Grid item md={3} sm={6} xs={12} className={classes.squareLink}>
-							<Link href="/animelist" passHref>
-								<SquareLink icon={LiveTvIcon}>Animelist</SquareLink>
-							</Link>
-						</Grid>
-						<Grid item md={3} sm={6} xs={12} className={classes.squareLink}>
-							<Link href="/projects" passHref>
-								<SquareLink icon={KeyboardArrowRightIcon}>
-									More projects
-								</SquareLink>
-							</Link>
-						</Grid>
-					</Grid>
+					</Container>
 				</section>
+
+				<WaveDivider5 backgroundColor="#292e39" color="#242933" />
 
 				<section className={classes.posts}>
-					<div className={classes.sectionTitle}>
-						<Typography variant="h4" component="h2">
-							Blog posts
-						</Typography>
-						<Divider />
-					</div>
-
-					{!!posts.featured.length && (
-						<Carousel {...carouselProps}>
-							{posts.featured.map(post => (
-								<FeaturedBlog key={post.id} post={post} />
-							))}
-						</Carousel>
-					)}
-
-					<div className={classes.latestPosts}>
-						<Grid container spacing={4}>
-							{posts.latest.map(post => (
-								<Grid item md={4} sm={6} xs={12} key={post.id}>
-									<BlogPost post={post} />
-								</Grid>
-							))}
-						</Grid>
-					</div>
+					<Container maxWidth="lg">
+						<div className={classes.sectionTitle}>
+							<Typography variant="h4" component="h2">
+								Blog posts
+							</Typography>
+							<Divider />
+						</div>
+						{!!posts.featured.length && (
+							<Carousel {...carouselProps}>
+								{posts.featured.map(post => (
+									<FeaturedBlog key={post.id} post={post} />
+								))}
+							</Carousel>
+						)}
+						<div className={classes.latestPosts}>
+							<Grid container spacing={4}>
+								{posts.latest.map(post => (
+									<Grid item md={4} sm={6} xs={12} key={post.id}>
+										<BlogPost post={post} />
+									</Grid>
+								))}
+							</Grid>
+						</div>
+					</Container>
 				</section>
-			
+				
+				<WaveDivider3 color="#292e39" />
+
 				<section className={classes.more}>
-					<div className={classes.sectionTitle}>
-						<Typography variant="h4" component="h2">
-							More
-						</Typography>
-						<Divider />
-					</div>
-
-					<Grid container justifyContent="space-between" spacing={4}>
-						<Grid item sm={4} xs={12} className={classes.squareLink}>
-							<Link href="/about" passHref>
-								<SquareLink icon={InfoIcon}>About me</SquareLink>
-							</Link>
+					<Container maxWidth="lg">
+						<div className={classes.sectionTitle}>
+							<Typography variant="h4" component="h2">
+								More
+							</Typography>
+							<Divider />
+						</div>
+						<Grid container justifyContent="space-between" spacing={4}>
+							<Grid item sm={4} xs={12} className={classes.squareLink}>
+								<Link href="/about" passHref>
+									<SquareLink icon={InfoIcon}>About me</SquareLink>
+								</Link>
+							</Grid>
+							<Grid item sm={4} xs={12} className={classes.squareLink}>
+								<Link href="/notes" passHref>
+									<SquareLink icon={BookIcon}>Random notes</SquareLink>
+								</Link>
+							</Grid>
+							<Grid item sm={4} xs={12} className={classes.squareLink}>
+								<Link href="/contact" passHref>
+									<SquareLink icon={ContactMailIcon}>Contact me</SquareLink>
+								</Link>
+							</Grid>
 						</Grid>
-						<Grid item sm={4} xs={12} className={classes.squareLink}>
-							<Link href="/notes" passHref>
-								<SquareLink icon={BookIcon}>Random notes</SquareLink>
-							</Link>
-						</Grid>
-						<Grid item sm={4} xs={12} className={classes.squareLink}>
-							<Link href="/contact" passHref>
-								<SquareLink icon={ContactMailIcon}>Contact me</SquareLink>
-							</Link>
-						</Grid>
-					</Grid>
+					</Container>
 				</section>
-			</Container>
+			</main>
+
+			<WaveDivider4 backgroundColor="#292e39" />
+
+			<Footer />
 		</>
 	);
 }
