@@ -9,6 +9,11 @@ body {
   box-sizing: border-box;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 ::selection {
   background-color: #4C566A80;
 }
