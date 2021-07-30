@@ -179,6 +179,9 @@ export function Footer() {
 						className={classes.supportButton}
 						variant="outlined"
 						color="primary"
+						href="https://www.buymeacoffee.com/yunger"
+						target="_blank"
+						rel="noreferrer"
 					>
 						Buy me a coffee
 					</Button>
@@ -306,7 +309,7 @@ function SocialMedia() {
 	return (
 		<div className={classes.root}>
 			{/* GitHub */}
-			<a href="https://github.com/yunger7" target="_blank" rel="noopener">
+			<a href="https://github.com/yunger7" target="_blank" rel="noreferrer">
 				<svg
 					className={classes.icon}
 					xmlns="http://www.w3.org/2000/svg"
@@ -323,7 +326,7 @@ function SocialMedia() {
 			<a
 				href="https://www.reddit.com/user/yunger_"
 				target="_blank"
-				rel="noopener"
+				rel="noreferrer"
 			>
 				<svg
 					className={classes.icon}
@@ -341,7 +344,7 @@ function SocialMedia() {
 			<a
 				href="https://myanimelist.net/profile/yunger"
 				target="_blank"
-				rel="noopener"
+				rel="noreferrer"
 			>
 				<svg
 					className={classes.icon}
@@ -377,7 +380,7 @@ function SocialMedia() {
 			<a
 				href="https://steamcommunity.com/id/yunger/"
 				target="_blank"
-				rel="noopener"
+				rel="noreferrer"
 			>
 				<svg
 					className={classes.icon}
