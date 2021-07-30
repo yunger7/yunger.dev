@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -144,6 +145,9 @@ export default function Home({ posts }) {
 
 	return (
 		<>
+			<Head>
+				<title>yunger.dev</title>
+			</Head>
 			<Header />
 			<main className={classes.page}>
 				<section className={classes.introduction}>
