@@ -22,10 +22,10 @@ import {
 } from "@material-ui/icons";
 
 import Carousel from "react-material-ui-carousel";
-import { getPlaiceholder } from "plaiceholder";
 
 import { notion } from "../services/notion";
 import { getNordColor } from "../utils/getNordColor";
+import { getPostCoverImage } from "../utils/getPostCoverImage";
 import { nordPalette } from "../theme";
 
 import { Header } from "../components/Header";
@@ -336,7 +336,7 @@ export async function getStaticProps() {
 
 		async function buildPostFromPage(page) {
 			const { id, created_time, properties } = page;
-			const image = await getCoverImage(page);
+			const image = await getPostCoverImage(page);
 
 			return {
 				id,
@@ -353,22 +353,6 @@ export async function getStaticProps() {
 				language: properties.Language ? properties.Language.select.name : null,
 				notionUrl: page.url,
 			};
-		}
-
-		// Temporarily hosting images on Imgur since Notion's API doesn't support files yet.
-		async function getCoverImage(page) {
-			const files = page.properties["Cover Image"].files;
-
-			if (files.length) {
-				const { base64, img } = await getPlaiceholder(files[0].name);
-	
-				return {
-					...img,
-					blurDataURL: base64,
-				};
-			}
-
-			return null;
 		}
 	}
 
