@@ -1,8 +1,11 @@
 import Image from "next/image";
+import React from "react";
 
-import { Chip, Typography } from "@material-ui/core";
+import { Chip, Typography, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Star as StarIcon, } from "@material-ui/icons";
+
+import { nordPalette } from "../theme";
 
 import { RichText } from "./RichText";
 
@@ -12,9 +15,22 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
     minHeight: 400,
+
 		display: "flex",
 		alignItems: "center",
 		gap: theme.spacing(2.5),
+
+    cursor: "pointer",
+		transition: "background .2s",
+
+		"&:hover": {
+			backgroundColor: `${nordPalette.nord3}aa`,
+		},
+
+    "& *": {
+      cursor: "pointer",
+    },
+
     [theme.breakpoints.down("sm")]: {
       flexDirection: "column",
       alignItems: "stretch",
@@ -24,9 +40,11 @@ const useStyles = makeStyles(theme => ({
 		position: "relative",
 		width: "50%",
 		height: 400,
+    
     "& img": {
       borderRadius: theme.shape.borderRadius,
     },
+
     [theme.breakpoints.down("sm")]: {
       width: "100%",
       height: 200,
@@ -54,13 +72,14 @@ const useStyles = makeStyles(theme => ({
 	},
 }));
 
-export function FeaturedBlog({ post }) {
+export const FeaturedBlog = React.forwardRef((props, ref) => {
   const classes = useStyles();
 
+  const { post, onClick, href } = props;
   const { title, image, description, createdAt, tags } = post;
 
   return (
-    <div className={classes.root}>
+    <Box className={classes.root} component="a" ref={ref} onClick={onClick} href={href}>
       <div className={classes.image}>
         {image ? (
           <Image
@@ -109,6 +128,8 @@ export function FeaturedBlog({ post }) {
           ))}
         </div>
       </div>
-    </div>
+    </Box>
   );
-}
+});
+
+FeaturedBlog.displayName = "FeaturedBlog";

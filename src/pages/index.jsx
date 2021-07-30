@@ -241,7 +241,9 @@ export default function Home({ posts }) {
 						{!!posts.featured.length && (
 							<Carousel {...carouselProps}>
 								{posts.featured.map(post => (
-									<FeaturedBlog key={post.id} post={post} />
+									<Link href={`/blog/${post.slug}`} passHref key={post.id}>
+										<FeaturedBlog post={post} />
+									</Link>
 								))}
 							</Carousel>
 						)}
