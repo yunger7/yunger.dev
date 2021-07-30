@@ -26,7 +26,6 @@ import { getPlaiceholder } from "plaiceholder";
 
 import { notion } from "../services/notion";
 import { getNordColor } from "../utils/getNordColor";
-import { getPostSlug } from "../utils/getPostSlug";
 import { nordPalette } from "../theme";
 
 import { Header } from "../components/Header";
@@ -344,7 +343,7 @@ export async function getStaticProps() {
 				image,
 				createdAt: created_time,
 				title: properties.Name.title,
-				slug: getPostSlug(page),
+				slug: properties.Slug.formula.string,
 				description: properties.Description.rich_text,
 				tags: properties.Tags.multi_select.map(option => ({
 					id: option.id,
