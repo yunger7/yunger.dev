@@ -2,11 +2,33 @@ import { notion } from "../../services/notion";
 
 import { getNordColor } from "../../utils/getNordColor";
 import { getPostCoverImage } from "../../utils/getPostCoverImage";
+import { getPlainTextFromBlocks } from "../../utils/getPlainTextFromBlocks";
+
+import { Header } from "../../components/Header";
 
 export default function BlogPost({ post }) {
 	console.dir(post, { depth: null });
 
-	return <h1>Blog post</h1>;
+	const headerPaths = [
+		{
+			name: "yunger.dev",
+			href: "/",
+		},
+		{
+			name: "Blog",
+			href: "/blog",
+		},
+		{
+			name: getPlainTextFromBlocks(post.title),
+			href: post.slug,
+		},
+	]
+
+	return (
+		<>
+			<Header paths={headerPaths} />
+		</>
+	);
 }
 
 const blogDatabaseId = process.env.NOTION_BLOG_DATABASE_ID;
@@ -66,6 +88,7 @@ export async function getStaticProps({ params: { slug } }) {
 		image: postImage,
 		createdAt: notionPost.created_time,
 		title: notionPost.properties["Name"].title,
+		slug: notionPost.properties.Slug.formula.string,
 		description: notionPost.properties["Description"].rich_text,
 		tags: notionPost.properties["Tags"].multi_select.map(option => ({
 			id: option.id,
