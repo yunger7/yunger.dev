@@ -16,7 +16,6 @@ const useStyles = makeStyles(theme => ({
 		height: "100%",
 
 		cursor: "pointer",
-		textDecoration: "none",
 		transition: "background .2s",
 
 		"&:hover": {

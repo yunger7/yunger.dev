@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { nordPalette } from "../theme";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
 	root: {
 		width: "100%",
 		height: "100%",
@@ -15,7 +15,6 @@ const useStyles = makeStyles(theme => ({
 		justifyContent: "center",
 
 		cursor: "pointer",
-		textDecoration: "none",
 		transition: "background .2s",
 
 		"&:hover": {
@@ -26,7 +25,7 @@ const useStyles = makeStyles(theme => ({
 		width: 50,
 		height: 50,
 	},
-}));
+});
 
 export const SquareLink = React.forwardRef((props, ref) => {
 	const classes = useStyles();
