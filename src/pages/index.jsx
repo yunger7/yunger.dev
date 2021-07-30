@@ -339,6 +339,7 @@ export async function getStaticProps() {
 				image,
 				createdAt: created_time,
 				title: properties.Name.title,
+				slug: getPostSlug(page),
 				description: properties.Description.rich_text,
 				tags: properties.Tags.multi_select.map(option => ({
 					id: option.id,
@@ -364,6 +365,16 @@ export async function getStaticProps() {
 			}
 
 			return null;
+		}
+
+		function getPostSlug(page) {
+			let postSlug = "";
+
+			page.properties["Name"].title.forEach(block => {
+				postSlug += block.plain_text;
+			});
+
+			return postSlug.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');
 		}
 	}
 
