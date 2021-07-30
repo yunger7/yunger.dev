@@ -26,6 +26,7 @@ import { getPlaiceholder } from "plaiceholder";
 
 import { notion } from "../services/notion";
 import { getNordColor } from "../utils/getNordColor";
+import { getPostSlug } from "../utils/getPostSlug";
 import { nordPalette } from "../theme";
 
 import { Header } from "../components/Header";
@@ -369,16 +370,6 @@ export async function getStaticProps() {
 			}
 
 			return null;
-		}
-
-		function getPostSlug(page) {
-			let postSlug = "";
-
-			page.properties["Name"].title.forEach(block => {
-				postSlug += block.plain_text;
-			});
-
-			return postSlug.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');
 		}
 	}
 
