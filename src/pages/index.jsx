@@ -249,7 +249,9 @@ export default function Home({ posts }) {
 							<Grid container spacing={4}>
 								{posts.latest.map(post => (
 									<Grid item md={4} sm={6} xs={12} key={post.id}>
-										<BlogPost post={post} />
+										<Link href={`/blog/${post.slug}`} passHref>
+											<BlogPost post={post} />
+										</Link>
 									</Grid>
 								))}
 							</Grid>

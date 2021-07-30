@@ -1,6 +1,10 @@
 import Image from "next/image";
+import React from "react";
+
 import { Card, CardContent, Typography, Chip } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+
+import { nordPalette } from "../theme";
 
 import { RichText } from "./RichText";
 
@@ -8,16 +12,25 @@ import placeholder1 from "../../public/placeholder1.jpg";
 
 const useStyles = makeStyles(theme => ({
 	root: {
-    height: "100%"
+		display: "block",
+		height: "100%",
+
+		cursor: "pointer",
+		textDecoration: "none",
+		transition: "background .2s",
+
+		"&:hover": {
+			backgroundColor: `${nordPalette.nord3}aa`,
+		},
 	},
-  image: {
-    height: 200,
-    position: "relative",
+	image: {
+		height: 200,
+		position: "relative",
 		borderRadius: theme.shape.borderRadius,
-  },
+	},
 	date: {
 		marginTop: theme.spacing(1),
-    fontFamily: "Inter",
+		fontFamily: "Inter",
 	},
 	tags: {
 		marginTop: theme.spacing(1),
@@ -27,13 +40,20 @@ const useStyles = makeStyles(theme => ({
 	},
 }));
 
-export function BlogPost({ post }) {
+export const BlogPost = React.forwardRef((props, ref) => {
 	const classes = useStyles();
+	const { post, onClick, href } = props;
 	const { title, image, description, createdAt, tags } = post;
 
 	return (
-		<Card className={classes.root}>
-      <div className={classes.image}>
+		<Card
+			className={classes.root}
+			component="a"
+			ref={ref}
+			onClick={onClick}
+			href={href}
+		>
+			<div className={classes.image}>
 				{image ? (
 					<Image
 						src={image.src}
@@ -43,7 +63,7 @@ export function BlogPost({ post }) {
 						placeholder="blur"
 						blurDataURL={image.blurDataURL}
 					/>
-					) : (
+				) : (
 					<Image
 						src={placeholder1}
 						alt="Post cover"
@@ -52,7 +72,7 @@ export function BlogPost({ post }) {
 						placeholder="blur"
 					/>
 				)}
-      </div>
+			</div>
 			<CardContent>
 				<Typography variant="h6" gutterBottom>
 					<RichText text={title} />
@@ -81,4 +101,6 @@ export function BlogPost({ post }) {
 			</CardContent>
 		</Card>
 	);
-}
+});
+
+BlogPost.displayName = "BlogPost";
