@@ -152,7 +152,7 @@ export default function BlogPost({ post }) {
 				</section>
 
 			</main>
-			
+
 			<WaveDivider4
 				backgroundColor={theme.palette.background.paper}
 				color="#242933"
@@ -262,6 +262,9 @@ export async function getStaticProps({ params: { slug } }) {
 
 
 	return {
-		props: { post },
+		props: {
+			post
+		},
+		revalidate: 60 * 60 * 8 // 8 hours
 	};
 }

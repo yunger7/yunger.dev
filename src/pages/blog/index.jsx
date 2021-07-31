@@ -118,5 +118,6 @@ export async function getStaticProps() {
     props: {
       posts,
     },
+    revalidate: 60 * 60 * 8 // 8 hours
   };
 }
