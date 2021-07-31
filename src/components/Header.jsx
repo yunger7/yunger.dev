@@ -24,11 +24,9 @@ const useStyles = makeStyles(theme => ({
 		flexGrow: 1,
 	},
 	link: {
-		padding: ".1rem .35rem",
+		padding: "4px 6px",
 		fontSize: 14,
 		cursor: "pointer",
-		display: "flex",
-		alignItems: "flex-end",
 		borderRadius: theme.shape.borderRadius,
 	},
 	linkDisabled: {
