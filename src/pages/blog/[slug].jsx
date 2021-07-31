@@ -62,6 +62,7 @@ export default function BlogPost({ post }) {
 
 	const classes = useStyles();
 	const theme = useTheme();
+	const jsxContent = useBlockRenderer(content);
 
 	const titleAsPlainText = getPlainTextFromBlocks(title);
 
@@ -148,7 +149,7 @@ export default function BlogPost({ post }) {
 
 				<section className={classes.blogContent}>
 					<Container maxWidth="md">
-						{content.map(block => useBlockRenderer(block))}
+						{jsxContent}
 					</Container>
 				</section>
 
