@@ -3,6 +3,10 @@
     {
       "source": "/templates/:match*",
       "destination": "https://templates.yunger.dev/:match*"
+    },
+    {
+      "source": "/shop",
+      "destination": "https://ko-fi.com/yunger/shop"
     }
   ]
 }
