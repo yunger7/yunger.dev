@@ -57,6 +57,7 @@ export const nordDark = createTheme({
     fontWeightBold: 600,
     h1: {
       fontSize: "3rem",
+      fontWeight: 400,
     },
     h2: {
       fontSize: "2.5rem",
@@ -98,6 +99,10 @@ export const nordDark = createTheme({
     MuiButton: {
       root: {
         padding: "4px 13px",
+      },
+      startIcon: {
+        marginLeft: 0,
+        marginRight: 4,
       },
     },
     MuiAccordion: {
