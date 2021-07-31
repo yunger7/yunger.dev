@@ -60,6 +60,7 @@ export const nordDark = createTheme({
     },
     h2: {
       fontSize: "2.5rem",
+      fontWeight: 400,
     },
     h3: {
       fontSize: "2rem",
@@ -97,6 +98,20 @@ export const nordDark = createTheme({
     MuiButton: {
       root: {
         padding: "4px 13px",
+      },
+    },
+    MuiAccordion: {
+      root: {
+        backgroundColor: nordPalette.nord1,
+      },
+    },
+    MuiAccordionSummary: {
+      root: {
+        flexDirection: "row-reverse",
+      },
+      expandIcon: {
+        margin: "0 10px 0 0",
+        padding: 0,
       },
     },
     MuiLink: {
