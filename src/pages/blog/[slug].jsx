@@ -151,13 +151,14 @@ export default function BlogPost({ post }) {
 					</Container>
 				</section>
 
-				<WaveDivider4
-					backgroundColor={theme.palette.background.paper}
-					color="#242933"
-				/>
-
-				<Footer />
 			</main>
+			
+			<WaveDivider4
+				backgroundColor={theme.palette.background.paper}
+				color="#242933"
+			/>
+
+			<Footer />
 		</>
 	);
 }
