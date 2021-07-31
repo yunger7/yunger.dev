@@ -16,6 +16,7 @@ import {
 	ShoppingCart as ShoppingCartIcon,
 	Description as DescriptionIcon,
 	Settings as SettingsIcon,
+	LocalCafe as LocalCafeIcon,
 } from "@material-ui/icons";
 import { Alert } from "@material-ui/lab";
 
@@ -177,9 +178,10 @@ export function Footer() {
 					</div>
 					<Button
 						className={classes.supportButton}
+						startIcon={<LocalCafeIcon />}
 						variant="outlined"
 						color="primary"
-						href="https://www.buymeacoffee.com/yunger"
+						href="https://ko-fi.com/yunger"
 						target="_blank"
 						rel="noreferrer"
 					>
