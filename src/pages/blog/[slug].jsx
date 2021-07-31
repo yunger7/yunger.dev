@@ -8,7 +8,7 @@ import {
 	Typography,
 	Chip,
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 
 import { notion } from "../../services/notion";
 
@@ -18,12 +18,18 @@ import { getPlainTextFromBlocks } from "../../utils/getPlainTextFromBlocks";
 
 import { Header } from "../../components/Header";
 import { RichText } from "../../components/RichText";
+import { WaveDivider1 } from "../../components/dividers/WaveDivider1";
+import { WaveDivider4 } from "../../components/dividers/WaveDivider4";
+import { Footer } from "../../components/Footer";
 
 import placeholder3 from "../../../public/placeholder3.jpg";
 
 const useStyles = makeStyles(theme => ({
 	page: {
 		paddingTop: theme.spacing(6),
+	},
+	introduction: {
+		paddingBottom: theme.spacing(5),
 	},
 	blogImage: {
 		width: "100%",
@@ -40,13 +46,20 @@ const useStyles = makeStyles(theme => ({
 	tag: {
 		margin: `0 ${theme.spacing(0.5)}px`,
 	},
-	date: {
+	blogDate: {
 		fontWeight: 400,
+	},
+	blogContent: {
+		paddingTop: theme.spacing(2.5),
+		paddingBottom: theme.spacing(10),
+		backgroundColor: theme.palette.background.paper,
 	},
 }));
 
 export default function BlogPost({ post }) {
 	const classes = useStyles();
+	const theme = useTheme();
+
 	const { title, image, slug, tags, createdAt } = post;
 	const titleAsPlainText = getPlainTextFromBlocks(title);
 
@@ -74,7 +87,7 @@ export default function BlogPost({ post }) {
 			</Head>
 			<Header paths={headerPaths} />
 			<main className={classes.page}>
-				<section>
+				<section className={classes.introduction}>
 					<Container maxWidth="lg">
 						<Card>
 							<div className={classes.blogImage}>
@@ -128,6 +141,26 @@ export default function BlogPost({ post }) {
 						</Card>
 					</Container>
 				</section>
+
+				<WaveDivider1 color={theme.palette.background.paper} />
+
+				<section className={classes.blogContent}>
+					<Container maxWidth="lg">
+						<Typography variant="body1">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum
+							deleniti reiciendis repellendus autem ad adipisci vel doloremque
+							cupiditate dolorem sit iure totam ullam quam incidunt, est quaerat
+							consectetur neque. Iure.
+						</Typography>
+					</Container>
+				</section>
+
+				<WaveDivider4
+					backgroundColor={theme.palette.background.paper}
+					color="#242933"
+				/>
+
+				<Footer />
 			</main>
 		</>
 	);
