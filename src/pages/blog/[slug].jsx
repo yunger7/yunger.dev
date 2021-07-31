@@ -72,7 +72,6 @@ export default function BlogPost({ post }) {
 		content,
 		readingTime,
 	} = post;
-	console.dir(post, { depth: null });
 
 	const classes = useStyles();
 	const theme = useTheme();
