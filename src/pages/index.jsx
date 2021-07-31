@@ -158,6 +158,7 @@ export default function Home({ posts }) {
 									layout="fill"
 									placeholder="blur"
 									objectFit="cover"
+									priority
 								/>
 							</div>
 							<CardContent className={classes.introductionCardContent}>
