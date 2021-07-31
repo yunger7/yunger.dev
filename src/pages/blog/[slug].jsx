@@ -66,8 +66,6 @@ export default function BlogPost({ post }) {
 
 	const titleAsPlainText = getPlainTextFromBlocks(title);
 
-	console.dir(post, { depth: null });
-
 	const headerPaths = [
 		{
 			name: "yunger.dev",
