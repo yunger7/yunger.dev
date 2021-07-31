@@ -15,6 +15,7 @@ import { notion } from "../../services/notion";
 import { getNordColor } from "../../utils/getNordColor";
 import { getPostCoverImage } from "../../utils/getPostCoverImage";
 import { getPlainTextFromBlocks } from "../../utils/getPlainTextFromBlocks";
+import { useBlockRenderer } from "../../hooks/useBlockRenderer";
 
 import { Header } from "../../components/Header";
 import { RichText } from "../../components/RichText";
@@ -57,10 +58,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function BlogPost({ post }) {
+	const { title, image, slug, tags, createdAt, content } = post;
+
 	const classes = useStyles();
 	const theme = useTheme();
 
-	const { title, image, slug, tags, createdAt } = post;
 	const titleAsPlainText = getPlainTextFromBlocks(title);
 
 	console.dir(post, { depth: null });
@@ -145,13 +147,8 @@ export default function BlogPost({ post }) {
 				<WaveDivider1 color={theme.palette.background.paper} />
 
 				<section className={classes.blogContent}>
-					<Container maxWidth="lg">
-						<Typography variant="body1">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum
-							deleniti reiciendis repellendus autem ad adipisci vel doloremque
-							cupiditate dolorem sit iure totam ullam quam incidunt, est quaerat
-							consectetur neque. Iure.
-						</Typography>
+					<Container maxWidth="md">
+						{content.map(block => useBlockRenderer(block))}
 					</Container>
 				</section>
 
@@ -217,12 +214,14 @@ export async function getStaticProps({ params: { slug } }) {
 
 	const notionPost = dataResponse.results[0];
 	const postImage = await getPostCoverImage(notionPost);
+	const blogContent = await getBlogContent(notionPost.id);
 
 	const post = {
 		id: notionPost.id,
 		image: postImage,
 		createdAt: notionPost.created_time,
 		title: notionPost.properties["Name"].title,
+		content: blogContent,
 		slug: notionPost.properties.Slug.formula.string,
 		description: notionPost.properties["Description"].rich_text,
 		tags: notionPost.properties["Tags"].multi_select.map(option => ({
@@ -236,11 +235,31 @@ export async function getStaticProps({ params: { slug } }) {
 		notionUrl: notionPost.url,
 	};
 
-	const pageResponse = await notion.blocks.children.list({
-		block_id: post.id,
-	});
+	async function getBlogContent(id) {
+		const blogContent = await getBlocks(id);
 
-	post.content = pageResponse.results;
+		async function getBlocks(id) {
+			const { results } = await notion.blocks.children.list({
+				block_id: id,
+			});
+
+			const blocksWithChildren = [];
+	
+			for (const block of results) {
+				if (block.has_children) {
+					const childBlocks = await getBlocks(block.id);
+					block[block.type].children = childBlocks;
+				}
+
+				blocksWithChildren.push(block);
+			}
+
+			return blocksWithChildren;
+		}
+
+		return blogContent;
+	}
+
 
 	return {
 		props: { post },
