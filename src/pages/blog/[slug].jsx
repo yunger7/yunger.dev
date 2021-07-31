@@ -9,12 +9,16 @@ import {
 	Chip,
 } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
+import readingTime from "reading-time";
 
 import { notion } from "../../services/notion";
 
 import { getNordColor } from "../../utils/getNordColor";
 import { getPostCoverImage } from "../../utils/getPostCoverImage";
-import { getPlainTextFromBlocks } from "../../utils/getPlainTextFromBlocks";
+import {
+	getPlainTextFromBlocks,
+	getPlainTextFromRichText,
+} from "../../utils/getPlainText";
 import { useBlockRenderer } from "../../hooks/useBlockRenderer";
 
 import { Header } from "../../components/Header";
@@ -58,13 +62,21 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function BlogPost({ post }) {
-	const { title, image, slug, tags, createdAt, content } = post;
+	const {
+		title,
+		titleAsPlainText,
+		image,
+		slug,
+		tags,
+		createdAt,
+		content,
+		readingTime,
+	} = post;
+	console.dir(post, { depth: null });
 
 	const classes = useStyles();
 	const theme = useTheme();
 	const jsxContent = useBlockRenderer(content);
-
-	const titleAsPlainText = getPlainTextFromBlocks(title);
 
 	const headerPaths = [
 		{
@@ -136,7 +148,8 @@ export default function BlogPost({ post }) {
 										month: "short",
 										day: "numeric",
 										year: "numeric",
-									})}
+									})}{" "}
+									• {readingTime.text}
 								</Typography>
 							</CardContent>
 						</Card>
@@ -146,11 +159,8 @@ export default function BlogPost({ post }) {
 				<WaveDivider1 color={theme.palette.background.paper} />
 
 				<section className={classes.blogContent}>
-					<Container maxWidth="md">
-						{jsxContent}
-					</Container>
+					<Container maxWidth="md">{jsxContent}</Container>
 				</section>
-
 			</main>
 
 			<WaveDivider4
@@ -215,12 +225,17 @@ export async function getStaticProps({ params: { slug } }) {
 	const notionPost = dataResponse.results[0];
 	const postImage = await getPostCoverImage(notionPost);
 	const blogContent = await getBlogContent(notionPost.id);
+	const blogContentRaw = getPlainTextFromBlocks(blogContent);
 
 	const post = {
 		id: notionPost.id,
 		image: postImage,
 		createdAt: notionPost.created_time,
+		readingTime: readingTime(blogContentRaw),
 		title: notionPost.properties["Name"].title,
+		titleAsPlainText: getPlainTextFromRichText(
+			notionPost.properties["Name"].title
+		),
 		content: blogContent,
 		slug: notionPost.properties.Slug.formula.string,
 		description: notionPost.properties["Description"].rich_text,
@@ -244,7 +259,7 @@ export async function getStaticProps({ params: { slug } }) {
 			});
 
 			const blocksWithChildren = [];
-	
+
 			for (const block of results) {
 				if (block.has_children) {
 					const childBlocks = await getBlocks(block.id);
@@ -260,11 +275,10 @@ export async function getStaticProps({ params: { slug } }) {
 		return blogContent;
 	}
 
-
 	return {
 		props: {
-			post
+			post,
 		},
-		revalidate: 60 * 60 * 8 // 8 hours
+		revalidate: 60 * 60 * 8, // 8 hours
 	};
 }
