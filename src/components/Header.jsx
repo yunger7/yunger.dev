@@ -5,7 +5,6 @@ import {
 	Breadcrumbs,
 	Button,
 	Link as MuiLink,
-	CssBaseline,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Search as SearchIcon } from "@material-ui/icons";
@@ -54,7 +53,7 @@ const defaultPaths = [
 		name: "yunger.dev",
 		href: "/",
 	},
-]
+];
 
 export function Header({ paths = defaultPaths }) {
 	const classes = useStyles();
@@ -62,7 +61,11 @@ export function Header({ paths = defaultPaths }) {
 	return (
 		<AppBar className={classes.root} position="sticky" color="inherit">
 			<Toolbar className={classes.toolbar}>
-				<Breadcrumbs className={classes.breadcrumbs} aria-label="breadcrumb">
+				<Breadcrumbs
+					className={classes.breadcrumbs}
+					maxItems={3}
+					aria-label="breadcrumb"
+				>
 					{paths.length > 1 ? (
 						paths.map((path, index) => {
 							if (index === paths.length - 1) {
@@ -71,6 +74,7 @@ export function Header({ paths = defaultPaths }) {
 										className={cs(classes.link, classes.linkDisabled)}
 										color="inherit"
 										key={path.name}
+										aria-current="page"
 									>
 										{path.name}
 									</MuiLink>
@@ -79,10 +83,7 @@ export function Header({ paths = defaultPaths }) {
 
 							return (
 								<Link href={path.href} passHref key={path.name}>
-									<MuiLink
-										className={classes.link}
-										color="inherit"
-									>
+									<MuiLink className={classes.link} color="inherit">
 										{path.name}
 									</MuiLink>
 								</Link>
