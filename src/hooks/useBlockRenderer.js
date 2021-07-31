@@ -32,10 +32,14 @@ const useStyles = makeStyles(theme => ({
 	checkboxFormControlLabel: {
 		cursor: "default",
 		maxHeight: 30,
-	},
-	checkbox: {
 		"&:hover": {
 			backgroundColor: "none",
+		},
+	},
+	checkbox: {
+		cursor: "default",
+		"&:hover": {
+			backgroundColor: "transparent !important",
 		},
 	},
 }));
@@ -95,6 +99,7 @@ export function useBlockRenderer(blocks) {
 									disableRipple
 									className={classes.checkbox}
 									checked={value.checked}
+									classes={{ checked: classes.checkbox }}
 								/>
 							}
 							label={<RichText text={value.text} />}
