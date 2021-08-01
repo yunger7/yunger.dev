@@ -61,6 +61,7 @@ export default function WorkInProgress() {
 					alt="Snow mountains"
 					layout="fill"
 					objectFit="cover"
+					priority
 				/>
 			</div>
 		</>
