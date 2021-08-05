@@ -20,6 +20,7 @@ import {
 	getPlainTextFromRichText,
 } from "../../utils/getPlainText";
 import { useBlockRenderer } from "../../hooks/useBlockRenderer";
+import { getNotionPageContent } from "../../lib/getNotionPageContent";
 
 import { Header } from "../../components/Header";
 import { RichText } from "../../components/RichText";
@@ -223,7 +224,7 @@ export async function getStaticProps({ params: { slug } }) {
 
 	const notionPost = dataResponse.results[0];
 	const postImage = await getPostCoverImage(notionPost);
-	const blogContent = await getBlogContent(notionPost.id);
+	const blogContent = await getNotionPageContent(notionPost.id);
 	const blogContentRaw = getPlainTextFromBlocks(blogContent);
 
 	const post = {
@@ -248,31 +249,6 @@ export async function getStaticProps({ params: { slug } }) {
 			: null,
 		notionUrl: notionPost.url,
 	};
-
-	async function getBlogContent(id) {
-		const blogContent = await getBlocks(id);
-
-		async function getBlocks(id) {
-			const { results } = await notion.blocks.children.list({
-				block_id: id,
-			});
-
-			const blocksWithChildren = [];
-
-			for (const block of results) {
-				if (block.has_children) {
-					const childBlocks = await getBlocks(block.id);
-					block[block.type].children = childBlocks;
-				}
-
-				blocksWithChildren.push(block);
-			}
-
-			return blocksWithChildren;
-		}
-
-		return blogContent;
-	}
 
 	return {
 		props: {
