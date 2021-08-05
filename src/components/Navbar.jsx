@@ -53,7 +53,7 @@ const defaultPaths = [
 	},
 ];
 
-export function Header({ paths = defaultPaths }) {
+export function Navbar({ paths = defaultPaths }) {
 	const classes = useStyles();
 
 	return (

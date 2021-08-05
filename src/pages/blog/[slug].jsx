@@ -22,7 +22,7 @@ import {
 import { useBlockRenderer } from "../../hooks/useBlockRenderer";
 import { getNotionPageContent } from "../../lib/getNotionPageContent";
 
-import { Header } from "../../components/Header";
+import { Navbar } from "../../components/Navbar";
 import { RichText } from "../../components/RichText";
 import { WaveDivider1 } from "../../components/dividers/WaveDivider1";
 import { WaveDivider4 } from "../../components/dividers/WaveDivider4";
@@ -78,7 +78,7 @@ export default function BlogPost({ post }) {
 	const theme = useTheme();
 	const jsxContent = useBlockRenderer(content);
 
-	const headerPaths = [
+	const navbarPaths = [
 		{
 			name: "yunger.dev",
 			href: "/",
@@ -98,7 +98,7 @@ export default function BlogPost({ post }) {
 			<Head>
 				<title>{titleAsPlainText}</title>
 			</Head>
-			<Header paths={headerPaths} />
+			<Navbar paths={navbarPaths} />
 			<main className={classes.page}>
 				<section className={classes.introduction}>
 					<Container maxWidth="lg">

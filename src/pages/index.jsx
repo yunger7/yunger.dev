@@ -27,7 +27,7 @@ import Carousel from "react-material-ui-carousel";
 import { nordPalette } from "../theme";
 import { getBlogPosts } from "../lib/getBlogPosts";
 
-import { Header } from "../components/Header";
+import { Navbar } from "../components/Navbar";
 import { SquareLink } from "../components/SquareLink";
 import { FeaturedBlog } from "../components/FeaturedBlog";
 import { BlogPost } from "../components/BlogPost";
@@ -151,7 +151,7 @@ export default function Home({ posts }) {
 			<Head>
 				<title>yunger.dev</title>
 			</Head>
-			<Header />
+			<Navbar />
 			<main className={classes.page}>
 				<section className={classes.introduction}>
 					<div id="introduction" className={classes.scroll} />

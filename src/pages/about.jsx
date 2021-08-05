@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Container, Typography, Card, CardContent } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 
-import { Header } from "../components/Header";
+import { Navbar } from "../components/Navbar";
 import { WaveDivider4 } from "../components/dividers/WaveDivider4";
 import { WaveDivider1 } from "../components/dividers/WaveDivider1";
 import { Footer } from "../components/Footer";
@@ -15,7 +15,7 @@ import { useBlockRenderer } from "../hooks/useBlockRenderer";
 import nordicWallpaper from "../../public/nordic-wallpaper.jpg";
 import profilePicture from "../../public/profile-picture.jpg";
 
-const headerPaths = [
+const navbarPaths = [
 	{
 		name: "yunger.dev",
 		href: "/",
@@ -90,7 +90,7 @@ export default function About({ content }) {
 				<title>About me</title>
 			</Head>
 
-			<Header paths={headerPaths} />
+			<Navbar paths={navbarPaths} />
 
 			<main className={classes.page}>
 				<section className={classes.introduction}>

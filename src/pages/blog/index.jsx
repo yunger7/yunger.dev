@@ -8,14 +8,14 @@ import Carousel from "react-material-ui-carousel";
 import { getBlogPosts } from "../../lib/getBlogPosts";
 import { nordPalette } from "../../theme";
 
-import { Header } from "../../components/Header"
+import { Navbar } from "../../components/Navbar"
 import { FeaturedBlog } from "../../components/FeaturedBlog";
 import { BlogPost } from "../../components/BlogPost";
 import { WaveDivider1 } from "../../components/dividers/WaveDivider1";
 import { WaveDivider4 } from "../../components/dividers/WaveDivider4";
 import { Footer } from "../../components/Footer";
 
-const headerPaths = [
+const navbarPaths = [
   {
     name: "yunger.dev",
     href: "/",
@@ -70,7 +70,7 @@ export default function Blog({ posts }) {
         <title>Blog | yunger.dev</title>
       </Head>
 
-      <Header paths={headerPaths} />
+      <Navbar paths={navbarPaths} />
 
       <main className={classes.page}>
         <section className={classes.featured}>

@@ -18,14 +18,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Email as MessageIcon, Send as SendIcon } from "@material-ui/icons";
 import { Alert } from "@material-ui/lab";
 
-import { Header } from "../components/Header";
+import { Navbar } from "../components/Navbar";
 import { WaveDivider1 } from "../components/dividers/WaveDivider1";
 import { WaveDivider4 } from "../components/dividers/WaveDivider4";
 import { Footer } from "../components/Footer";
 
 import placeholder3 from "../../public/placeholder3.jpg";
 
-const headerPaths = [
+const navbarPaths = [
 	{
 		name: "yunger.dev",
 		href: "/",
@@ -168,7 +168,7 @@ export default function Contact() {
 				<title>Contact me</title>
 			</Head>
 
-			<Header paths={headerPaths} />
+			<Navbar paths={navbarPaths} />
 
 			<main className={classes.page}>
 				<section className={classes.introduction}>
