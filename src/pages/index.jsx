@@ -46,6 +46,10 @@ const useStyles = makeStyles(theme => ({
 	sectionTitle: {
 		marginBottom: theme.spacing(2),
 	},
+	scroll: {
+		position: "relative",
+		bottom: 100,
+	},
 	introduction: {
 		paddingBottom: theme.spacing(5),
 		[theme.breakpoints.down("sm")]: {
@@ -149,6 +153,7 @@ export default function Home({ posts }) {
 			<Header />
 			<main className={classes.page}>
 				<section className={classes.introduction}>
+					<div id="introduction" className={classes.scroll} />
 					<Container maxWidth="lg">
 						<Card className={classes.introductionCard}>
 							<div className={classes.introductionWallpaper}>
@@ -193,6 +198,7 @@ export default function Home({ posts }) {
 				<WaveDivider1 color="#292e39" />
 
 				<section className={classes.projects}>
+					<div id="projects" className={classes.scroll} />
 					<Container maxWidth="lg">
 						<div className={classes.sectionTitle}>
 							<Typography variant="h4" component="h2">
@@ -230,6 +236,7 @@ export default function Home({ posts }) {
 				<WaveDivider5 backgroundColor="#292e39" color="#242933" />
 
 				<section className={classes.posts}>
+					<div id="posts" className={classes.scroll} />
 					<Container maxWidth="lg">
 						<div className={classes.sectionTitle}>
 							<Typography variant="h4" component="h2">
@@ -263,6 +270,7 @@ export default function Home({ posts }) {
 				<WaveDivider3 color="#292e39" />
 
 				<section className={classes.more}>
+					<div id="more" className={classes.scroll} />
 					<Container maxWidth="lg">
 						<div className={classes.sectionTitle}>
 							<Typography variant="h4" component="h2">
