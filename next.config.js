@@ -13,10 +13,6 @@ module.exports = {
 				destination: "/work-in-progress",
 			},
 			{
-				source: "/about",
-				destination: "/work-in-progress",
-			},
-			{
 				source: "/animelist",
 				destination: "/work-in-progress",
 			}
