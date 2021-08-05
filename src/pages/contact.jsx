@@ -15,6 +15,8 @@ import { Email as MessageIcon, Send as SendIcon } from "@material-ui/icons";
 
 import { Header } from "../components/Header";
 import { WaveDivider1 } from "../components/dividers/WaveDivider1";
+import { WaveDivider4 } from "../components/dividers/WaveDivider4";
+import { Footer } from "../components/Footer";
 
 import placeholder3 from "../../public/placeholder3.jpg";
 
@@ -54,6 +56,8 @@ const useStyles = makeStyles(theme => ({
 	},
 	form: {
 		backgroundColor: "#282e39",
+    paddingTop: theme.spacing(5),
+    paddingBottom: theme.spacing(10),
 	},
 }));
 
@@ -159,6 +163,10 @@ export default function Contact() {
 					</Container>
 				</section>
 			</main>
+
+      <WaveDivider4 backgroundColor="#292e39" />
+
+      <Footer />
 		</>
 	);
 }
