@@ -174,7 +174,7 @@ export function Footer() {
 							<FavoriteIcon color="primary" style={{ fontSize: 14 }} /> and
 							JavaScript
 						</Typography>
-						<Typography variant="body2">v0.1.0</Typography>
+						<Typography variant="body2">v0.1.0 (In development)</Typography>
 					</div>
 					<Button
 						className={classes.supportButton}
