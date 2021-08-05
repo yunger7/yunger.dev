@@ -9,6 +9,7 @@ import {
 	CardContent,
 	Typography,
 	Divider,
+	Link as MuiLink,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -185,9 +186,14 @@ export default function Home({ posts }) {
 								<div>
 									<Typography variant="body1">
 										Hello world 👋 <br /> I&apos;m <strong>Luís</strong>, a
-										programmer, musician and coffee enthusiast. I taught myself how
-										to code to turn my dumb ideas into reality, and I&apos;ve
-										created this place to share them with the world.
+										programmer, musician and coffee enthusiast. I taught myself
+										how to code to turn my dumb ideas into reality, and
+										I&apos;ve created this place to share them with the world.
+										Check out{" "}
+										<Link href="/about" passHref>
+											<MuiLink>my bio</MuiLink>
+										</Link>{" "}
+										for more information.
 									</Typography>
 								</div>
 							</CardContent>
@@ -266,7 +272,7 @@ export default function Home({ posts }) {
 						</div>
 					</Container>
 				</section>
-				
+
 				<WaveDivider3 color="#292e39" />
 
 				<section className={classes.more}>
@@ -313,6 +319,6 @@ export async function getStaticProps() {
 		props: {
 			posts,
 		},
-		revalidate: 60 * 60 * 8 // 8 hours
+		revalidate: 60 * 60 * 8, // 8 hours
 	};
 }
