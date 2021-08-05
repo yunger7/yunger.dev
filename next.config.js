@@ -5,10 +5,6 @@ module.exports = {
 	async rewrites() {
 		return [
 			{
-				source: "/contact",
-				destination: "/work-in-progress",
-			},
-			{
 				source: "/projects",
 				destination: "/work-in-progress",
 			},
