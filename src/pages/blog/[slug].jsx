@@ -54,6 +54,7 @@ export default function BlogPost({ post }) {
 	const {
 		title,
 		titleAsPlainText,
+		description,
 		image,
 		slug,
 		tags,
@@ -64,7 +65,7 @@ export default function BlogPost({ post }) {
 
 	const classes = useStyles();
 	const theme = useTheme();
-	const jsxContent = useBlockRenderer(content);
+	// const jsxContent = useBlockRenderer(content);
 
 	const navbarPaths = [
 		{
@@ -112,9 +113,11 @@ export default function BlogPost({ post }) {
 				}
 				dividerColor={theme.palette.background.paper}
 			>
-				<DescriptionIcon style={{ fontSize: 100 }} />
-				<Typography component="h1" variant="h5" align="center">
+				<Typography component="h1" variant="h5">
 					<RichText text={title} />
+				</Typography>
+				<Typography variant="body1">
+					<RichText text={description} />
 				</Typography>
 				<div className={classes.tags}>
 					{tags.map(({ id, name, color }) => (
@@ -144,7 +147,7 @@ export default function BlogPost({ post }) {
 
 			<main className={classes.page}>
 				<section className={classes.blogContent}>
-					<Container maxWidth="md">{jsxContent}</Container>
+					{/* <Container maxWidth="md">{jsxContent}</Container> */}
 				</section>
 			</main>
 

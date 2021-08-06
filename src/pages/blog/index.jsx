@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import { Container, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { Create as CreateIcon } from "@material-ui/icons";
+import { Description as DescriptionIcon } from "@material-ui/icons";
 import Carousel from "react-material-ui-carousel";
 
 import { getBlogPosts } from "../../lib/getBlogPosts";
@@ -87,7 +87,7 @@ export default function Blog({ posts }) {
         }
         dividerColor="#242933"
       >
-        <CreateIcon style={{ fontSize: 80 }} />
+        <DescriptionIcon style={{ fontSize: 80 }} />
         <Typography variant="h3" component="h1">
           Blog posts
         </Typography>

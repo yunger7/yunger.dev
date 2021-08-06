@@ -158,7 +158,7 @@ export default function Contact() {
 				}
 				dividerColor="#292e39"
 			>
-				<MessageIcon style={{ fontSize: 100 }} />
+				<MessageIcon style={{ fontSize: 80 }} />
 				<Typography variant="h3" component="h1">
 					Send me a message!
 				</Typography>
