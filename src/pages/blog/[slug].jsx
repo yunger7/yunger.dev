@@ -30,15 +30,6 @@ import { Footer } from "../../components/Footer";
 import placeholder3 from "../../../public/placeholder3.jpg";
 
 const useStyles = makeStyles(theme => ({
-	introduction: {
-		paddingTop: theme.spacing(5),
-		paddingBottom: theme.spacing(5),
-	},
-	blogImage: {
-		width: "100%",
-		height: 250,
-		position: "relative",
-	},
 	tags: {
 		margin: `${theme.spacing(1.5)}px 0`,
 
