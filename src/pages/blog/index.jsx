@@ -1,19 +1,24 @@
 import Head from "next/head";
+import Image from "next/image";
 import Link from "next/link";
 
-import { Container, Grid } from "@material-ui/core";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { Container, Grid, Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import { Create as CreateIcon } from "@material-ui/icons";
 import Carousel from "react-material-ui-carousel";
 
 import { getBlogPosts } from "../../lib/getBlogPosts";
 import { nordPalette } from "../../theme";
 
-import { Navbar } from "../../components/Navbar"
+import { Navbar } from "../../components/Navbar";
+import { Header } from "../../components/Header";
 import { FeaturedBlog } from "../../components/FeaturedBlog";
 import { BlogPost } from "../../components/BlogPost";
 import { WaveDivider1 } from "../../components/dividers/WaveDivider1";
 import { WaveDivider4 } from "../../components/dividers/WaveDivider4";
 import { Footer } from "../../components/Footer";
+
+import nordicWallpaper from "../../../public/nordic-wallpaper.jpg";
 
 const navbarPaths = [
   {
@@ -47,10 +52,8 @@ const carouselProps = {
 };
 
 const useStyles = makeStyles(theme => ({
-  page: {
-    paddingTop: theme.spacing(6),
-  },
   featured: {
+    paddingTop: theme.spacing(5),
     paddingBottom: theme.spacing(5),
   },
   latest: {
@@ -61,7 +64,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Blog({ posts }) {
-  const theme = useTheme();
   const classes = useStyles();
 
   return (
@@ -71,6 +73,25 @@ export default function Blog({ posts }) {
       </Head>
 
       <Navbar paths={navbarPaths} />
+
+      <Header
+        backgroundImage={
+          <Image
+            priority
+            src={nordicWallpaper}
+            alt="Nordic Wallpaper"
+            layout="fill"
+						placeholder="blur"
+						objectFit="cover"
+          />
+        }
+        dividerColor="#242933"
+      >
+        <CreateIcon style={{ fontSize: 80 }} />
+        <Typography variant="h3" component="h1">
+          Blog posts
+        </Typography>
+      </Header>
 
       <main className={classes.page}>
         <section className={classes.featured}>
