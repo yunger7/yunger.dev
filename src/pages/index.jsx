@@ -53,6 +53,11 @@ const useStyles = makeStyles(theme => ({
 			borderRadius: 10,
 		},
 	},
+	bioLink: {
+		"&:hover": {
+			backgroundColor: "#ffffff00", // Remove hover color
+		},
+	},
 	projects: {
 		paddingTop: theme.spacing(2.5),
 		paddingBottom: theme.spacing(10),
@@ -145,7 +150,7 @@ export default function Home({ posts }) {
 					dumb ideas into reality, and I&apos;ve created this place to share
 					them with the world. Check out{" "}
 					<Link href="/about" passHref>
-						<MuiLink>my bio</MuiLink>
+						<MuiLink className={classes.bioLink}>my bio</MuiLink>
 					</Link>{" "}
 					for more information.
 				</Typography>
