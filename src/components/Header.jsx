@@ -1,11 +1,6 @@
-import Image from "next/image";
-
-import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { WaveDivider1 } from "../components/dividers/WaveDivider1";
-
-import nordicWallpaper from "../../public/nordic-wallpaper.jpg";
 
 const useStyles = makeStyles(theme => ({
 	scroll: {
@@ -43,14 +38,6 @@ const useStyles = makeStyles(theme => ({
 		justifyContent: "center",
 		alignItems: "center",
 	},
-	icon: {
-		minWidth: 100,
-		minHeight: 100,
-
-		display: "flex",
-		justifyContent: "center",
-		alignItems: "center",
-	},
 	divider: {
 		position: "absolute",
 		width: "100%",
@@ -59,7 +46,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export function Header(props) {
-	const { icon, backgroundImage, dividerColor, children } = props;
+	const { backgroundImage, dividerColor, children } = props;
 	const classes = useStyles();
 
 	return (
@@ -69,7 +56,6 @@ export function Header(props) {
 			{backgroundImage}
 
 			<div className={classes.card}>
-				{icon && <div className={classes.icon}>{icon}</div>}
 				{children}
 			</div>
 

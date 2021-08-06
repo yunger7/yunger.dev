@@ -99,7 +99,6 @@ export default function BlogPost({ post }) {
 			<Navbar paths={navbarPaths} />
 
 			<Header
-				icon={<DescriptionIcon style={{ fontSize: 100 }} />}
 				backgroundImage={
 					image ? (
 						<Image
@@ -122,6 +121,7 @@ export default function BlogPost({ post }) {
 				}
 				dividerColor={theme.palette.background.paper}
 			>
+				<DescriptionIcon style={{ fontSize: 100 }} />
 				<Typography component="h1" variant="h5" align="center">
 					<RichText text={title} />
 				</Typography>

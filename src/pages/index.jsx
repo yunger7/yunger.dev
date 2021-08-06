@@ -115,17 +115,6 @@ export default function Home({ posts }) {
 			<Navbar />
 
 			<Header
-				icon={
-					<div className={classes.profileImage}>
-						<Image
-							priority
-							src={profilePicture}
-							alt="yunger profile image"
-							width={150}
-							height={150}
-						/>
-					</div>
-				}
 				backgroundImage={
 					<Image
 						className={classes.background}
@@ -138,6 +127,15 @@ export default function Home({ posts }) {
 					/>
 				}
 			>
+				<div className={classes.profileImage}>
+					<Image
+						priority
+						src={profilePicture}
+						alt="yunger profile image"
+						width={150}
+						height={150}
+					/>
+				</div>
 				<Typography gutterBottom variant="h3" component="h1">
 					yunger.dev
 				</Typography>
