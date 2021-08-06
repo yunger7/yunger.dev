@@ -5,8 +5,6 @@ import Image from "next/image";
 import {
 	Container,
 	Grid,
-	Card,
-	CardContent,
 	Typography,
 	Divider,
 	Link as MuiLink,
@@ -32,18 +30,15 @@ import { SquareLink } from "../components/SquareLink";
 import { FeaturedBlog } from "../components/FeaturedBlog";
 import { BlogPost } from "../components/BlogPost";
 import { Footer } from "../components/Footer";
-import { WaveDivider1 } from "../components/dividers/WaveDivider1";
 import { WaveDivider3 } from "../components/dividers/WaveDivider3";
 import { WaveDivider4 } from "../components/dividers/WaveDivider4";
 import { WaveDivider5 } from "../components/dividers/WaveDivider5";
+import { Header } from "../components/Header";
 
 import nordicWallpaper from "../../public/nordic-wallpaper.jpg";
 import profilePicture from "../../public/profile-picture.jpg";
 
 const useStyles = makeStyles(theme => ({
-	page: {
-		paddingTop: theme.spacing(6),
-	},
 	sectionTitle: {
 		marginBottom: theme.spacing(2),
 	},
@@ -51,46 +46,11 @@ const useStyles = makeStyles(theme => ({
 		position: "relative",
 		bottom: 100,
 	},
-	introduction: {
-		paddingBottom: theme.spacing(5),
-		[theme.breakpoints.down("sm")]: {
-			paddingBottom: theme.spacing(10),
-		},
-	},
-	introductionCard: {
-		width: "100%",
-	},
-	introductionWallpaper: {
-		width: "100%",
-		height: 250,
-		position: "relative",
-	},
-	introductionCardContent: {
-		padding: `${theme.spacing(2)}px ${theme.spacing(5)}px`,
-	},
-	profile: {
-		display: "flex",
-		[theme.breakpoints.down("sm")]: {
-			flexDirection: "column",
-			alignItems: "center",
-			textAlign: "center",
-			marginBottom: theme.spacing(2),
-		},
-	},
-	profileName: {
-		display: "flex",
-		flexDirection: "column",
-	},
 	profileImage: {
-		position: "relative",
-		bottom: 100,
-		maxHeight: 100,
-		marginRight: theme.spacing(2.5),
+		marginBottom: theme.spacing(1),
+
 		"& img": {
-			borderRadius: theme.shape.borderRadius,
-		},
-		[theme.breakpoints.down("sm")]: {
-			marginRight: 0,
+			borderRadius: 10,
 		},
 	},
 	projects: {
@@ -151,58 +111,49 @@ export default function Home({ posts }) {
 			<Head>
 				<title>yunger.dev</title>
 			</Head>
+
 			<Navbar />
-			<main className={classes.page}>
-				<section className={classes.introduction}>
-					<div id="introduction" className={classes.scroll} />
-					<Container maxWidth="lg">
-						<Card className={classes.introductionCard}>
-							<div className={classes.introductionWallpaper}>
-								<Image
-									src={nordicWallpaper}
-									alt="Snow mountain wallpaper"
-									layout="fill"
-									placeholder="blur"
-									objectFit="cover"
-									priority
-								/>
-							</div>
-							<CardContent className={classes.introductionCardContent}>
-								<div className={classes.profile}>
-									<div className={classes.profileImage}>
-										<Image
-											src={profilePicture}
-											alt="yunger profile image"
-											width={175}
-											height={175}
-											priority
-										/>
-									</div>
-									<div className={classes.profileName}>
-										<Typography variant="h3">Luís Galete</Typography>
-										<Typography variant="subtitle1">yunger</Typography>
-									</div>
-								</div>
-								<div>
-									<Typography variant="body1">
-										Hello world 👋 <br /> I&apos;m <strong>Luís</strong>, a
-										programmer, musician and coffee enthusiast. I taught myself
-										how to code to turn my dumb ideas into reality, and
-										I&apos;ve created this place to share them with the world.
-										Check out{" "}
-										<Link href="/about" passHref>
-											<MuiLink>my bio</MuiLink>
-										</Link>{" "}
-										for more information.
-									</Typography>
-								</div>
-							</CardContent>
-						</Card>
-					</Container>
-				</section>
 
-				<WaveDivider1 color="#292e39" />
+			<Header
+				icon={
+					<div className={classes.profileImage}>
+						<Image
+							priority
+							src={profilePicture}
+							alt="yunger profile image"
+							width={150}
+							height={150}
+						/>
+					</div>
+				}
+				backgroundImage={
+					<Image
+						className={classes.background}
+						src={nordicWallpaper}
+						alt="Nordic Wallpaper"
+						layout="fill"
+						placeholder="blur"
+						objectFit="cover"
+						priority
+					/>
+				}
+			>
+				<Typography gutterBottom variant="h3" component="h1">
+					yunger.dev
+				</Typography>
+				<Typography variant="body1">
+					Hello world 👋 <br /> I&apos;m <strong>Luís</strong>, a programmer,
+					musician and coffee enthusiast. I taught myself how to code to turn my
+					dumb ideas into reality, and I&apos;ve created this place to share
+					them with the world. Check out{" "}
+					<Link href="/about" passHref>
+						<MuiLink>my bio</MuiLink>
+					</Link>{" "}
+					for more information.
+				</Typography>
+			</Header>
 
+			<main>
 				<section className={classes.projects}>
 					<div id="projects" className={classes.scroll} />
 					<Container maxWidth="lg">

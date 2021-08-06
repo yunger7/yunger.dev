@@ -31,10 +31,6 @@ const footerLinks = [
 		},
 		links: [
 			{
-				name: "Introduction",
-				href: "/#introduction",
-			},
-			{
 				name: "Projects",
 				href: "/#projects",
 			},

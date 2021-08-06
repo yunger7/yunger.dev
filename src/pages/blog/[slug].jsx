@@ -3,12 +3,11 @@ import Image from "next/image";
 
 import {
 	Container,
-	Card,
-	CardContent,
 	Typography,
 	Chip,
 } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { Description as DescriptionIcon } from "@material-ui/icons";
 import readingTime from "reading-time";
 
 import { notion } from "../../services/notion";
@@ -23,18 +22,16 @@ import { useBlockRenderer } from "../../hooks/useBlockRenderer";
 import { getNotionPageContent } from "../../lib/getNotionPageContent";
 
 import { Navbar } from "../../components/Navbar";
+import { Header } from "../../components/Header";
 import { RichText } from "../../components/RichText";
-import { WaveDivider1 } from "../../components/dividers/WaveDivider1";
 import { WaveDivider4 } from "../../components/dividers/WaveDivider4";
 import { Footer } from "../../components/Footer";
 
 import placeholder3 from "../../../public/placeholder3.jpg";
 
 const useStyles = makeStyles(theme => ({
-	page: {
-		paddingTop: theme.spacing(6),
-	},
 	introduction: {
+		paddingTop: theme.spacing(5),
 		paddingBottom: theme.spacing(5),
 	},
 	blogImage: {
@@ -98,66 +95,63 @@ export default function BlogPost({ post }) {
 			<Head>
 				<title>{titleAsPlainText}</title>
 			</Head>
+
 			<Navbar paths={navbarPaths} />
+
+			<Header
+				icon={<DescriptionIcon style={{ fontSize: 100 }} />}
+				backgroundImage={
+					image ? (
+						<Image
+							src={image.src}
+							alt="Post cover"
+							layout="fill"
+							objectFit="cover"
+							placeholder="blur"
+							blurDataURL={image.blurDataURL}
+						/>
+					) : (
+						<Image
+							src={placeholder3}
+							alt="Post cover"
+							layout="fill"
+							objectFit="cover"
+							placeholder="blur"
+						/>
+					)
+				}
+				dividerColor={theme.palette.background.paper}
+			>
+				<Typography component="h1" variant="h5" align="center">
+					<RichText text={title} />
+				</Typography>
+				<div className={classes.tags}>
+					{tags.map(({ id, name, color }) => (
+						<Chip
+							className={classes.tag}
+							size="small"
+							label={name}
+							style={{ backgroundColor: color }}
+							key={id}
+						/>
+					))}
+				</div>
+				<Typography
+					className={classes.blogDate}
+					variant="subtitle2"
+					align="center"
+					gutterBottom
+				>
+					{new Date(createdAt).toLocaleDateString("en-US", {
+						month: "short",
+						day: "numeric",
+						year: "numeric",
+					})}{" "}
+					• {readingTime.text}
+				</Typography>
+			</Header>
+
 			<main className={classes.page}>
-				<section className={classes.introduction}>
-					<Container maxWidth="lg">
-						<Card>
-							<div className={classes.blogImage}>
-								{image ? (
-									<Image
-										src={image.src}
-										alt="Post cover"
-										layout="fill"
-										objectFit="cover"
-										placeholder="blur"
-										blurDataURL={image.blurDataURL}
-									/>
-								) : (
-									<Image
-										src={placeholder3}
-										alt="Post cover"
-										layout="fill"
-										objectFit="cover"
-										placeholder="blur"
-									/>
-								)}
-							</div>
-							<CardContent>
-								<Typography component="h1" variant="h5" align="center">
-									<RichText text={title} />
-								</Typography>
-								<div className={classes.tags}>
-									{tags.map(({ id, name, color }) => (
-										<Chip
-											className={classes.tag}
-											size="small"
-											label={name}
-											style={{ backgroundColor: color }}
-											key={id}
-										/>
-									))}
-								</div>
-								<Typography
-									className={classes.blogDate}
-									variant="subtitle2"
-									align="center"
-									gutterBottom
-								>
-									{new Date(createdAt).toLocaleDateString("en-US", {
-										month: "short",
-										day: "numeric",
-										year: "numeric",
-									})}{" "}
-									• {readingTime.text}
-								</Typography>
-							</CardContent>
-						</Card>
-					</Container>
-				</section>
-
-				<WaveDivider1 color={theme.palette.background.paper} />
-
 				<section className={classes.blogContent}>
 					<Container maxWidth="md">{jsxContent}</Container>
 				</section>
