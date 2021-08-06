@@ -2,7 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Container, Grid, Typography } from "@material-ui/core";
+import { Container, Grid, Typography, Divider } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Description as DescriptionIcon } from "@material-ui/icons";
 import Carousel from "react-material-ui-carousel";
@@ -52,6 +52,9 @@ const carouselProps = {
 };
 
 const useStyles = makeStyles(theme => ({
+  sectionTitle: {
+    marginBottom: theme.spacing(2),
+  },
   featured: {
     paddingTop: theme.spacing(5),
     paddingBottom: theme.spacing(5),
@@ -96,6 +99,12 @@ export default function Blog({ posts }) {
       <main className={classes.page}>
         <section className={classes.featured}>
           <Container maxWidth="lg">
+            <div className={classes.sectionTitle}>
+              <Typography variant="h4" component="h2">
+                Featured
+              </Typography>
+              <Divider />
+            </div>
             {!!posts.featured.length && (
 							<Carousel {...carouselProps}>
 								{posts.featured.map(post => (
@@ -112,6 +121,12 @@ export default function Blog({ posts }) {
 
         <section className={classes.latest}>
           <Container maxWidth="lg">
+            <div className={classes.sectionTitle}>
+              <Typography variant="h4" component="h2">
+                Latest
+              </Typography>
+              <Divider />
+            </div>
             <Grid container spacing={4}>
               {posts.latest.map(post => (
                 <Grid item md={4} sm={6} xs={12} key={post.id}>
