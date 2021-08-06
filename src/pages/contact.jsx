@@ -4,8 +4,6 @@ import { useState } from "react";
 
 import {
 	Container,
-	Card,
-	CardContent,
 	Typography,
 	Grid,
 	TextField,
@@ -19,7 +17,7 @@ import { Email as MessageIcon, Send as SendIcon } from "@material-ui/icons";
 import { Alert } from "@material-ui/lab";
 
 import { Navbar } from "../components/Navbar";
-import { WaveDivider1 } from "../components/dividers/WaveDivider1";
+import { Header } from "../components/Header";
 import { WaveDivider4 } from "../components/dividers/WaveDivider4";
 import { Footer } from "../components/Footer";
 
@@ -37,30 +35,8 @@ const navbarPaths = [
 ];
 
 const useStyles = makeStyles(theme => ({
-	page: {
-		paddingTop: theme.spacing(6),
-	},
-	introduction: {
-		paddingBottom: theme.spacing(5),
-	},
-	introductionWallpaper: {
-		position: "relative",
-		width: "100%",
-		height: 250,
-	},
-	introductionCardContent: {
-		padding: `${theme.spacing(2)}px ${theme.spacing(5)}px`,
-		maxHeight: 125,
-		display: "flex",
-	},
-	messageIcon: {
-		fontSize: 160,
-		position: "relative",
-		bottom: 75,
-		marginRight: theme.spacing(2.5),
-	},
 	form: {
-		backgroundColor: "#282e39",
+		backgroundColor: "#292e39",
 		paddingTop: theme.spacing(5),
 		paddingBottom: theme.spacing(10),
 	},
@@ -170,36 +146,28 @@ export default function Contact() {
 
 			<Navbar paths={navbarPaths} />
 
+			<Header
+				backgroundImage={
+					<Image
+						src={placeholder3}
+						alt="Mountain wallpaper"
+						layout="fill"
+						objectFit="cover"
+						placeholder="blur"
+					/>
+				}
+				dividerColor="#292e39"
+			>
+				<MessageIcon style={{ fontSize: 100 }} />
+				<Typography variant="h3" component="h1">
+					Send me a message!
+				</Typography>
+				<Typography variant="body1">
+					Want to say hi? Just send a message bellow.
+				</Typography>
+			</Header>
+
 			<main className={classes.page}>
-				<section className={classes.introduction}>
-					<Container maxWidth="lg">
-						<Card>
-							<div className={classes.introductionWallpaper}>
-								<Image
-									src={placeholder3}
-									alt=""
-									layout="fill"
-									objectFit="cover"
-									placeholder="blur"
-								/>
-							</div>
-							<CardContent className={classes.introductionCardContent}>
-								<MessageIcon className={classes.messageIcon} />
-								<div>
-									<Typography variant="h5" component="h1">
-										Send me a message!
-									</Typography>
-									<Typography variant="body1">
-										Want to say hi? Just send a message bellow.
-									</Typography>
-								</div>
-							</CardContent>
-						</Card>
-					</Container>
-				</section>
-
-				<WaveDivider1 color="#292e39" />
-
 				<section className={classes.form}>
 					<Container maxWidth="md">
 						<form noValidate autoComplete="off" onSubmit={handleSubmit}>
