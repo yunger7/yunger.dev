@@ -65,7 +65,7 @@ export default function BlogPost({ post }) {
 
 	const classes = useStyles();
 	const theme = useTheme();
-	// const jsxContent = useBlockRenderer(content);
+	const jsxContent = useBlockRenderer(content);
 
 	const navbarPaths = [
 		{
@@ -147,7 +147,7 @@ export default function BlogPost({ post }) {
 
 			<main className={classes.page}>
 				<section className={classes.blogContent}>
-					{/* <Container maxWidth="md">{jsxContent}</Container> */}
+					<Container maxWidth="md">{jsxContent}</Container>
 				</section>
 			</main>
 
