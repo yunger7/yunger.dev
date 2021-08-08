@@ -49,93 +49,88 @@ export function useBlockRenderer(blocks) {
 	const jsxContent = [];
 
 	for (const block of blocks) {
-		const { type, id } = block;
-		const value = block[type];
-
-		switch (type) {
-			case "paragraph":
-				jsxContent.push((
-					<Typography paragraph variant="body1" key={id}>
-						<RichText text={value.text} />
-					</Typography>
-				));
-				break;
-			case "heading_1":
-				jsxContent.push((
-					<Typography variant="h3" component="h2" key={id}>
-						<RichText text={value.text} />
-					</Typography>
-				));
-				break;
-			case "heading_2":
-				jsxContent.push((
-					<Typography variant="h4" component="h3" key={id}>
-						<RichText text={value.text} />
-					</Typography>
-				));
-				break;
-			case "heading_3":
-				jsxContent.push((
-					<Typography variant="h5" component="h4" key={id}>
-						<RichText text={value.text} />
-					</Typography>
-				));
-				break;
-			case "bulleted_list_item":
-			case "numbered_list_item":
-				jsxContent.push((
-					<li className={classes.listItem} key={id}>
-						<span className={classes.listItemDot}>•</span>
-						<span className={classes.listItemContent}>
-							<RichText text={value.text} />
-						</span>
-					</li>
-				));
-				break;
-			case "to_do":
-				jsxContent.push((
-					<div key={id}>
-						<FormControlLabel
-							className={classes.checkboxFormControlLabel}
-							control={
-								<Checkbox
-									disableRipple
-									className={classes.checkbox}
-									checked={value.checked}
-									classes={{ checked: classes.checkbox }}
-								/>
-							}
-							label={<RichText text={value.text} />}
-						/>
-					</div>
-				));
-				break;
-			case "toggle":
-				jsxContent.push((
-					<Accordion className={classes.accordion} key={id}>
-						<AccordionSummary expandIcon={<ExpandMoreIcon />}>
-							<RichText text={value.text} />
-						</AccordionSummary>
-						<AccordionDetails className={classes.accordionDetails}>
-							{value.children && useBlockRenderer(value.children)}
-						</AccordionDetails>
-					</Accordion>
-				));
-				break;
-			case "child_page":
-				jsxContent.push((
-					<p key={id}>{value.title}</p>
-				)); // Temp
-				break;
-			default:
-				jsxContent.push((
-					<p key={id}>
-						<strong>⛔ Unsupported block ⛔</strong>
-					</p>
-				));
-				break;
-		}
+		jsxContent.push(renderBlock(block, classes));
 	}
 
 	return jsxContent;
+}
+
+function renderBlock(block, classes) {
+	const { type, id } = block;
+	const value = block[type];
+
+	switch (type) {
+		case "paragraph":
+			return (
+				<Typography paragraph variant="body1" key={id}>
+					<RichText text={value.text} />
+				</Typography>
+			);
+		case "heading_1":
+			return (
+				<Typography variant="h3" component="h2" key={id}>
+					<RichText text={value.text} />
+				</Typography>
+			);
+		case "heading_2":
+			return (
+				<Typography variant="h4" component="h3" key={id}>
+					<RichText text={value.text} />
+				</Typography>
+			);
+		case "heading_3":
+			return (
+				<Typography variant="h5" component="h4" key={id}>
+					<RichText text={value.text} />
+				</Typography>
+			);
+		case "bulleted_list_item":
+		case "numbered_list_item":
+			return (
+				<li className={classes.listItem} key={id}>
+					<span className={classes.listItemDot}>•</span>
+					<span className={classes.listItemContent}>
+						<RichText text={value.text} />
+					</span>
+				</li>
+			);
+		case "to_do":
+			return (
+				<div key={id}>
+					<FormControlLabel
+						className={classes.checkboxFormControlLabel}
+						control={
+							<Checkbox
+								disableRipple
+								className={classes.checkbox}
+								checked={value.checked}
+								classes={{ checked: classes.checkbox }}
+							/>
+						}
+						label={<RichText text={value.text} />}
+					/>
+				</div>
+			);
+		case "toggle":
+			return (
+				<Accordion className={classes.accordion} key={id}>
+					<AccordionSummary expandIcon={<ExpandMoreIcon />}>
+						<RichText text={value.text} />
+					</AccordionSummary>
+					<AccordionDetails className={classes.accordionDetails}>
+						{value.children && value.children.map(block => renderBlock(block, classes))}
+					</AccordionDetails>
+				</Accordion>
+			);
+		case "child_page":
+			return (
+				<p key={id}>{value.title}</p>
+			); // Temp
+		default:
+			return (
+				<p key={id}>
+					<strong>⛔ Unsupported block ⛔</strong>
+				</p>
+			);
+	}
 }
