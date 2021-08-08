@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import cs from "classnames";
 
 import { Link as MuiLink } from "@material-ui/core";
@@ -6,6 +7,8 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { getNordColor } from "../utils/getNordColor";
 import { nordPalette } from "../theme";
+
+import { allowedPostImageDomains } from "../../site.config";
 
 const useStyles = makeStyles(theme => ({
 	bold: {
@@ -27,6 +30,11 @@ const useStyles = makeStyles(theme => ({
 	underline: {
 		textDecoration: "underline",
 	},
+	image: {
+		position: "relative",
+		height: 450,
+		width: "100%",
+	},
 }));
 
 export function RichText({ text: richText }) {
@@ -44,6 +52,23 @@ export function RichText({ text: richText }) {
 		} = value;
 
 		if (text) {
+			if (
+				text.link &&
+				allowedPostImageDomains.some(url => text.link.url.includes(url))
+			) {
+				return (
+					<div className={classes.image}>
+						<Image
+							src={text.link.url}
+							alt=""
+							layout="fill"
+							objectFit="cover"
+							key={index}
+						/>
+					</div>
+				);
+			}
+
 			return (
 				<span
 					className={cs(
@@ -58,7 +83,9 @@ export function RichText({ text: richText }) {
 				>
 					{text.link ? (
 						<Link href={text.link.url} passHref>
-							<MuiLink target="_blank" rel="noreferrer">{text.content}</MuiLink>
+							<MuiLink target="_blank" rel="noreferrer">
+								{text.content}
+							</MuiLink>
 						</Link>
 					) : (
 						text.content
