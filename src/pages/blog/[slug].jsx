@@ -7,7 +7,6 @@ import {
 	Chip,
 } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { Description as DescriptionIcon } from "@material-ui/icons";
 import readingTime from "reading-time";
 
 import { notion } from "../../services/notion";

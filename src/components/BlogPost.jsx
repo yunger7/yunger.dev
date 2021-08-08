@@ -4,9 +4,9 @@ import React from "react";
 import { Card, CardContent, Typography, Chip } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { nordPalette } from "../theme";
-
 import { RichText } from "./RichText";
+
+import { nordPalette } from "../theme";
 
 import placeholder1 from "../../public/placeholder1.jpg";
 

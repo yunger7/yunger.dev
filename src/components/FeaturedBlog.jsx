@@ -5,9 +5,9 @@ import { Chip, Typography, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Star as StarIcon, } from "@material-ui/icons";
 
-import { nordPalette } from "../theme";
-
 import { RichText } from "./RichText";
+
+import { nordPalette } from "../theme";
 
 import placeholder3 from "../../public/placeholder3.jpg";
 

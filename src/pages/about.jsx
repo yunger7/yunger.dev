@@ -1,10 +1,11 @@
 import Head from "next/head";
 import Image from "next/image";
 
-import { Container, Typography, Card, CardContent } from "@material-ui/core";
+import { Container, Typography } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 
 import { Navbar } from "../components/Navbar";
+import { Header } from "../components/Header";
 import { WaveDivider4 } from "../components/dividers/WaveDivider4";
 import { Footer } from "../components/Footer";
 
@@ -13,7 +14,6 @@ import { useBlockRenderer } from "../hooks/useBlockRenderer";
 
 import nordicWallpaper from "../../public/nordic-wallpaper.jpg";
 import profilePicture from "../../public/profile-picture.jpg";
-import { Header } from "../components/Header";
 
 const navbarPaths = [
 	{
