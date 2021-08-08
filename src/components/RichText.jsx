@@ -5,13 +5,18 @@ import { Link as MuiLink } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { getNordColor } from "../utils/getNordColor";
+import { nordPalette } from "../theme";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
 	bold: {
 		fontWeight: "bold",
 	},
 	code: {
 		fontFamily: "monospace",
+		borderRadius: 2,
+		padding: `${theme.spacing(0.05)}px ${theme.spacing(0.75)}px`,
+		backgroundColor: nordPalette.nord1,
+		color: theme.palette.primary.main,
 	},
 	italic: {
 		fontStyle: "italic",
@@ -22,7 +27,7 @@ const useStyles = makeStyles({
 	underline: {
 		textDecoration: "underline",
 	},
-});
+}));
 
 export function RichText({ text: richText }) {
 	const classes = useStyles();

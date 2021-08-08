@@ -14,8 +14,14 @@ const useStyles = makeStyles(theme => ({
 		display: "flex",
 		justifyContent: "center",
 		alignItems: "center",
+	},
+	mask: {
+		position: "absolute",
+		width: "100%",
+		height: "100%",
+		backgroundColor: "rgba(25, 25, 25, 0.25)",
 
-		"& > img": {
+		"& img": {
 			zIndex: -1,
 		}
 	},
@@ -53,7 +59,9 @@ export function Header(props) {
 		<section className={classes.root}>
 			<div id="header" className={classes.scroll} />
 
-			{backgroundImage}
+			<div className={classes.mask}>
+				{backgroundImage}
+			</div>
 
 			<div className={classes.card}>
 				{children}
