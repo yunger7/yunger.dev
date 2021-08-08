@@ -11,51 +11,89 @@ const useStyles = makeStyles({
 		fontWeight: "bold",
 	},
 	code: {
-		fontFamily: "monospace"
+		fontFamily: "monospace",
 	},
 	italic: {
-    fontStyle: "italic",
-  },
+		fontStyle: "italic",
+	},
 	strikethrough: {
-    textDecoration: "line-through",
-  },
+		textDecoration: "line-through",
+	},
 	underline: {
-    textDecoration: "underline",
-  },
+		textDecoration: "underline",
+	},
 });
 
-export function RichText({ text }) {
+export function RichText({ text: richText }) {
 	const classes = useStyles();
 
-	if (!text) {
+	if (!richText) {
 		return null;
 	}
 
-	return text.map((value, index) => {
+	return richText.map((value, index) => {
 		const {
 			annotations: { bold, code, color, italic, strikethrough, underline },
 			text,
+			mention,
 		} = value;
-		return (
-			<span
-        className={cs(
-          {[classes.bold]: bold},
-          {[classes.code]: code},
-          {[classes.italic]: italic},
-          {[classes.strikethrough]: strikethrough},
-          {[classes.underline]: underline}
-        )}
-				style={color !== "default" ? { color: getNordColor(color) } : {}}
-        key={index}
-			>
-				{text.link ? (
-					<Link href={text.link.url} passHref>
-						<MuiLink>{text.content}</MuiLink>
-					</Link>
-				) : (
-					text.content
-				)}
-			</span>
-		);
+
+		if (text) {
+			return (
+				<span
+					className={cs(
+						{ [classes.bold]: bold },
+						{ [classes.code]: code },
+						{ [classes.italic]: italic },
+						{ [classes.strikethrough]: strikethrough },
+						{ [classes.underline]: underline }
+					)}
+					style={color !== "default" ? { color: getNordColor(color) } : {}}
+					key={index}
+				>
+					{text.link ? (
+						<Link href={text.link.url} passHref>
+							<MuiLink target="_blank" rel="noreferrer">{text.content}</MuiLink>
+						</Link>
+					) : (
+						text.content
+					)}
+				</span>
+			);
+		}
+
+		if (mention) {
+			const { date } = mention;
+
+			if (date) {
+				if (date.end) {
+					return (
+						<span key={index}>
+							{new Date(date.end).toLocaleDateString("en-US", {
+								month: "short",
+								day: "numeric",
+								year: "numeric",
+							})}{" "}
+							→{" "}
+							{new Date(date.start).toLocaleDateString("en-US", {
+								month: "short",
+								day: "numeric",
+								year: "numeric",
+							})}
+						</span>
+					);
+				} else {
+					return (
+						<span key={index}>
+							{new Date(date.start).toLocaleDateString("en-US", {
+								month: "short",
+								day: "numeric",
+								year: "numeric",
+							})}
+						</span>
+					);
+				}
+			}
+		}
 	});
 }
