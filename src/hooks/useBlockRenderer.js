@@ -23,11 +23,11 @@ const useStyles = makeStyles(theme => ({
 	listItem: {
 		listStyle: "none",
 		fontSize: 16,
-		"&::before": {
-			content: '"•"',
-			marginRight: theme.spacing(1),
-			marginLeft: theme.spacing(0.25),
-		},
+		display: "flex",
+		margin: `${theme.spacing(1)}px 0`,
+	},
+	listItemDot: {
+		marginRight: theme.spacing(1),
 	},
 	checkboxFormControlLabel: {
 		cursor: "default",
@@ -62,21 +62,21 @@ export function useBlockRenderer(blocks) {
 				break;
 			case "heading_1":
 				jsxContent.push((
-					<Typography variant="h2" key={id}>
+					<Typography variant="h3" component="h2" key={id}>
 						<RichText text={value.text} />
 					</Typography>
 				));
 				break;
 			case "heading_2":
 				jsxContent.push((
-					<Typography variant="h3" key={id}>
+					<Typography variant="h4" component="h3" key={id}>
 						<RichText text={value.text} />
 					</Typography>
 				));
 				break;
 			case "heading_3":
 				jsxContent.push((
-					<Typography variant="h4" key={id}>
+					<Typography variant="h5" component="h4" key={id}>
 						<RichText text={value.text} />
 					</Typography>
 				));
@@ -85,7 +85,10 @@ export function useBlockRenderer(blocks) {
 			case "numbered_list_item":
 				jsxContent.push((
 					<li className={classes.listItem} key={id}>
-						<RichText text={value.text} />
+						<span className={classes.listItemDot}>•</span>
+						<span className={classes.listItemContent}>
+							<RichText text={value.text} />
+						</span>
 					</li>
 				));
 				break;
