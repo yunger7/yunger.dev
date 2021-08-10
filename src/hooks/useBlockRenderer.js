@@ -114,18 +114,20 @@ function renderBlock(block, classes) {
 		case "toggle":
 			return (
 				<Accordion className={classes.accordion} key={id}>
-					<AccordionSummary expandIcon={<ExpandMoreIcon />}>
+					<AccordionSummary
+						expandIcon={<ExpandMoreIcon />}
+						IconButtonProps={{ disableRipple: true }}
+					>
 						<RichText text={value.text} />
 					</AccordionSummary>
 					<AccordionDetails className={classes.accordionDetails}>
-						{value.children && value.children.map(block => renderBlock(block, classes))}
+						{value.children &&
+							value.children.map(block => renderBlock(block, classes))}
 					</AccordionDetails>
 				</Accordion>
 			);
 		case "child_page":
-			return (
-				<p key={id}>{value.title}</p>
-			); // Temp
+			return <p key={id}>{value.title}</p>; // Temp
 		default:
 			return (
 				<p key={id}>
