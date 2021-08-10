@@ -56,10 +56,12 @@ export default function NotFound() {
 			</main>
 			<div className={classes.image}>
 				<Image
+					priority
 					src={placeholder2}
 					alt="Snow mountains"
 					layout="fill"
 					objectFit="cover"
+					placeholder="blur"
 				/>
 			</div>
 		</>
