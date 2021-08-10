@@ -3,13 +3,13 @@ import {
 	AppBar,
 	Toolbar,
 	Breadcrumbs,
-	Button,
 	Link as MuiLink,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { Search as SearchIcon } from "@material-ui/icons";
 
 import cs from "classnames";
+
+import { Search } from "./Search";
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -39,10 +39,6 @@ const useStyles = makeStyles(theme => ({
 		marginRight: theme.spacing(0.5),
 		width: 20,
 		height: 20,
-	},
-	searchButton: {
-		fontSize: 14,
-		padding: ".1rem .5rem",
 	},
 }));
 
@@ -97,14 +93,7 @@ export function Navbar({ paths = defaultPaths }) {
 					)}
 				</Breadcrumbs>
 
-				<Button
-					className={classes.searchButton}
-					size="small"
-					startIcon={<SearchIcon />}
-					disableRipple
-				>
-					Search
-				</Button>
+				<Search />
 			</Toolbar>
 		</AppBar>
 	);
