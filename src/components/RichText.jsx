@@ -1,9 +1,13 @@
+import "react-medium-image-zoom/dist/styles.css";
+
 import Link from "next/link";
 import Image from "next/image";
-import cs from "classnames";
 
 import { Link as MuiLink } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+
+import cs from "classnames";
+import ImageZoom from "react-medium-image-zoom";
 
 import { getNordColor } from "../utils/getNordColor";
 import { nordPalette } from "../theme";
@@ -57,15 +61,21 @@ export function RichText({ text: richText }) {
 				allowedPostImageDomains.some(url => text.link.url.includes(url))
 			) {
 				return (
-					<div className={classes.image}>
-						<Image
-							src={text.link.url}
-							alt=""
-							layout="fill"
-							objectFit="contain"
-							key={index}
-						/>
-					</div>
+					<ImageZoom
+						overlayBgColorStart={`${nordPalette.nord0}ee`}
+						overlayBgColorEnd={`${nordPalette.nord0}ee`}
+						wrapStyle={{ width: "100%" }}
+					>
+						<div className={classes.image}>
+							<Image
+								src={text.link.url}
+								alt=""
+								layout="fill"
+								objectFit="contain"
+								key={index}
+							/>
+						</div>
+					</ImageZoom>
 				);
 			}
 
