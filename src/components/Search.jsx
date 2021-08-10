@@ -1,8 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-import { Button, Dialog, Paper, TextField, InputAdornment } from "@material-ui/core";
+import {
+	Button,
+	Dialog,
+	Paper,
+	TextField,
+	InputAdornment,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Search as SearchIcon } from "@material-ui/icons";
+
+import { sleep } from "../utils/sleep";
 
 const useStyles = makeStyles({
 	searchButton: {
@@ -44,12 +52,57 @@ function SearchModal(props) {
 	const classes = useModalStyles();
 	const { dialogOpen, setDialogOpen } = props;
 
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState([]);
+
+  const getResults = async (query) => {
+    const responseRaw = await fetch("/api/search", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query,
+      }),
+    });
+
+    const data = await responseRaw.json();
+    return data;
+  }
+
+  useEffect(() => {
+    let currentQuery = true;
+    const controller = new AbortController();
+
+    const loadResults = async () => {
+      if (!query) {
+        setResults([]);
+        return;
+      }
+
+      await sleep(500);
+      if (currentQuery) {
+        const results = await getResults(query, controller);
+        setResults(results);
+        console.log(results);
+      }
+    }
+
+    loadResults();
+
+    return () => {
+      currentQuery = false;
+      controller.abort();
+    }
+
+  }, [query]);
+
 	return (
 		<Dialog
-      fullWidth
+			fullWidth
 			onClose={() => setDialogOpen(false)}
 			open={dialogOpen}
-      maxWidth="xs"
+			maxWidth="xs"
 			classes={{
 				scrollPaper: classes.dialogScrollPaper,
 				paper: classes.dialogPaper,
@@ -57,17 +110,19 @@ function SearchModal(props) {
 		>
 			<Paper className={classes.paper}>
 				<TextField
-          autoFocus
-          fullWidth
+					autoFocus
+					fullWidth
 					id="search"
 					variant="outlined"
-          placeholder="Search"
+					placeholder="Search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
 					InputProps={{
 						startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            )
+							<InputAdornment position="start">
+								<SearchIcon />
+							</InputAdornment>
+						),
 					}}
 				/>
 			</Paper>
