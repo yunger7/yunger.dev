@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	image: {
 		position: "relative",
-		height: 450,
+		height: 500,
 		width: "100%",
 	},
 }));
@@ -62,7 +62,7 @@ export function RichText({ text: richText }) {
 							src={text.link.url}
 							alt=""
 							layout="fill"
-							objectFit="cover"
+							objectFit="contain"
 							key={index}
 						/>
 					</div>
