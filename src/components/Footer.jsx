@@ -31,8 +31,8 @@ const footerLinks = [
 		},
 		links: [
 			{
-				name: "Projects",
-				href: "/#projects",
+				name: "Quick access",
+				href: "/#quick-access",
 			},
 			{
 				name: "Latest posts",
@@ -83,6 +83,10 @@ const footerLinks = [
 			{
 				name: "About me",
 				href: "/about",
+			},
+			{
+				name: "Projects",
+				href: "/projects"
 			},
 			{
 				name: "Random notes",

@@ -26,8 +26,8 @@ module.exports = {
 				permanent: true,
 			},
 			{
-				source: "/shop",
-				destination: "https://ko-fi.com/yunger/shop",
+				source: "/support",
+				destination: "https://ko-fi.com/yunger/",
 				permanent: false,
 			},
 		];

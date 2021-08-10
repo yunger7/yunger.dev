@@ -29,7 +29,7 @@ const useStyles = makeStyles({
 
 export const SquareLink = React.forwardRef((props, ref) => {
 	const classes = useStyles();
-	const { onClick, href, children } = props;
+	const { onClick, href, children, openInNewTab } = props;
 	const Icon = props.icon;
 
 	const [elevation, setElevation] = useState(1);
@@ -41,6 +41,8 @@ export const SquareLink = React.forwardRef((props, ref) => {
 			href={href}
 			onClick={onClick}
 			ref={ref}
+			target={openInNewTab ? "_blank" : false}
+			rel={openInNewTab ? "noreferrer" : false}
 			elevation={elevation}
 			onMouseOver={() => setElevation(5)}
 			onMouseOut={() => setElevation(1)}

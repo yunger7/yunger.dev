@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import {
-	ShoppingCart as ShoppingCartIcon,
+	LocalCafe as CafeIcon,
 	LiveTv as LiveTvIcon,
 	Description as DescriptionIcon,
 	KeyboardArrowRight as KeyboardArrowRightIcon,
@@ -158,18 +158,18 @@ export default function Home({ posts }) {
 
 			<main>
 				<section className={classes.projects}>
-					<div id="projects" className={classes.scroll} />
+					<div id="quick-access" className={classes.scroll} />
 					<Container maxWidth="lg">
 						<div className={classes.sectionTitle}>
 							<Typography variant="h4" component="h2">
-								Projects
+								Quick access
 							</Typography>
 							<Divider />
 						</div>
 						<Grid container justifyContent="space-between" spacing={4}>
 							<Grid item md={3} sm={6} xs={12} className={classes.squareLink}>
-								<Link href="/shop" passHref>
-									<SquareLink icon={ShoppingCartIcon}>Shop</SquareLink>
+								<Link href="/support" passHref>
+									<SquareLink icon={CafeIcon} openInNewTab>Buy me a coffee</SquareLink>
 								</Link>
 							</Grid>
 							<Grid item md={3} sm={6} xs={12} className={classes.squareLink}>
@@ -185,7 +185,7 @@ export default function Home({ posts }) {
 							<Grid item md={3} sm={6} xs={12} className={classes.squareLink}>
 								<Link href="/projects" passHref>
 									<SquareLink icon={KeyboardArrowRightIcon}>
-										More projects
+										All projects
 									</SquareLink>
 								</Link>
 							</Grid>
