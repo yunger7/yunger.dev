@@ -37,6 +37,7 @@ export default async function search(request, response) {
 }
 
 const messageDatabaseId = process.env.NOTION_MESSAGES_DATABASE_ID;
+const blogDatabaseId = process.env.NOTION_BLOG_DATABASE_ID;
 
 function filterResults(results) {
 	const filteredResults = [];
@@ -50,8 +51,10 @@ function filterResults(results) {
 			continue;
 		}
 
-		if (page.properties["Status"]?.select.name !== "Published") {
-			continue;
+		if (page.parent.database_id === blogDatabaseId) {
+			if (page.properties["Status"]?.select.name !== "Published") {
+				continue;
+			}
 		}
 
 		filteredResults.push(page);
