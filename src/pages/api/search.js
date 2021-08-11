@@ -1,4 +1,5 @@
 import { notion } from "../../services/notion";
+import { getPlainTextFromRichText } from "../../utils/getPlainText";
 
 export default async function search(request, response) {
 	if (request.method !== "POST") {
@@ -22,7 +23,8 @@ export default async function search(request, response) {
 			},
 		});
 
-		const data = filterResults(results);
+		const filteredData = filterResults(results);
+		const data = getData(filteredData);
 
 		response.status(200).json(data);
 		return;
@@ -61,4 +63,22 @@ function filterResults(results) {
 	}
 
 	return filteredResults;
+}
+
+function getData(results) {
+	const data = [];
+
+	for (const page of results) {
+		const { id, properties } = page;
+
+		const titleKey = Object.keys(properties).find(key => properties[key].type === "title");
+		const title = getPlainTextFromRichText(properties[titleKey].title);
+
+		data.push({
+			id,
+			title,
+		});
+	}
+
+	return data;
 }
