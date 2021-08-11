@@ -38,6 +38,7 @@ export default async function search(request, response) {
 	}
 }
 
+const pagesDatabaseId = process.env.NOTION_PAGES_DATABASE_ID;
 const messageDatabaseId = process.env.NOTION_MESSAGES_DATABASE_ID;
 const blogDatabaseId = process.env.NOTION_BLOG_DATABASE_ID;
 
@@ -49,11 +50,18 @@ function filterResults(results) {
 			continue;
 		}
 
-		if (page.parent.database_id === messageDatabaseId) {
+		if (page.parent.database_id.replace(/[-]/g, "") === messageDatabaseId) {
 			continue;
 		}
 
-		if (page.parent.database_id === blogDatabaseId) {
+		console.log(page.parent.database_id.replace(/[-]/g, ""));
+		if (page.parent.database_id.replace(/[-]/g, "") === pagesDatabaseId) {
+			if (!page.properties["Public"].checkbox) {
+				continue;
+			}
+		}
+
+		if (page.parent.database_id.replace(/[-]/g, "") === blogDatabaseId) {
 			if (page.properties["Status"]?.select.name !== "Published") {
 				continue;
 			}
