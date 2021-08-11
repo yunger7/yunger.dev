@@ -55,6 +55,10 @@ const useStyles = makeStyles(theme => ({
   sectionTitle: {
     marginBottom: theme.spacing(2),
   },
+  scroll: {
+    position: "relative",
+		bottom: 100,
+  },
   featured: {
     paddingTop: theme.spacing(5),
     paddingBottom: theme.spacing(5),
@@ -98,6 +102,7 @@ export default function Blog({ posts }) {
 
       <main className={classes.page}>
         <section className={classes.featured}>
+          <div id="featured" className={classes.scroll} />
           <Container maxWidth="lg">
             <div className={classes.sectionTitle}>
               <Typography variant="h4" component="h2">
@@ -120,6 +125,7 @@ export default function Blog({ posts }) {
         <WaveDivider1 color="#292e39" />
 
         <section className={classes.latest}>
+          <div id="latest" className={classes.scroll} />
           <Container maxWidth="lg">
             <div className={classes.sectionTitle}>
               <Typography variant="h4" component="h2">

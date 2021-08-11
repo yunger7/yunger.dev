@@ -13,7 +13,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import {
 	Favorite as FavoriteIcon,
 	Home as HomeIcon,
-	ShoppingCart as ShoppingCartIcon,
+	Info as InfoIcon,
 	Description as DescriptionIcon,
 	Settings as SettingsIcon,
 	LocalCafe as LocalCafeIcon,
@@ -46,19 +46,20 @@ const footerLinks = [
 	},
 	{
 		title: {
-			name: "Shop",
-			href: "/shop",
-			icon: ShoppingCartIcon,
-		},
-		links: [],
-	},
-	{
-		title: {
 			name: "Blog",
 			href: "/blog",
 			icon: DescriptionIcon,
 		},
-		links: [],
+		links: [
+			{
+				name: "Featured",
+				href: "/blog/#featured",
+			},
+			{
+				name: "Latest",
+				href: "/blog/#latest",
+			},
+		],
 	},
 	{
 		title: {
@@ -75,26 +76,31 @@ const footerLinks = [
 	},
 	{
 		title: {
+			name: "Info",
+			href: null,
+			icon: InfoIcon,
+		},
+		links: [
+			{
+				"name": "About me",
+				href: "/about",
+			},
+		],
+	},
+	{
+		title: {
 			name: "Other",
 			href: null,
 			icon: null,
 		},
 		links: [
 			{
-				name: "About me",
-				href: "/about",
-			},
-			{
-				name: "Projects",
-				href: "/projects"
+				name: "Contact me",
+				href: "/contact",
 			},
 			{
 				name: "Random notes",
 				href: "/notes",
-			},
-			{
-				name: "Contact me",
-				href: "/contact",
 			},
 		],
 	},
