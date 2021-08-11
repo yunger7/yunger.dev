@@ -1,6 +1,10 @@
 import { notion } from "../../services/notion";
 import { getPlainTextFromRichText } from "../../utils/getPlainText";
 
+const pagesDatabaseId = process.env.NOTION_PAGES_DATABASE_ID;
+const messageDatabaseId = process.env.NOTION_MESSAGES_DATABASE_ID;
+const blogDatabaseId = process.env.NOTION_BLOG_DATABASE_ID;
+
 export default async function search(request, response) {
 	if (request.method !== "POST") {
 		response.status(400).json({ message: "Only POST requests are allowed" });
@@ -38,10 +42,6 @@ export default async function search(request, response) {
 	}
 }
 
-const pagesDatabaseId = process.env.NOTION_PAGES_DATABASE_ID;
-const messageDatabaseId = process.env.NOTION_MESSAGES_DATABASE_ID;
-const blogDatabaseId = process.env.NOTION_BLOG_DATABASE_ID;
-
 function filterResults(results) {
 	const filteredResults = [];
 
@@ -54,7 +54,6 @@ function filterResults(results) {
 			continue;
 		}
 
-		console.log(page.parent.database_id.replace(/[-]/g, ""));
 		if (page.parent.database_id.replace(/[-]/g, "") === pagesDatabaseId) {
 			if (!page.properties["Public"].checkbox) {
 				continue;
@@ -79,12 +78,28 @@ function getData(results) {
 	for (const page of results) {
 		const { id, properties } = page;
 
+		// Get title
 		const titleKey = Object.keys(properties).find(key => properties[key].type === "title");
 		const title = getPlainTextFromRichText(properties[titleKey].title);
+		let href = "";
+		let pageType = ""
+
+		// Get href and page type (webpage, post, etc.)
+		if (page.parent.database_id.replace(/[-]/g, "") === pagesDatabaseId) {
+			href = getPlainTextFromRichText(page.properties["Href"].rich_text);
+			pageType = "webpage";
+		}
+
+		if (page.parent.database_id.replace(/[-]/g, "") === blogDatabaseId) {
+			href = `/blog/${page.properties["Slug"].formula.string}`;
+			pageType = "post";
+		}
 
 		data.push({
 			id,
 			title,
+			href,
+			pageType,
 		});
 	}
 
