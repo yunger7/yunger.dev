@@ -41,8 +41,8 @@ export const SquareLink = React.forwardRef((props, ref) => {
 			href={href}
 			onClick={onClick}
 			ref={ref}
-			target={openInNewTab ? "_blank" : false}
-			rel={openInNewTab ? "noreferrer" : false}
+			target={openInNewTab ? "_blank" : undefined}
+			rel={openInNewTab ? "noreferrer" : undefined}
 			elevation={elevation}
 			onMouseOver={() => setElevation(5)}
 			onMouseOut={() => setElevation(1)}
