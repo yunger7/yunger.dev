@@ -184,7 +184,7 @@ function SearchModal(props) {
 										{result.pageType === "post" && (
 											<PostIcon className={classes.resultIcon} />
 										)}
-										<Typography variant="inherit">{result.title}</Typography>
+										<Typography noWrap variant="inherit">{result.title}</Typography>
 									</ListItem>
 								</Link>
 							))}
