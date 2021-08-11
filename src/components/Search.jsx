@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useState, useEffect } from "react";
 
 import {
@@ -6,9 +7,16 @@ import {
 	Paper,
 	TextField,
 	InputAdornment,
+	List,
+	ListItem,
+	Typography,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { Search as SearchIcon } from "@material-ui/icons";
+import {
+	Search as SearchIcon,
+	Description as PostIcon,
+	Language as WebpageIcon,
+} from "@material-ui/icons";
 
 import { sleep } from "../utils/sleep";
 
@@ -39,63 +47,90 @@ export function Search() {
 	);
 }
 
-const useModalStyles = makeStyles({
+const useModalStyles = makeStyles(theme => ({
 	dialogScrollPaper: {
 		alignItems: "flex-start",
 	},
 	dialogPaper: {
 		marginTop: "15vh",
 	},
-});
+	results: {
+		maxHeight: 200,
+		overflow: "auto",
+	},
+	resultIcon: {
+		marginRight: theme.spacing(1),
+	},
+	noResults: {
+		height: 200,
+		display: "flex",
+		flexDirection: "column",
+		justifyContent: "center",
+		alignItems: "center",
+	},
+	noResultsTitle: {
+		marginBottom: theme.spacing(0.75),
+	},
+	noResultsSubtitle: {
+		filter: "brightness(0.8)",
+	},
+}));
 
 function SearchModal(props) {
 	const classes = useModalStyles();
 	const { dialogOpen, setDialogOpen } = props;
 
-  const [query, setQuery] = useState("");
-  const [results, setResults] = useState([]);
+	const [query, setQuery] = useState("");
+	const [isFirstSearch, setIsFirstSearch] = useState(true);
+	const [results, setResults] = useState([]);
+	const [loading, setLoading] = useState(false);
 
-  const getResults = async (query) => {
-    const responseRaw = await fetch("/api/search", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        query,
-      }),
-    });
+	const getResults = async query => {
+		const responseRaw = await fetch("/api/search", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				query,
+			}),
+		});
 
-    const data = await responseRaw.json();
-    return data;
-  }
+		const data = await responseRaw.json();
+		return data;
+	};
 
-  useEffect(() => {
-    let currentQuery = true;
-    const controller = new AbortController();
+	useEffect(() => {
+		let currentQuery = true;
+		setLoading(true);
+		const controller = new AbortController();
 
-    const loadResults = async () => {
-      if (!query) {
-        setResults([]);
-        return;
-      }
+		const loadResults = async () => {
+			if (!query) {
+				setResults([]);
+				return;
+			}
 
-      await sleep(500);
-      if (currentQuery) {
-        const results = await getResults(query, controller);
-        setResults(results);
-        console.log(results);
-      }
-    }
+			await sleep(500);
 
-    loadResults();
+			if (currentQuery) {
+				const results = await getResults(query, controller);
+				setResults(results);
 
-    return () => {
-      currentQuery = false;
-      controller.abort();
-    }
+				setIsFirstSearch(false);
+				console.log(results);
+			}
 
-  }, [query]);
+			setLoading(false);
+		};
+
+		loadResults();
+
+		return () => {
+			currentQuery = false;
+			controller.abort();
+		};
+	}, [query]);
 
 	return (
 		<Dialog
@@ -108,24 +143,52 @@ function SearchModal(props) {
 				paper: classes.dialogPaper,
 			}}
 		>
-			<Paper className={classes.paper}>
-				<TextField
-					autoFocus
-					fullWidth
-					id="search"
-					variant="outlined"
-					placeholder="Search"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-					InputProps={{
-						startAdornment: (
-							<InputAdornment position="start">
-								<SearchIcon />
-							</InputAdornment>
-						),
-					}}
-				/>
-			</Paper>
+			<TextField
+				autoFocus
+				fullWidth
+				id="search"
+				variant="outlined"
+				placeholder="Search"
+				value={query}
+				onChange={e => setQuery(e.target.value)}
+				InputProps={{
+					startAdornment: (
+						<InputAdornment position="start">
+							<SearchIcon />
+						</InputAdornment>
+					),
+				}}
+			/>
+			{!isFirstSearch && (
+				<>
+					{results.length ? (
+						<List className={classes.results}>
+							{results.map(result => (
+								<Link passHref href={result.href} key={result.id}>
+									<ListItem button disableRipple component="a">
+										{result.pageType === "webpage" && (
+											<WebpageIcon className={classes.resultIcon} />
+										)}
+										{result.pageType === "post" && (
+											<PostIcon className={classes.resultIcon} />
+										)}
+										<Typography variant="inherit">{result.title}</Typography>
+									</ListItem>
+								</Link>
+							))}
+						</List>
+					) : (
+						<Paper className={classes.noResults}>
+							<Typography className={classes.noResultsTitle} variant="body1">
+								No results found
+							</Typography>
+							<Typography className={classes.noResultsSubtitle} variant="body2">
+								Try different search terms
+							</Typography>
+						</Paper>
+					)}
+				</>
+			)}
 		</Dialog>
 	);
 }
