@@ -10,6 +10,7 @@ import {
 	List,
 	ListItem,
 	Typography,
+	CircularProgress,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -102,7 +103,6 @@ function SearchModal(props) {
 
 	useEffect(() => {
 		let currentQuery = true;
-		setLoading(true);
 		const controller = new AbortController();
 
 		const loadResults = async () => {
@@ -114,14 +114,15 @@ function SearchModal(props) {
 			await sleep(500);
 
 			if (currentQuery) {
+				setLoading(true);
 				const results = await getResults(query, controller);
 				setResults(results);
 
 				setIsFirstSearch(false);
+				setLoading(false);
 				console.log(results);
 			}
 
-			setLoading(false);
 		};
 
 		loadResults();
@@ -161,7 +162,11 @@ function SearchModal(props) {
 				InputProps={{
 					startAdornment: (
 						<InputAdornment position="start">
-							<SearchIcon />
+							{loading ? (
+								<CircularProgress size={24} />
+							) : (
+								<SearchIcon />
+							)}
 						</InputAdornment>
 					),
 				}}
