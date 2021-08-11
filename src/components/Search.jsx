@@ -132,6 +132,13 @@ function SearchModal(props) {
 		};
 	}, [query]);
 
+	useEffect(() => {
+		setIsFirstSearch(true);
+		setQuery("");
+		setLoading(false);
+		setResults([]);
+	}, [dialogOpen])
+
 	return (
 		<Dialog
 			fullWidth
