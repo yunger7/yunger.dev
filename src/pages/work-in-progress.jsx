@@ -43,10 +43,10 @@ export default function WorkInProgress() {
 			</Head>
 			<main className={classes.page}>
         <SettingsIcon style={{ fontSize: 48 }} />
-				<Typography variant="h1">
+				<Typography variant="h1" align="center">
 					Work in progress
 				</Typography>
-				<Typography variant="h5" gutterBottom>
+				<Typography variant="h5" align="center" gutterBottom>
 					Hurry up and go home before you catch a cold!
 				</Typography>
 				<Link href="/" passHref>

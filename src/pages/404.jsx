@@ -31,6 +31,9 @@ const useStyles = makeStyles({
 		filter: "blur(10px)",
 		userSelect: "none",
 	},
+	line: {
+		display: "inline-block",
+	},
 });
 
 export default function NotFound() {
@@ -42,14 +45,20 @@ export default function NotFound() {
 				<title>404 | Page not found</title>
 			</Head>
 			<main className={classes.page}>
-				<Typography variant="h1" gutterBottom>
-					(404) Woops (っ °Д °;)っ
+				<Typography variant="h1" align="center" gutterBottom>
+					<span className={classes.line}>(404) Woops </span>{" "}
+					<span className={classes.line}>(っ °Д °;)っ</span>
 				</Typography>
-				<Typography variant="h5" gutterBottom>
+				<Typography variant="h5" align="center" gutterBottom>
 					Hurry up and go home before you catch a cold!
 				</Typography>
 				<Link href="/" passHref>
-					<Button variant="contained" color="primary" startIcon={<HomeIcon />} disableRipple>
+					<Button
+						variant="contained"
+						color="primary"
+						startIcon={<HomeIcon />}
+						disableRipple
+					>
 						Go home
 					</Button>
 				</Link>
