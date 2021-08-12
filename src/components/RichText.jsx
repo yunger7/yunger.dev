@@ -92,11 +92,17 @@ export function RichText({ text: richText }) {
 					key={index}
 				>
 					{text.link ? (
-						<Link href={text.link.url} passHref>
-							<MuiLink target="_blank" rel="noreferrer">
-								{text.content}
-							</MuiLink>
-						</Link>
+						<>
+							{text.link.url.includes("yunger.dev") ? (
+								<Link href={cleanUrl(text.link.url)} passHref>
+									<MuiLink>{text.content}</MuiLink>
+								</Link>
+							) : (
+								<MuiLink href={text.link.url} target="_blank" rel="noreferrer">
+									{text.content}
+								</MuiLink>
+							)}
+						</>
 					) : (
 						text.content
 					)}
@@ -138,4 +144,12 @@ export function RichText({ text: richText }) {
 			}
 		}
 	});
+}
+
+function cleanUrl(url) {
+	return url
+		.replace("http://", "")
+		.replace("https://", "")
+		.replace("www.", "")
+		.replace("yunger.dev", "");
 }
