@@ -40,6 +40,13 @@ const useStyles = makeStyles(theme => ({
 		paddingTop: theme.spacing(5),
 		paddingBottom: theme.spacing(10),
 	},
+	submitContainer: {
+		[theme.breakpoints.down("xs")]: {
+			display: "flex",
+			justifyContent: "center",
+			alignItems: "center",
+		},
+	},
 }));
 
 export default function Contact() {
@@ -188,7 +195,7 @@ export default function Contact() {
 										autoComplete="off"
 									/>
 								</Grid>
-								<Grid item xs={6}>
+								<Grid item sm={6} xs={12}>
 									<TextField
 										fullWidth
 										id="name"
@@ -203,7 +210,7 @@ export default function Contact() {
 										autoComplete="off"
 									/>
 								</Grid>
-								<Grid item xs={6}>
+								<Grid item sm={6} xs={12}>
 									<TextField
 										fullWidth
 										id="email"
@@ -237,7 +244,7 @@ export default function Contact() {
 										autoComplete="off"
 									/>
 								</Grid>
-								<Grid item xs={4}>
+								<Grid className={classes.submitContainer} item xs={12}>
 									{loading ? (
                     <Button
                       disableRipple
