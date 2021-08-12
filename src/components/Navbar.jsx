@@ -4,6 +4,7 @@ import {
 	Toolbar,
 	Breadcrumbs,
 	Link as MuiLink,
+	Typography,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -40,6 +41,10 @@ const useStyles = makeStyles(theme => ({
 		width: 20,
 		height: 20,
 	},
+	typography: {
+		display: "block",
+		maxWidth: 100,
+	},
 }));
 
 const defaultPaths = [
@@ -64,32 +69,46 @@ export function Navbar({ paths = defaultPaths }) {
 						paths.map((path, index) => {
 							if (index === paths.length - 1) {
 								return (
-									<MuiLink
-										className={cs(classes.link, classes.linkDisabled)}
-										color="inherit"
-										key={path.name}
-										aria-current="page"
+									<Typography
+										className={classes.typography}
+										variant="inherit"
+										noWrap
 									>
-										{path.name}
-									</MuiLink>
+										<MuiLink
+											className={cs(classes.link, classes.linkDisabled)}
+											color="inherit"
+											key={path.name}
+											aria-current="page"
+										>
+											{path.name}
+										</MuiLink>
+									</Typography>
 								);
 							}
 
 							return (
-								<Link href={path.href} passHref key={path.name}>
-									<MuiLink className={classes.link} color="inherit">
-										{path.name}
-									</MuiLink>
-								</Link>
+								<Typography
+									className={classes.typography}
+									variant="inherit"
+									noWrap
+								>
+									<Link href={path.href} passHref key={path.name}>
+										<MuiLink className={classes.link} color="inherit">
+											{path.name}
+										</MuiLink>
+									</Link>
+								</Typography>
 							);
 						})
 					) : (
-						<MuiLink
-							className={cs(classes.link, classes.linkDisabled)}
-							color="inherit"
-						>
-							yunger.dev
-						</MuiLink>
+						<Typography className={classes.typography} variant="inherit" noWrap>
+							<MuiLink
+								className={cs(classes.link, classes.linkDisabled)}
+								color="inherit"
+							>
+								yunger.dev
+							</MuiLink>
+						</Typography>
 					)}
 				</Breadcrumbs>
 
