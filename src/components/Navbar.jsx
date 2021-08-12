@@ -70,14 +70,14 @@ export function Navbar({ paths = defaultPaths }) {
 							if (index === paths.length - 1) {
 								return (
 									<Typography
+										noWrap
 										className={classes.typography}
 										variant="inherit"
-										noWrap
+										key={path.name}
 									>
 										<MuiLink
 											className={cs(classes.link, classes.linkDisabled)}
 											color="inherit"
-											key={path.name}
 											aria-current="page"
 										>
 											{path.name}
@@ -88,11 +88,12 @@ export function Navbar({ paths = defaultPaths }) {
 
 							return (
 								<Typography
+									noWrap
 									className={classes.typography}
 									variant="inherit"
-									noWrap
+									key={path.name}
 								>
-									<Link href={path.href} passHref key={path.name}>
+									<Link href={path.href} passHref>
 										<MuiLink className={classes.link} color="inherit">
 											{path.name}
 										</MuiLink>
