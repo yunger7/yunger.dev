@@ -145,10 +145,10 @@ export default function Home({ posts }) {
 					yunger.dev
 				</Typography>
 				<Typography variant="body1">
-					Hello world 👋 <br /> I&apos;m <strong>Luís</strong>, a programmer,
-					musician and coffee enthusiast. I taught myself how to code to turn my
-					dumb ideas into reality, and I&apos;ve created this place to share
-					them with the world. Check out{" "}
+					Hello world! I&apos;m <strong>Luís</strong>, a self-proclaimed digital
+					craftsman, music enthusiast, anime connoisseur and coffee addict. I
+					taught myself how to code to turn my dumb ideas into reality, and
+					I&apos;ve created this place to share them with the world. Check out{" "}
 					<Link href="/about" passHref>
 						<MuiLink className={classes.bioLink}>my bio</MuiLink>
 					</Link>{" "}
@@ -169,7 +169,9 @@ export default function Home({ posts }) {
 						<Grid container justifyContent="space-between" spacing={4}>
 							<Grid item md={3} sm={6} xs={12} className={classes.squareLink}>
 								<Link href="/support" passHref>
-									<SquareLink icon={CafeIcon} openInNewTab>Buy me a coffee</SquareLink>
+									<SquareLink icon={CafeIcon} openInNewTab>
+										Buy me a coffee
+									</SquareLink>
 								</Link>
 							</Grid>
 							<Grid item md={3} sm={6} xs={12} className={classes.squareLink}>
