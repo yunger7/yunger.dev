@@ -43,7 +43,9 @@ const useStyles = makeStyles(theme => ({
 	},
 	typography: {
 		display: "block",
-		maxWidth: 100,
+		[theme.breakpoints.down("xs")]: {
+			maxWidth: 100,
+		},
 	},
 }));
 
