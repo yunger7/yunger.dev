@@ -1,6 +1,6 @@
 module.exports = {
 	images: {
-		domains: ["i.imgur.com"],
+		domains: ["i.imgur.com", "www.notion.so", "images.unsplash.com"],
 	},
 	async rewrites() {
 		return [
@@ -15,7 +15,7 @@ module.exports = {
 			{
 				source: "/animelist",
 				destination: "/work-in-progress",
-			}
+			},
 		];
 	},
 	async redirects() {

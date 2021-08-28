@@ -4,7 +4,7 @@ import { getNordColor } from "../utils/getNordColor";
 import { getPostCoverImage } from "../utils/getPostCoverImage";
 
 export async function getBlogPosts() {
-  const blogDatabaseId = process.env.NOTION_BLOG_DATABASE_ID;
+	const blogDatabaseId = process.env.NOTION_BLOG_DATABASE_ID;
 
 	const response = await notion.databases.query({
 		database_id: blogDatabaseId,
@@ -60,5 +60,5 @@ export async function getBlogPosts() {
 		}
 	}
 
-  return posts;
+	return posts;
 }

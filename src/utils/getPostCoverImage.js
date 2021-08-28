@@ -1,17 +1,18 @@
 import { getPlaiceholder } from "plaiceholder";
 
-// Temporarily hosting images on Imgur since Notion's API doesn't support files yet.
 export async function getPostCoverImage(page) {
-  const files = page.properties["Cover Image"].files;
+	const image = page.cover;
 
-  if (files.length) {
-    const { base64, img } = await getPlaiceholder(files[0].name);
+	if (image && image.type === "external") {
+		const { base64, img: imageData } = await getPlaiceholder(
+			image.external.url
+		);
 
-    return {
-      ...img,
-      blurDataURL: base64,
-    };
-  }
+		return {
+			...imageData,
+			blurDataURL: base64,
+		};
+	}
 
-  return null;
+	return null;
 }

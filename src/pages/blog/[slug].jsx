@@ -1,11 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 
-import {
-	Container,
-	Typography,
-	Chip,
-} from "@material-ui/core";
+import { Container, Typography, Chip } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import readingTime from "reading-time";
 
@@ -29,6 +25,9 @@ import { Footer } from "../../components/Footer";
 import placeholder3 from "../../../public/placeholder3.jpg";
 
 const useStyles = makeStyles(theme => ({
+	icon: {
+		marginBottom: theme.spacing(1),
+	},
 	tags: {
 		margin: `${theme.spacing(1.5)}px 0`,
 
@@ -55,6 +54,7 @@ export default function BlogPost({ post }) {
 		titleAsPlainText,
 		description,
 		image,
+		icon,
 		slug,
 		tags,
 		createdAt,
@@ -93,6 +93,7 @@ export default function BlogPost({ post }) {
 				backgroundImage={
 					image ? (
 						<Image
+							priority
 							src={image.src}
 							alt="Post cover"
 							layout="fill"
@@ -102,6 +103,7 @@ export default function BlogPost({ post }) {
 						/>
 					) : (
 						<Image
+							priority
 							src={placeholder3}
 							alt="Post cover"
 							layout="fill"
@@ -112,6 +114,17 @@ export default function BlogPost({ post }) {
 				}
 				dividerColor={theme.palette.background.paper}
 			>
+				{icon && (
+					<Image
+						priority
+						className={classes.icon}
+						src={icon.external.url}
+						alt="Post icon"
+						width={100}
+						height={100}
+						objectFit="contain"
+					/>
+				)}
 				<Typography component="h1" variant="h5">
 					<RichText text={title} />
 				</Typography>
@@ -217,6 +230,7 @@ export async function getStaticProps({ params: { slug } }) {
 	const post = {
 		id: notionPost.id,
 		image: postImage,
+		icon: notionPost.icon,
 		createdAt: notionPost.created_time,
 		readingTime: readingTime(blogContentRaw),
 		title: notionPost.properties["Name"].title,
