@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import {
 	Typography,
 	Checkbox,
@@ -9,7 +11,10 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import { ExpandMore as ExpandMoreIcon } from "@material-ui/icons";
 
+import ImageZoom from "react-medium-image-zoom";
+
 import { RichText } from "../components/RichText";
+import { nordPalette } from "../theme";
 
 const useStyles = makeStyles(theme => ({
 	accordion: {
@@ -41,6 +46,11 @@ const useStyles = makeStyles(theme => ({
 		"&:hover": {
 			backgroundColor: "transparent !important",
 		},
+	},
+	image: {
+		position: "relative",
+		height: 500,
+		width: "100%",
 	},
 }));
 
@@ -83,6 +93,32 @@ function renderBlock(block, classes) {
 				<Typography variant="h5" component="h4" key={id}>
 					<RichText text={value.text} />
 				</Typography>
+			);
+		case "image":
+			if (!value.external) {
+				return null;
+			}
+
+			if (!value.external.url) {
+				return null;
+			}
+
+			return (
+				<ImageZoom
+					overlayBgColorStart={`${nordPalette.nord0}ee`}
+					overlayBgColorEnd={`${nordPalette.nord0}ee`}
+					wrapStyle={{ width: "100%" }}
+					key={id}
+				>
+					<div className={classes.image}>
+						<Image
+							src={value.external.url}
+							alt=""
+							layout="fill"
+							objectFit="contain"
+						/>
+					</div>
+				</ImageZoom>
 			);
 		case "bulleted_list_item":
 		case "numbered_list_item":
