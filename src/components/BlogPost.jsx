@@ -1,8 +1,8 @@
 import Image from "next/image";
 import React from "react";
 
-import { Card, CardContent, Typography, Chip } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Card, CardContent, Typography, Chip } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
 
 import { RichText } from "./RichText";
 

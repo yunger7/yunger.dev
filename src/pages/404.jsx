@@ -2,9 +2,9 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Button, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import { Home as HomeIcon } from "@material-ui/icons";
+import { Button, Typography } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import { Home as HomeIcon } from "@mui/icons-material";
 
 import { nordPalette } from "../theme";
 

@@ -2,9 +2,9 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Container, Grid, Typography, Divider } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import { Description as DescriptionIcon } from "@material-ui/icons";
+import { Container, Grid, Typography, Divider } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import { Description as DescriptionIcon } from "@mui/icons-material";
 import Carousel from "react-material-ui-carousel";
 
 import { getBlogPosts } from "../../lib/getBlogPosts";

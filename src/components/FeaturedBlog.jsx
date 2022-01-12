@@ -1,9 +1,9 @@
 import Image from "next/image";
 import React from "react";
 
-import { Chip, Typography, Box } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import { Star as StarIcon, } from "@material-ui/icons";
+import { Chip, Typography, Box } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import { Star as StarIcon, } from "@mui/icons-material";
 
 import { RichText } from "./RichText";
 
@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
       cursor: "pointer",
     },
 
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down('md')]: {
       flexDirection: "column",
       alignItems: "stretch",
     },
@@ -45,14 +45,14 @@ const useStyles = makeStyles(theme => ({
       borderRadius: theme.shape.borderRadius,
     },
 
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down('md')]: {
       width: "100%",
       height: 200,
     },
 	},
 	information: {
     width: "50%",
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down('md')]: {
       width: "100%",
       height: "50%",
     },

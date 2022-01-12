@@ -1,4 +1,4 @@
-import { createTheme } from "@material-ui/core/styles";
+import { createTheme, adaptV4Theme } from "@mui/material/styles";
 
 export const nordPalette = {
   nord0: "#2E3440",
@@ -19,9 +19,9 @@ export const nordPalette = {
   nord15: "#B48EAD",
 };
 
-export const nordDark = createTheme({
+export const nordDark = createTheme(adaptV4Theme({
   palette: {
-    type: "dark",
+    mode: "dark",
     primary: {
       main: nordPalette.nord8,
       dark: "#79b8ca",
@@ -139,4 +139,4 @@ export const nordDark = createTheme({
       },  
     },
   },
-});
+}));

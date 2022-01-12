@@ -8,8 +8,8 @@ import {
 	Tooltip,
 	Snackbar,
 	Slide,
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+} from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
 import {
 	Favorite as FavoriteIcon,
 	Home as HomeIcon,
@@ -17,8 +17,8 @@ import {
 	Description as DescriptionIcon,
 	Settings as SettingsIcon,
 	LocalCafe as LocalCafeIcon,
-} from "@material-ui/icons";
-import { Alert } from "@material-ui/lab";
+} from "@mui/icons-material";
+import { Alert } from '@mui/material';
 
 import { nordPalette } from "../theme";
 
@@ -117,7 +117,7 @@ const useStyles = makeStyles(theme => ({
 		height: "100%",
 		display: "flex",
 		justifyContent: "space-between",
-		[theme.breakpoints.down("sm")]: {
+		[theme.breakpoints.down('md')]: {
 			flexDirection: "column",
 			alignItems: "center",
 			gap: theme.spacing(5),
@@ -125,17 +125,17 @@ const useStyles = makeStyles(theme => ({
 	},
 	info: {
 		width: "20%",
-		[theme.breakpoints.down("sm")]: {
+		[theme.breakpoints.down('md')]: {
 			width: "30%",
 			textAlign: "center",
 		},
-		[theme.breakpoints.down("xs")]: {
+		[theme.breakpoints.down('sm')]: {
 			width: "65%",
 		},
 	},
 	websiteTitle: {
 		fontWeight: 500,
-		[theme.breakpoints.down("sm")]: {
+		[theme.breakpoints.down('md')]: {
 			marginBottom: theme.spacing(2),
 		},
 	},
@@ -148,7 +148,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	links: {
 		justifyContent: "flex-end",
-		[theme.breakpoints.down("sm")]: {
+		[theme.breakpoints.down('md')]: {
 			justifyContent: "space-between",
 		},
 	},
@@ -207,7 +207,7 @@ export function Footer() {
 const useLinkSectionStyles = makeStyles(theme => ({
 	root: {
 		color: nordPalette.nord4,
-		[theme.breakpoints.down("xs")]: {
+		[theme.breakpoints.down('sm')]: {
 			textAlign: "center",
 			marginBottom: theme.spacing(2.5),
 		},
@@ -222,7 +222,7 @@ const useLinkSectionStyles = makeStyles(theme => ({
 		display: "flex",
 		alignItems: "flex-start",
 		gap: theme.spacing(1),
-		[theme.breakpoints.down("xs")]: {
+		[theme.breakpoints.down('sm')]: {
 			justifyContent: "center",
 		},
 	},

@@ -8,8 +8,8 @@ import {
 	Typography,
 	Divider,
 	Link as MuiLink,
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+} from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
 import {
 	LocalCafe as CafeIcon,
 	LiveTv as LiveTvIcon,
@@ -18,7 +18,7 @@ import {
 	Info as InfoIcon,
 	Book as BookIcon,
 	ContactMail as ContactMailIcon,
-} from "@material-ui/icons";
+} from "@mui/icons-material";
 
 import Carousel from "react-material-ui-carousel";
 
@@ -62,7 +62,7 @@ const useStyles = makeStyles(theme => ({
 		paddingTop: theme.spacing(2.5),
 		paddingBottom: theme.spacing(10),
 		backgroundColor: "#292e39",
-		[theme.breakpoints.down("sm")]: {
+		[theme.breakpoints.down('md')]: {
 			paddingTop: theme.spacing(5),
 		},
 	},
@@ -72,7 +72,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	posts: {
 		paddingBottom: theme.spacing(10),
-		[theme.breakpoints.down("sm")]: {
+		[theme.breakpoints.down('md')]: {
 			paddingTop: theme.spacing(5),
 		},
 	},
@@ -82,7 +82,7 @@ const useStyles = makeStyles(theme => ({
 	more: {
 		backgroundColor: "#292e39",
 		paddingBottom: theme.spacing(10),
-		[theme.breakpoints.down("sm")]: {
+		[theme.breakpoints.down('md')]: {
 			paddingTop: theme.spacing(5),
 		},
 	},

@@ -1,8 +1,10 @@
 import Head from "next/head";
 import Image from "next/image";
 
-import { Container, Typography } from "@material-ui/core";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { Container, Typography } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+
+import makeStyles from '@mui/styles/makeStyles';
 
 import { Navbar } from "../components/Navbar";
 import { Header } from "../components/Header";

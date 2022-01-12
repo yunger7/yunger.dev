@@ -5,8 +5,8 @@ import {
 	Breadcrumbs,
 	Link as MuiLink,
 	Typography,
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+} from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
 
 import cs from "classnames";
 
@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	typography: {
 		display: "block",
-		[theme.breakpoints.down("xs")]: {
+		[theme.breakpoints.down("sm")]: {
 			maxWidth: 100,
 		},
 	},

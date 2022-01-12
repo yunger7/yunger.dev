@@ -11,13 +11,13 @@ import {
 	ListItem,
 	Typography,
 	CircularProgress,
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+} from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
 import {
 	Search as SearchIcon,
 	Description as PostIcon,
 	Language as WebpageIcon,
-} from "@material-ui/icons";
+} from "@mui/icons-material";
 
 import { sleep } from "../utils/sleep";
 
@@ -38,6 +38,7 @@ export function Search() {
 				disableRipple
 				className={classes.searchButton}
 				size="small"
+				color="inherit"
 				startIcon={<SearchIcon />}
 				onClick={() => setDialogOpen(true)}
 			>
@@ -122,7 +123,6 @@ function SearchModal(props) {
 				setLoading(false);
 				console.log(results);
 			}
-
 		};
 
 		loadResults();
@@ -138,7 +138,7 @@ function SearchModal(props) {
 		setQuery("");
 		setLoading(false);
 		setResults([]);
-	}, [dialogOpen])
+	}, [dialogOpen]);
 
 	return (
 		<Dialog
@@ -162,11 +162,7 @@ function SearchModal(props) {
 				InputProps={{
 					startAdornment: (
 						<InputAdornment position="start">
-							{loading ? (
-								<CircularProgress size={24} />
-							) : (
-								<SearchIcon />
-							)}
+							{loading ? <CircularProgress size={24} /> : <SearchIcon />}
 						</InputAdornment>
 					),
 				}}
@@ -184,7 +180,9 @@ function SearchModal(props) {
 										{result.pageType === "post" && (
 											<PostIcon className={classes.resultIcon} />
 										)}
-										<Typography noWrap variant="inherit">{result.title}</Typography>
+										<Typography noWrap variant="inherit">
+											{result.title}
+										</Typography>
 									</ListItem>
 								</Link>
 							))}

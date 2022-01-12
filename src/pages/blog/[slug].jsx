@@ -1,8 +1,9 @@
 import Head from "next/head";
 import Image from "next/image";
 
-import { Container, Typography, Chip } from "@material-ui/core";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { Container, Typography, Chip } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import makeStyles from '@mui/styles/makeStyles';
 import readingTime from "reading-time";
 
 import { notion } from "../../services/notion";
@@ -29,14 +30,14 @@ const useStyles = makeStyles(theme => ({
 		marginBottom: theme.spacing(1),
 	},
 	tags: {
-		margin: `${theme.spacing(1.5)}px 0`,
+		margin: `${theme.spacing(1.5)} 0`,
 
 		display: "flex",
 		justifyContent: "center",
 		alignItems: "center",
 	},
 	tag: {
-		margin: `0 ${theme.spacing(0.5)}px`,
+		margin: `0 ${theme.spacing(0.5)}`,
 	},
 	blogDate: {
 		fontWeight: 400,

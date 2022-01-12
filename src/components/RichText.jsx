@@ -2,8 +2,8 @@ import "react-medium-image-zoom/dist/styles.css";
 
 import Link from "next/link";
 
-import { Link as MuiLink } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Link as MuiLink } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
 
 import cs from "classnames";
 
@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
 	code: {
 		fontFamily: "monospace",
 		borderRadius: 2,
-		padding: `${theme.spacing(0.05)}px ${theme.spacing(0.75)}px`,
+		padding: `${theme.spacing(0.05)} ${theme.spacing(0.75)}`,
 		backgroundColor: nordPalette.nord1,
 		color: theme.palette.primary.main,
 	},

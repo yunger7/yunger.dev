@@ -11,10 +11,10 @@ import {
   Snackbar,
   Slide,
   CircularProgress,
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import { Email as MessageIcon, Send as SendIcon } from "@material-ui/icons";
-import { Alert } from "@material-ui/lab";
+} from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import { Email as MessageIcon, Send as SendIcon } from "@mui/icons-material";
+import { Alert } from '@mui/material';
 
 import { Navbar } from "../components/Navbar";
 import { Header } from "../components/Header";
@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
 		paddingBottom: theme.spacing(10),
 	},
 	submitContainer: {
-		[theme.breakpoints.down("xs")]: {
+		[theme.breakpoints.down('sm')]: {
 			display: "flex",
 			justifyContent: "center",
 			alignItems: "center",

@@ -7,9 +7,9 @@ import {
 	Accordion,
 	AccordionSummary,
 	AccordionDetails,
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import { ExpandMore as ExpandMoreIcon } from "@material-ui/icons";
+} from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import { ExpandMore as ExpandMoreIcon } from "@mui/icons-material";
 
 import ImageZoom from "react-medium-image-zoom";
 
@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
 		listStyle: "none",
 		fontSize: 16,
 		display: "flex",
-		margin: `${theme.spacing(1)}px 0`,
+		margin: `${theme.spacing(1)} 0`,
 	},
 	listItemDot: {
 		marginRight: theme.spacing(1),
