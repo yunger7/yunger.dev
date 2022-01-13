@@ -2,39 +2,12 @@ import "react-medium-image-zoom/dist/styles.css";
 
 import Link from "next/link";
 
-import { Link as MuiLink } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
+import { Box, Link as MuiLink } from "@mui/material";
 
-import cs from "classnames";
-
-import { getNordColor } from "../utils/getNordColor";
+import { getNordColor } from "../utils";
 import { palette } from "../theme";
 
-const useStyles = makeStyles(theme => ({
-	bold: {
-		fontWeight: "bold",
-	},
-	code: {
-		fontFamily: "monospace",
-		borderRadius: 2,
-		padding: `${theme.spacing(0.05)} ${theme.spacing(0.75)}`,
-		backgroundColor: palette.nord1,
-		color: theme.palette.primary.main,
-	},
-	italic: {
-		fontStyle: "italic",
-	},
-	strikethrough: {
-		textDecoration: "line-through",
-	},
-	underline: {
-		textDecoration: "underline",
-	},
-}));
-
 export function RichText({ text: richText }) {
-	const classes = useStyles();
-
 	if (!richText) {
 		return null;
 	}
@@ -48,21 +21,39 @@ export function RichText({ text: richText }) {
 
 		if (text) {
 			return (
-				<span
-					className={cs(
-						{ [classes.bold]: bold },
-						{ [classes.code]: code },
-						{ [classes.italic]: italic },
-						{ [classes.strikethrough]: strikethrough },
-						{ [classes.underline]: underline }
-					)}
-					style={color !== "default" ? { color: getNordColor(color) } : {}}
+				<Box
+					component="span"
+					sx={[
+						color !== "default" && {
+							color: getNordColor(color),
+						},
+						bold && {
+							fontWeight: "bold",
+						},
+						code && {
+							fontFamily: "monospace",
+							borderRadius: 1,
+							py: 0.05,
+							px: 0.75,
+							bgcolor: palette.nord1,
+							color: "primary.main",
+						},
+						italic && {
+							fontStyle: "italic",
+						},
+						underline && {
+							textDecoration: "underline",
+						},
+						strikethrough && {
+							textDecoration: "line-through",
+						},
+					]}
 					key={index}
 				>
 					{text.link ? (
 						<>
 							{text.link.url.includes("yunger.dev") ? (
-								<Link href={cleanUrl(text.link.url)} passHref>
+								<Link passHref href={cleanUrl(text.link.url)}>
 									<MuiLink>{text.content}</MuiLink>
 								</Link>
 							) : (
@@ -74,7 +65,7 @@ export function RichText({ text: richText }) {
 					) : (
 						text.content
 					)}
-				</span>
+				</Box>
 			);
 		}
 
