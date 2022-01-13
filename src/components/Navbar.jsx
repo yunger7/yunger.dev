@@ -1,4 +1,5 @@
 import Link from "next/link";
+
 import {
 	AppBar,
 	Toolbar,
@@ -6,48 +7,8 @@ import {
 	Link as MuiLink,
 	Typography,
 } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
 
-import cs from "classnames";
-
-import { Search } from "./Search";
-
-const useStyles = makeStyles(theme => ({
-	root: {
-		flexGrow: 1,
-	},
-	toolbar: {
-		width: "100%",
-		maxWidth: theme.breakpoints.values.lg,
-		margin: "0 auto",
-	},
-	breadcrumbs: {
-		flexGrow: 1,
-	},
-	link: {
-		padding: "4px 6px",
-		fontSize: 14,
-		cursor: "pointer",
-		borderRadius: theme.shape.borderRadius,
-	},
-	linkDisabled: {
-		cursor: "default",
-		"&:hover": {
-			backgroundColor: "transparent",
-		},
-	},
-	linkIcon: {
-		marginRight: theme.spacing(0.5),
-		width: 20,
-		height: 20,
-	},
-	typography: {
-		display: "block",
-		[theme.breakpoints.down("sm")]: {
-			maxWidth: 100,
-		},
-	},
-}));
+import { Search } from ".";
 
 const defaultPaths = [
 	{
@@ -57,30 +18,45 @@ const defaultPaths = [
 ];
 
 export function Navbar({ paths = defaultPaths }) {
-	const classes = useStyles();
-
 	return (
-		<AppBar className={classes.root} position="sticky" color="inherit">
-			<Toolbar className={classes.toolbar}>
-				<Breadcrumbs
-					className={classes.breadcrumbs}
-					maxItems={3}
-					aria-label="breadcrumb"
-				>
+		<AppBar position="sticky" color="inherit" sx={{ flexGrow: 1 }}>
+			<Toolbar
+				sx={{
+					width: 1,
+					maxWidth: theme => theme.breakpoints.values.lg,
+					mx: "auto",
+					my: 0,
+				}}
+			>
+				<Breadcrumbs maxItems={3} aria-label="breadcrumb" sx={{ flexGrow: 1 }}>
 					{paths.length > 1 ? (
 						paths.map((path, index) => {
 							if (index === paths.length - 1) {
 								return (
 									<Typography
 										noWrap
-										className={classes.typography}
 										variant="inherit"
 										key={path.name}
+										sx={theme => ({
+											display: "block",
+											[theme.breakpoints.down("sm")]: {
+												maxWidth: 100,
+											},
+										})}
 									>
 										<MuiLink
-											className={cs(classes.link, classes.linkDisabled)}
 											color="inherit"
 											aria-current="page"
+											sx={{
+												py: 0.5,
+												px: 0.75,
+												fontSize: 14,
+												borderRadius: 1,
+												cursor: "default",
+												":hover": {
+													bgcolor: "transparent",
+												},
+											}}
 										>
 											{path.name}
 										</MuiLink>
@@ -91,12 +67,26 @@ export function Navbar({ paths = defaultPaths }) {
 							return (
 								<Typography
 									noWrap
-									className={classes.typography}
 									variant="inherit"
 									key={path.name}
+									sx={theme => ({
+										display: "block",
+										[theme.breakpoints.down("sm")]: {
+											maxWidth: 100,
+										},
+									})}
 								>
-									<Link href={path.href} passHref>
-										<MuiLink className={classes.link} color="inherit">
+									<Link passHref href={path.href}>
+										<MuiLink
+											color="inherit"
+											sx={{
+												py: 0.5,
+												px: 0.75,
+												fontSize: 14,
+												cursor: "pointer",
+												borderRadius: 1,
+											}}
+										>
 											{path.name}
 										</MuiLink>
 									</Link>
@@ -104,10 +94,28 @@ export function Navbar({ paths = defaultPaths }) {
 							);
 						})
 					) : (
-						<Typography className={classes.typography} variant="inherit" noWrap>
+						<Typography
+							noWrap
+							variant="inherit"
+							sx={theme => ({
+								display: "block",
+								[theme.breakpoints.down("sm")]: {
+									maxWidth: 100,
+								},
+							})}
+						>
 							<MuiLink
-								className={cs(classes.link, classes.linkDisabled)}
 								color="inherit"
+								sx={{
+									py: 0.5,
+									px: 0.75,
+									fontSize: 14,
+									borderRadius: 1,
+									cursor: "default",
+									":hover": {
+										bgcolor: "transparent",
+									},
+								}}
 							>
 								yunger.dev
 							</MuiLink>
