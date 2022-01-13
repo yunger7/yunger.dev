@@ -2,14 +2,16 @@ import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 
+import Carousel from "react-material-ui-carousel";
+
 import {
+	Box,
 	Container,
 	Grid,
 	Typography,
 	Divider,
 	Link as MuiLink,
 } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
 import {
 	LocalCafe as CafeIcon,
 	LiveTv as LiveTvIcon,
@@ -20,73 +22,29 @@ import {
 	ContactMail as ContactMailIcon,
 } from "@mui/icons-material";
 
-import Carousel from "react-material-ui-carousel";
+import {
+	Navbar,
+	SquareLink,
+	FeaturedBlog,
+	BlogPost,
+	Footer,
+	Header,
+} from "../components";
+import {
+	WaveDivider3,
+	WaveDivider4,
+	WaveDivider5,
+} from "../components/dividers";
 
 import { palette } from "../theme";
 import { getBlogPosts } from "../lib/getBlogPosts";
 
-import { Navbar } from "../components/Navbar";
-import { SquareLink } from "../components/SquareLink";
-import { FeaturedBlog } from "../components/FeaturedBlog";
-import { BlogPost } from "../components/BlogPost";
-import { Footer } from "../components/Footer";
-import { WaveDivider3 } from "../components/dividers/WaveDivider3";
-import { WaveDivider4 } from "../components/dividers/WaveDivider4";
-import { WaveDivider5 } from "../components/dividers/WaveDivider5";
-import { Header } from "../components/Header";
-
 import nordicWallpaper from "../../public/nordic-wallpaper.jpg";
 import profilePicture from "../../public/profile-picture.jpg";
 
-const useStyles = makeStyles(theme => ({
-	sectionTitle: {
-		marginBottom: theme.spacing(2),
-	},
-	scroll: {
-		position: "relative",
-		bottom: 100,
-	},
-	profileImage: {
-		marginBottom: theme.spacing(1),
-
-		"& img": {
-			borderRadius: 10,
-		},
-	},
-	bioLink: {
-		"&:hover": {
-			backgroundColor: "#ffffff00", // Remove hover color
-		},
-	},
-	projects: {
-		paddingTop: theme.spacing(2.5),
-		paddingBottom: theme.spacing(10),
-		backgroundColor: "#292e39",
-		[theme.breakpoints.down("md")]: {
-			paddingTop: theme.spacing(5),
-		},
-	},
-	squareLink: {
-		width: 200,
-		height: 200,
-	},
-	posts: {
-		paddingBottom: theme.spacing(10),
-		[theme.breakpoints.down("md")]: {
-			paddingTop: theme.spacing(5),
-		},
-	},
-	latestPosts: {
-		marginTop: theme.spacing(5),
-	},
-	more: {
-		backgroundColor: "#292e39",
-		paddingBottom: theme.spacing(10),
-		[theme.breakpoints.down("md")]: {
-			paddingTop: theme.spacing(5),
-		},
-	},
-}));
+function ScrollRedirect({ href }) {
+	return <Box id={href} sx={{ position: "relative", bottom: 100 }} />;
+}
 
 const carouselProps = {
 	navButtonsAlwaysInvisible: true,
@@ -109,8 +67,6 @@ const carouselProps = {
 };
 
 export default function Home({ posts }) {
-	const classes = useStyles();
-
 	return (
 		<>
 			<Head>
@@ -122,25 +78,31 @@ export default function Home({ posts }) {
 			<Header
 				backgroundImage={
 					<Image
-						className={classes.background}
+						priority
 						src={nordicWallpaper}
 						alt="Nordic Wallpaper"
 						layout="fill"
 						placeholder="blur"
 						objectFit="cover"
-						priority
 					/>
 				}
 			>
-				<div className={classes.profileImage}>
+				<Box
+					sx={{
+						mb: 1,
+						"& img": {
+							borderRadius: 2.5,
+						},
+					}}
+				>
 					<Image
 						priority
 						src={profilePicture}
-						alt="yunger profile image"
+						alt="yunger profile picture"
 						width={150}
 						height={150}
 					/>
-				</div>
+				</Box>
 				<Typography gutterBottom variant="h3" component="h1">
 					yunger.dev
 				</Typography>
@@ -149,43 +111,53 @@ export default function Home({ posts }) {
 					craftsman, music enthusiast, anime connoisseur and coffee addict. I
 					taught myself how to code to turn my dumb ideas into reality, and
 					I&apos;ve created this place to share them with the world. Check out{" "}
-					<Link href="/about" passHref>
-						<MuiLink className={classes.bioLink}>my bio</MuiLink>
+					<Link passHref href="/about">
+						<MuiLink>my bio</MuiLink>
 					</Link>{" "}
 					for more information.
 				</Typography>
 			</Header>
 
 			<main>
-				<section className={classes.projects}>
-					<div id="quick-access" className={classes.scroll} />
+				<Box
+					component="section"
+					sx={{
+						pt: {
+							xs: 5,
+							md: 2.5,
+						},
+						pb: 10,
+						bgcolor: "#292e39",
+					}}
+				>
+					<ScrollRedirect href="quick-access" />
 					<Container maxWidth="lg">
-						<div className={classes.sectionTitle}>
+						<Box sx={{ mb: 2 }}>
 							<Typography variant="h4" component="h2">
 								Quick access
 							</Typography>
 							<Divider />
-						</div>
+						</Box>
 						<Grid container justifyContent="space-between" spacing={4}>
-							<Grid item md={3} sm={6} xs={12} className={classes.squareLink}>
-								<Link href="/support" passHref>
-									<SquareLink icon={CafeIcon} openInNewTab>
+							<Grid item md={3} sm={6} xs={12} sx={{ width: 200, height: 200 }}>
+								<Link passHref href="/support">
+									<SquareLink openInNewTab icon={CafeIcon}>
 										Buy me a coffee
 									</SquareLink>
 								</Link>
 							</Grid>
-							<Grid item md={3} sm={6} xs={12} className={classes.squareLink}>
-								<Link href="/blog" passHref>
+							<Grid item md={3} sm={6} xs={12} sx={{ width: 200, height: 200 }}>
+								<Link passHref href="/blog">
 									<SquareLink icon={DescriptionIcon}>Blog</SquareLink>
 								</Link>
 							</Grid>
-							<Grid item md={3} sm={6} xs={12} className={classes.squareLink}>
-								<Link href="/animelist" passHref>
+							<Grid item md={3} sm={6} xs={12} sx={{ width: 200, height: 200 }}>
+								<Link passHref href="/animelist">
 									<SquareLink icon={LiveTvIcon}>Animelist</SquareLink>
 								</Link>
 							</Grid>
-							<Grid item md={3} sm={6} xs={12} className={classes.squareLink}>
-								<Link href="/projects" passHref>
+							<Grid item md={3} sm={6} xs={12} sx={{ width: 200, height: 200 }}>
+								<Link passHref href="/projects">
 									<SquareLink icon={KeyboardArrowRightIcon}>
 										All projects
 									</SquareLink>
@@ -193,72 +165,75 @@ export default function Home({ posts }) {
 							</Grid>
 						</Grid>
 					</Container>
-				</section>
+				</Box>
 
 				<WaveDivider5 backgroundColor="#292e39" color="#242933" />
 
-				<section className={classes.posts}>
-					<div id="posts" className={classes.scroll} />
+				<Box component="section" sx={{ pb: 10, pt: { xs: 5, md: 0 } }}>
+					<ScrollRedirect href="posts" />
 					<Container maxWidth="lg">
-						<div className={classes.sectionTitle}>
+						<Box sx={{ mb: 2 }}>
 							<Typography variant="h4" component="h2">
 								Blog posts
 							</Typography>
 							<Divider />
-						</div>
+						</Box>
 						{!!posts.featured.length && (
 							<Carousel {...carouselProps}>
 								{posts.featured.map(post => (
-									<Link href={`/blog/${post.slug}`} passHref key={post.id}>
+									<Link passHref href={`/blog/${post.slug}`} key={post.id}>
 										<FeaturedBlog post={post} />
 									</Link>
 								))}
 							</Carousel>
 						)}
-						<div className={classes.latestPosts}>
+						<Box sx={{ mt: 5 }}>
 							<Grid container spacing={4}>
 								{posts.latest.map(post => (
 									<Grid item md={4} sm={6} xs={12} key={post.id}>
-										<Link href={`/blog/${post.slug}`} passHref>
+										<Link passHref href={`/blog/${post.slug}`}>
 											<BlogPost post={post} />
 										</Link>
 									</Grid>
 								))}
 							</Grid>
-						</div>
+						</Box>
 					</Container>
-				</section>
+				</Box>
 
 				<WaveDivider3 color="#292e39" />
 
-				<section className={classes.more}>
-					<div id="more" className={classes.scroll} />
+				<Box
+					component="section"
+					sx={{ bgcolor: "#292e39", pb: 10, pt: { xs: 5, md: 0 } }}
+				>
+					<ScrollRedirect href="more" />
 					<Container maxWidth="lg">
-						<div className={classes.sectionTitle}>
+						<Box sx={{ mb: 2 }}>
 							<Typography variant="h4" component="h2">
 								More
 							</Typography>
 							<Divider />
-						</div>
+						</Box>
 						<Grid container justifyContent="space-between" spacing={4}>
-							<Grid item sm={4} xs={12} className={classes.squareLink}>
-								<Link href="/about" passHref>
+							<Grid item sm={4} xs={12} sx={{ width: 200, height: 200 }}>
+								<Link passHref href="/about">
 									<SquareLink icon={InfoIcon}>About me</SquareLink>
 								</Link>
 							</Grid>
-							<Grid item sm={4} xs={12} className={classes.squareLink}>
-								<Link href="/notes" passHref>
+							<Grid item sm={4} xs={12} sx={{ width: 200, height: 200 }}>
+								<Link passHref href="/notes">
 									<SquareLink icon={BookIcon}>Random notes</SquareLink>
 								</Link>
 							</Grid>
-							<Grid item sm={4} xs={12} className={classes.squareLink}>
-								<Link href="/contact" passHref>
+							<Grid item sm={4} xs={12} sx={{ width: 200, height: 200 }}>
+								<Link passHref href="/contact">
 									<SquareLink icon={ContactMailIcon}>Contact me</SquareLink>
 								</Link>
 							</Grid>
 						</Grid>
 					</Container>
-				</section>
+				</Box>
 			</main>
 
 			<WaveDivider4 backgroundColor="#292e39" />
