@@ -1,15 +1,11 @@
 import Head from "next/head";
 import Image from "next/image";
 
-import { Container, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
-import makeStyles from '@mui/styles/makeStyles';
-
-import { Navbar } from "../components/Navbar";
-import { Header } from "../components/Header";
-import { WaveDivider4 } from "../components/dividers/WaveDivider4";
-import { Footer } from "../components/Footer";
+import { Navbar, Header, Footer } from "../components";
+import { WaveDivider4 } from "../components/dividers";
 
 import { getNotionPageContent } from "../lib/getNotionPageContent";
 import { useBlockRenderer } from "../hooks/useBlockRenderer";
@@ -28,23 +24,7 @@ const navbarPaths = [
 	},
 ];
 
-const useStyles = makeStyles(theme => ({
-	profileImage: {
-		marginBottom: theme.spacing(1),
-
-		"& img": {
-			borderRadius: 10,
-		},
-	},
-	content: {
-		paddingTop: theme.spacing(5),
-		paddingBottom: theme.spacing(10),
-		backgroundColor: theme.palette.background.paper,
-	},
-}));
-
 export default function About({ content }) {
-	const classes = useStyles();
 	const theme = useTheme();
 	const jsxContent = useBlockRenderer(content);
 
@@ -59,39 +39,46 @@ export default function About({ content }) {
 			<Header
 				backgroundImage={
 					<Image
+						priority
 						src={nordicWallpaper}
 						alt="Nordic Wallpaper"
 						layout="fill"
-						placeholder="blur"
 						objectFit="cover"
-						priority
+						placeholder="blur"
 					/>
 				}
 				dividerColor={theme.palette.background.paper}
 			>
-				<div className={classes.profileImage}>
+				<Box sx={{ mb: 1, "& img": { borderRadius: 2.5 } }}>
 					<Image
 						priority
 						src={profilePicture}
-						alt="yunger profile image"
+						alt="yunger profile picture"
 						width={150}
 						height={150}
 					/>
-				</div>
+				</Box>
 				<Typography variant="h3" component="h1">
 					About me
 				</Typography>
 				<Typography variant="subtitle1">
-					A little bit of info about <strong>yunger</strong>, the
-					creator of this website.
+					A little bit of info about <strong>yunger</strong>, the creator of
+					this website.
 				</Typography>
 			</Header>
 
-			<main className={classes.page}>
-				<section className={classes.content}>
+			<Box component="main">
+				<Box
+					component="section"
+					sx={{
+						pt: 5,
+						pb: 10,
+						bgcolor: theme => theme.palette.background.paper,
+					}}
+				>
 					<Container maxWidth="md">{jsxContent}</Container>
-				</section>
-			</main>
+				</Box>
+			</Box>
 
 			<WaveDivider4
 				backgroundColor={theme.palette.background.paper}
