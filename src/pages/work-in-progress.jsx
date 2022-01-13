@@ -3,10 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Button, Typography } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
-import { Home as HomeIcon, Settings as SettingsIcon } from "@mui/icons-material";
+import makeStyles from "@mui/styles/makeStyles";
+import {
+	Home as HomeIcon,
+	Settings as SettingsIcon,
+} from "@mui/icons-material";
 
-import { nordPalette } from "../theme";
+import { palette } from "../theme";
 
 import placeholder2 from "../../public/placeholder2.jpg";
 
@@ -16,7 +19,7 @@ const useStyles = makeStyles({
 		width: "100vw",
 		height: "100vh",
 		overflow: "hidden",
-		backgroundColor: `${nordPalette.nord0}aa`,
+		backgroundColor: `${palette.nord0}aa`,
 
 		display: "flex",
 		flexDirection: "column",
@@ -42,7 +45,7 @@ export default function WorkInProgress() {
 				<title>Work in progress</title>
 			</Head>
 			<main className={classes.page}>
-        <SettingsIcon style={{ fontSize: 48 }} />
+				<SettingsIcon style={{ fontSize: 48 }} />
 				<Typography variant="h1" align="center">
 					Work in progress
 				</Typography>
@@ -50,7 +53,12 @@ export default function WorkInProgress() {
 					Hurry up and go home before you catch a cold!
 				</Typography>
 				<Link href="/" passHref>
-					<Button variant="contained" color="primary" startIcon={<HomeIcon />} disableRipple>
+					<Button
+						variant="contained"
+						color="primary"
+						startIcon={<HomeIcon />}
+						disableRipple
+					>
 						Go home
 					</Button>
 				</Link>

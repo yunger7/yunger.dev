@@ -8,13 +8,13 @@ import {
 	AccordionSummary,
 	AccordionDetails,
 } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 import { ExpandMore as ExpandMoreIcon } from "@mui/icons-material";
 
 import ImageZoom from "react-medium-image-zoom";
 
 import { RichText } from "../components/RichText";
-import { nordPalette } from "../theme";
+import { palette } from "../theme";
 
 const useStyles = makeStyles(theme => ({
 	accordion: {
@@ -105,8 +105,8 @@ function renderBlock(block, classes) {
 
 			return (
 				<ImageZoom
-					overlayBgColorStart={`${nordPalette.nord0}ee`}
-					overlayBgColorEnd={`${nordPalette.nord0}ee`}
+					overlayBgColorStart={`${palette.nord0}ee`}
+					overlayBgColorEnd={`${palette.nord0}ee`}
 					wrapStyle={{ width: "100%" }}
 					key={id}
 				>

@@ -1,34 +1,34 @@
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 
-import { nordPalette } from "../../theme";
+import { palette } from "../../theme";
 
 const useStyles = makeStyles({
-  root: {
-    display: "block",
-    bottom: -1,
-    left: 0,
-    right: 0,
-    width: "100%",
-    backgroundColor: ({ backgroundColor }) => {
-      return backgroundColor ? backgroundColor : "transparent";
-    },
-    pointerEvents: "none",
-    userSelect: "none",
-    verticalAlign: "middle",
-    overflow: "hidden",
-    fill: ({ color }) => {
-      return color ? color : nordPalette.nord0;
-    },
-    transition: "fill 400ms ease-in-out 0s",
-  },
+	root: {
+		display: "block",
+		bottom: -1,
+		left: 0,
+		right: 0,
+		width: "100%",
+		backgroundColor: ({ backgroundColor }) => {
+			return backgroundColor ? backgroundColor : "transparent";
+		},
+		pointerEvents: "none",
+		userSelect: "none",
+		verticalAlign: "middle",
+		overflow: "hidden",
+		fill: ({ color }) => {
+			return color ? color : palette.nord0;
+		},
+		transition: "fill 400ms ease-in-out 0s",
+	},
 });
 
 export function WaveDivider1({ color, backgroundColor }) {
-  const classes = useStyles({ color, backgroundColor });
+	const classes = useStyles({ color, backgroundColor });
 
 	return (
 		<svg
-      className={classes.root}
+			className={classes.root}
 			viewBox="0 0 1440 47"
 			xmlns="http://www.w3.org/2000/svg"
 		>

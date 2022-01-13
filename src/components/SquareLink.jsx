@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Paper, Typography } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 
-import { nordPalette } from "../theme";
+import { palette } from "../theme";
 
 const useStyles = makeStyles({
 	root: {
@@ -18,7 +18,7 @@ const useStyles = makeStyles({
 		transition: "background .2s",
 
 		"&:hover": {
-			backgroundColor: `${nordPalette.nord3}aa`,
+			backgroundColor: `${palette.nord3}aa`,
 		},
 	},
 	icon: {

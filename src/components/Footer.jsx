@@ -9,7 +9,7 @@ import {
 	Snackbar,
 	Slide,
 } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 import {
 	Favorite as FavoriteIcon,
 	Home as HomeIcon,
@@ -18,9 +18,9 @@ import {
 	Settings as SettingsIcon,
 	LocalCafe as LocalCafeIcon,
 } from "@mui/icons-material";
-import { Alert } from '@mui/material';
+import { Alert } from "@mui/material";
 
-import { nordPalette } from "../theme";
+import { palette } from "../theme";
 
 const footerLinks = [
 	{
@@ -82,7 +82,7 @@ const footerLinks = [
 		},
 		links: [
 			{
-				"name": "About me",
+				name: "About me",
 				href: "/about",
 			},
 		],
@@ -111,13 +111,13 @@ const useStyles = makeStyles(theme => ({
 		minHeight: 300,
 		paddingTop: theme.spacing(2.5),
 		paddingBottom: theme.spacing(5),
-		backgroundColor: nordPalette.nord1,
+		backgroundColor: palette.nord1,
 	},
 	container: {
 		height: "100%",
 		display: "flex",
 		justifyContent: "space-between",
-		[theme.breakpoints.down('md')]: {
+		[theme.breakpoints.down("md")]: {
 			flexDirection: "column",
 			alignItems: "center",
 			gap: theme.spacing(5),
@@ -125,22 +125,22 @@ const useStyles = makeStyles(theme => ({
 	},
 	info: {
 		width: "20%",
-		[theme.breakpoints.down('md')]: {
+		[theme.breakpoints.down("md")]: {
 			width: "30%",
 			textAlign: "center",
 		},
-		[theme.breakpoints.down('sm')]: {
+		[theme.breakpoints.down("sm")]: {
 			width: "65%",
 		},
 	},
 	websiteTitle: {
 		fontWeight: 500,
-		[theme.breakpoints.down('md')]: {
+		[theme.breakpoints.down("md")]: {
 			marginBottom: theme.spacing(2),
 		},
 	},
 	copyright: {
-		color: nordPalette.nord4,
+		color: palette.nord4,
 	},
 	supportButton: {
 		marginTop: theme.spacing(3),
@@ -148,7 +148,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	links: {
 		justifyContent: "flex-end",
-		[theme.breakpoints.down('md')]: {
+		[theme.breakpoints.down("md")]: {
 			justifyContent: "space-between",
 		},
 	},
@@ -206,15 +206,15 @@ export function Footer() {
 
 const useLinkSectionStyles = makeStyles(theme => ({
 	root: {
-		color: nordPalette.nord4,
-		[theme.breakpoints.down('sm')]: {
+		color: palette.nord4,
+		[theme.breakpoints.down("sm")]: {
 			textAlign: "center",
 			marginBottom: theme.spacing(2.5),
 		},
 	},
 	title: {
 		marginBottom: theme.spacing(2),
-		borderBottom: `1px solid ${nordPalette.nord3}`,
+		borderBottom: `1px solid ${palette.nord3}`,
 	},
 	titleText: {
 		fontFamily: "Rubik",
@@ -222,7 +222,7 @@ const useLinkSectionStyles = makeStyles(theme => ({
 		display: "flex",
 		alignItems: "flex-start",
 		gap: theme.spacing(1),
-		[theme.breakpoints.down('sm')]: {
+		[theme.breakpoints.down("sm")]: {
 			justifyContent: "center",
 		},
 	},
@@ -232,7 +232,7 @@ const useLinkSectionStyles = makeStyles(theme => ({
 		marginBottom: theme.spacing(1),
 		transition: "all .2s",
 		"&:hover": {
-			color: nordPalette.nord5,
+			color: palette.nord5,
 		},
 	},
 }));
@@ -294,7 +294,7 @@ const useSocialMediaStyles = makeStyles(theme => ({
 		marginBottom: theme.spacing(3),
 	},
 	icon: {
-		fill: nordPalette.nord4,
+		fill: palette.nord4,
 		transition: "all .2s",
 		"&:hover": {
 			fill: "#ffffff",
@@ -430,7 +430,9 @@ function SocialMedia() {
 				onClose={() => setSnackbarOpen(false)}
 				TransitionComponent={Slide}
 			>
-				<Alert severity="success" variant="filled">Copied to clipboard!</Alert>
+				<Alert severity="success" variant="filled">
+					Copied to clipboard!
+				</Alert>
 			</Snackbar>
 		</div>
 	);

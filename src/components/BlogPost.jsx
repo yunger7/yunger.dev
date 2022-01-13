@@ -2,11 +2,11 @@ import Image from "next/image";
 import React from "react";
 
 import { Card, CardContent, Typography, Chip } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 
 import { RichText } from "./RichText";
 
-import { nordPalette } from "../theme";
+import { palette } from "../theme";
 
 import placeholder1 from "../../public/placeholder1.jpg";
 
@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
 		transition: "background .2s",
 
 		"&:hover": {
-			backgroundColor: `${nordPalette.nord3}aa`,
+			backgroundColor: `${palette.nord3}aa`,
 		},
 	},
 	image: {

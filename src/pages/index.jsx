@@ -9,7 +9,7 @@ import {
 	Divider,
 	Link as MuiLink,
 } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 import {
 	LocalCafe as CafeIcon,
 	LiveTv as LiveTvIcon,
@@ -22,7 +22,7 @@ import {
 
 import Carousel from "react-material-ui-carousel";
 
-import { nordPalette } from "../theme";
+import { palette } from "../theme";
 import { getBlogPosts } from "../lib/getBlogPosts";
 
 import { Navbar } from "../components/Navbar";
@@ -62,7 +62,7 @@ const useStyles = makeStyles(theme => ({
 		paddingTop: theme.spacing(2.5),
 		paddingBottom: theme.spacing(10),
 		backgroundColor: "#292e39",
-		[theme.breakpoints.down('md')]: {
+		[theme.breakpoints.down("md")]: {
 			paddingTop: theme.spacing(5),
 		},
 	},
@@ -72,7 +72,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	posts: {
 		paddingBottom: theme.spacing(10),
-		[theme.breakpoints.down('md')]: {
+		[theme.breakpoints.down("md")]: {
 			paddingTop: theme.spacing(5),
 		},
 	},
@@ -82,7 +82,7 @@ const useStyles = makeStyles(theme => ({
 	more: {
 		backgroundColor: "#292e39",
 		paddingBottom: theme.spacing(10),
-		[theme.breakpoints.down('md')]: {
+		[theme.breakpoints.down("md")]: {
 			paddingTop: theme.spacing(5),
 		},
 	},
@@ -92,18 +92,18 @@ const carouselProps = {
 	navButtonsAlwaysInvisible: true,
 	indicatorIconButtonProps: {
 		style: {
-			color: nordPalette.nord1,
+			color: palette.nord1,
 			"&:hover": {
-				backgroundColor: nordPalette.nord1,
+				backgroundColor: palette.nord1,
 			},
 			"&:active": {
-				backgroundColor: nordPalette.nord1,
+				backgroundColor: palette.nord1,
 			},
 		},
 	},
 	activeIndicatorIconButtonProps: {
 		style: {
-			color: nordPalette.nord9,
+			color: palette.nord9,
 		},
 	},
 };

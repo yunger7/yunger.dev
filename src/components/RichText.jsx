@@ -3,12 +3,12 @@ import "react-medium-image-zoom/dist/styles.css";
 import Link from "next/link";
 
 import { Link as MuiLink } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 
 import cs from "classnames";
 
 import { getNordColor } from "../utils/getNordColor";
-import { nordPalette } from "../theme";
+import { palette } from "../theme";
 
 const useStyles = makeStyles(theme => ({
 	bold: {
@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
 		fontFamily: "monospace",
 		borderRadius: 2,
 		padding: `${theme.spacing(0.05)} ${theme.spacing(0.75)}`,
-		backgroundColor: nordPalette.nord1,
+		backgroundColor: palette.nord1,
 		color: theme.palette.primary.main,
 	},
 	italic: {

@@ -3,10 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Button, Typography } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 import { Home as HomeIcon } from "@mui/icons-material";
 
-import { nordPalette } from "../theme";
+import { palette } from "../theme";
 
 import placeholder2 from "../../public/placeholder2.jpg";
 
@@ -16,7 +16,7 @@ const useStyles = makeStyles({
 		width: "100vw",
 		height: "100vh",
 		overflow: "hidden",
-		backgroundColor: `${nordPalette.nord0}aa`,
+		backgroundColor: `${palette.nord0}aa`,
 
 		display: "flex",
 		flexDirection: "column",
