@@ -1,7 +1,7 @@
 import { notion } from "../services/notion";
 
 import { getNordColor } from "../utils/getNordColor";
-import { getPostCoverImage } from "../utils/getPostCoverImage";
+import { getPostCoverImage } from "./getPostCoverImage";
 
 export async function getBlogPosts() {
 	const blogDatabaseId = process.env.NOTION_BLOG_DATABASE_ID;

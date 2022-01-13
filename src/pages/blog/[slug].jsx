@@ -11,12 +11,12 @@ import { WaveDivider4 } from "../../components/dividers";
 
 import {
 	getNordColor,
-	getPostCoverImage,
 	getPlainTextFromBlocks,
 	getPlainTextFromRichText,
 } from "../../utils";
 import { useBlockRenderer } from "../../hooks/useBlockRenderer";
 import { getNotionPageContent } from "../../lib/getNotionPageContent";
+import { getPostCoverImage } from "../../lib/getPostCoverImage";
 import { notion } from "../../services/notion";
 
 import placeholder3 from "../../../public/placeholder3.jpg";
