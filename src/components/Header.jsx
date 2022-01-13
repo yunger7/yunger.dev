@@ -1,75 +1,75 @@
-import makeStyles from '@mui/styles/makeStyles';
+import { Box } from "@mui/material";
 
-import { WaveDivider1 } from "../components/dividers/WaveDivider1";
+import { WaveDivider1 } from "./dividers";
 
-const useStyles = makeStyles(theme => ({
-	scroll: {
-		position: "relative",
-		bottom: 100,
-	},
-	root: {
-		position: "relative",
-		minHeight: 500,
-
-		display: "flex",
-		justifyContent: "center",
-		alignItems: "center",
-	},
-	mask: {
-		position: "absolute",
-		width: "100%",
-		height: "100%",
-		backgroundColor: "rgba(25, 25, 25, 0.25)",
-
-		"& img": {
-			zIndex: -1,
-		}
-	},
-	card: {
-		position: "relative",
-		bottom: 25,
-		minHeight: 300,
-		width: 700,
-		padding: theme.spacing(2.5),
-		textAlign: "center",
-
-		backgroundColor: "#eceff41a",
-		boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.37)",
-		backdropFilter: "blur(4px)",
-		borderRadius: 10,
-		border: "1px solid rgba(255, 255, 255, 0.18)",
-
-		display: "flex",
-		flexDirection: "column",
-		justifyContent: "center",
-		alignItems: "center",
-	},
-	divider: {
-		position: "absolute",
-		width: "100%",
-		bottom: 0,
-	},
-}));
+function ScrollRedirect({ href }) {
+	return <Box id={href} sx={{ position: "relative", bottom: 100 }} />;
+}
 
 export function Header(props) {
 	const { backgroundImage, dividerColor, children } = props;
-	const classes = useStyles();
 
 	return (
-		<section className={classes.root}>
-			<div id="header" className={classes.scroll} />
+		<Box
+			component="section"
+			sx={{
+				position: "relative",
+				minHeight: 500,
+				display: "flex",
+				justifyContent: "center",
+				alignItems: "center",
+			}}
+		>
+			<ScrollRedirect href="header" />
 
-			<div className={classes.mask}>
+			<Box
+				sx={{
+					position: "absolute",
+					width: 1,
+					height: 1,
+					bgcolor: "rgba(25, 25, 25, 0.25)",
+
+					"& img": {
+						zIndex: -1,
+					},
+				}}
+			>
 				{backgroundImage}
-			</div>
+			</Box>
 
-			<div className={classes.card}>
+			<Box
+				sx={{
+					position: "relative",
+					bottom: 25,
+					width: 700,
+					minHeight: 300,
+					p: 2.5,
+					textAlign: "center",
+
+					backgroundColor: "#eceff41a",
+					boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.37)",
+					backdropFilter: "blur(4px)",
+					borderRadius: 2.5,
+					border: "1px solid rgba(255, 255, 255, 0.18)",
+
+					display: "flex",
+					flexDirection: "column",
+					justifyContent: "center",
+					alignItems: "center",
+				}}
+			>
 				{children}
-			</div>
+			</Box>
 
-			<div className={classes.divider}>
+			<Box
+				sx={{
+					position: "absolute",
+					width: "100%",
+					bottom: 0,
+				}}
+			>
 				<WaveDivider1 color={dividerColor ? dividerColor : "#292e39"} />
-			</div>
-		</section>
+			</Box>
+		</Box>
 	);
 }
