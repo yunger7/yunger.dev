@@ -1,53 +1,25 @@
 import Head from "next/head";
 import Image from "next/image";
 
-import { Container, Typography, Chip } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
-import makeStyles from '@mui/styles/makeStyles';
 import readingTime from "reading-time";
 
-import { notion } from "../../services/notion";
+import { Box, Stack, Container, Typography, Chip } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 
-import { getNordColor } from "../../utils/getNordColor";
-import { getPostCoverImage } from "../../utils/getPostCoverImage";
+import { Navbar, Header, RichText, Footer } from "../../components";
+import { WaveDivider4 } from "../../components/dividers";
+
 import {
+	getNordColor,
+	getPostCoverImage,
 	getPlainTextFromBlocks,
 	getPlainTextFromRichText,
-} from "../../utils/getPlainText";
+} from "../../utils";
 import { useBlockRenderer } from "../../hooks/useBlockRenderer";
 import { getNotionPageContent } from "../../lib/getNotionPageContent";
-
-import { Navbar } from "../../components/Navbar";
-import { Header } from "../../components/Header";
-import { RichText } from "../../components/RichText";
-import { WaveDivider4 } from "../../components/dividers/WaveDivider4";
-import { Footer } from "../../components/Footer";
+import { notion } from "../../services/notion";
 
 import placeholder3 from "../../../public/placeholder3.jpg";
-
-const useStyles = makeStyles(theme => ({
-	icon: {
-		marginBottom: theme.spacing(1),
-	},
-	tags: {
-		margin: `${theme.spacing(1.5)} 0`,
-
-		display: "flex",
-		justifyContent: "center",
-		alignItems: "center",
-	},
-	tag: {
-		margin: `0 ${theme.spacing(0.5)}`,
-	},
-	blogDate: {
-		fontWeight: 400,
-	},
-	blogContent: {
-		paddingTop: theme.spacing(2.5),
-		paddingBottom: theme.spacing(10),
-		backgroundColor: theme.palette.background.paper,
-	},
-}));
 
 export default function BlogPost({ post }) {
 	const {
@@ -63,7 +35,6 @@ export default function BlogPost({ post }) {
 		readingTime,
 	} = post;
 
-	const classes = useStyles();
 	const theme = useTheme();
 	const jsxContent = useBlockRenderer(content);
 
@@ -116,15 +87,16 @@ export default function BlogPost({ post }) {
 				dividerColor={theme.palette.background.paper}
 			>
 				{icon && (
-					<Image
-						priority
-						className={classes.icon}
-						src={icon.external.url}
-						alt="Post icon"
-						width={100}
-						height={100}
-						objectFit="contain"
-					/>
+					<Box component="span" sx={{ mb: 1 }}>
+						<Image
+							priority
+							src={icon.external.url}
+							alt="Post icon"
+							width={100}
+							height={100}
+							objectFit="contain"
+						/>
+					</Box>
 				)}
 				<Typography component="h1" variant="h5">
 					<RichText text={title} />
@@ -132,22 +104,16 @@ export default function BlogPost({ post }) {
 				<Typography variant="body1">
 					<RichText text={description} />
 				</Typography>
-				<div className={classes.tags}>
+				<Stack direction="row" spacing={1} sx={{ my: 1.5 }}>
 					{tags.map(({ id, name, color }) => (
-						<Chip
-							className={classes.tag}
-							size="small"
-							label={name}
-							style={{ backgroundColor: color }}
-							key={id}
-						/>
+						<Chip size="small" label={name} key={id} sx={{ bgcolor: color }} />
 					))}
-				</div>
+				</Stack>
 				<Typography
-					className={classes.blogDate}
+					gutterBottom
 					variant="subtitle2"
 					align="center"
-					gutterBottom
+					sx={{ fontWeight: 400 }}
 				>
 					{new Date(createdAt).toLocaleDateString("en-US", {
 						month: "short",
@@ -158,11 +124,18 @@ export default function BlogPost({ post }) {
 				</Typography>
 			</Header>
 
-			<main className={classes.page}>
-				<section className={classes.blogContent}>
+			<Box component="main">
+				<Box
+					component="section"
+					sx={{
+						pt: 2.5,
+						pb: 10,
+						bgcolor: theme => theme.palette.background.paper,
+					}}
+				>
 					<Container maxWidth="md">{jsxContent}</Container>
-				</section>
-			</main>
+				</Box>
+			</Box>
 
 			<WaveDivider4
 				backgroundColor={theme.palette.background.paper}
