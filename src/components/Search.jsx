@@ -12,35 +12,30 @@ import {
 	Typography,
 	CircularProgress,
 } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
 import {
 	Search as SearchIcon,
 	Description as PostIcon,
 	Language as WebpageIcon,
 } from "@mui/icons-material";
 
-import { sleep } from "../utils/sleep";
-
-const useStyles = makeStyles({
-	searchButton: {
-		fontSize: 14,
-		padding: ".1rem .5rem",
-	},
-});
+import { sleep } from "../utils";
 
 export function Search() {
-	const classes = useStyles();
 	const [dialogOpen, setDialogOpen] = useState(false);
 
 	return (
 		<>
 			<Button
 				disableRipple
-				className={classes.searchButton}
 				size="small"
 				color="inherit"
 				startIcon={<SearchIcon />}
 				onClick={() => setDialogOpen(true)}
+				sx={{
+					fontSize: 14,
+					px: 1,
+					py: 0.25,
+				}}
 			>
 				Search
 			</Button>
@@ -48,38 +43,7 @@ export function Search() {
 		</>
 	);
 }
-
-const useModalStyles = makeStyles(theme => ({
-	dialogScrollPaper: {
-		alignItems: "flex-start",
-	},
-	dialogPaper: {
-		marginTop: "15vh",
-	},
-	results: {
-		maxHeight: 200,
-		overflow: "auto",
-	},
-	resultIcon: {
-		marginRight: theme.spacing(1),
-	},
-	noResults: {
-		height: 200,
-		display: "flex",
-		flexDirection: "column",
-		justifyContent: "center",
-		alignItems: "center",
-	},
-	noResultsTitle: {
-		marginBottom: theme.spacing(0.75),
-	},
-	noResultsSubtitle: {
-		filter: "brightness(0.8)",
-	},
-}));
-
 function SearchModal(props) {
-	const classes = useModalStyles();
 	const { dialogOpen, setDialogOpen } = props;
 
 	const [query, setQuery] = useState("");
@@ -146,9 +110,13 @@ function SearchModal(props) {
 			onClose={() => setDialogOpen(false)}
 			open={dialogOpen}
 			maxWidth="xs"
-			classes={{
-				scrollPaper: classes.dialogScrollPaper,
-				paper: classes.dialogPaper,
+			sx={{
+				"& .MuiDialog-scrollPaper": {
+					alignItems: "flex-start",
+				},
+				"& .MuiPaper-root": {
+					mt: "15vh",
+				},
 			}}
 		>
 			<TextField
@@ -170,16 +138,14 @@ function SearchModal(props) {
 			{!isFirstSearch && (
 				<>
 					{results.length ? (
-						<List className={classes.results}>
+						<List sx={{ maxHeight: 200, overflow: "auto" }}>
 							{results.map(result => (
 								<Link passHref href={result.href} key={result.id}>
 									<ListItem button disableRipple component="a">
 										{result.pageType === "webpage" && (
-											<WebpageIcon className={classes.resultIcon} />
+											<WebpageIcon sx={{ mr: 1 }} />
 										)}
-										{result.pageType === "post" && (
-											<PostIcon className={classes.resultIcon} />
-										)}
+										{result.pageType === "post" && <PostIcon sx={{ mr: 1 }} />}
 										<Typography noWrap variant="inherit">
 											{result.title}
 										</Typography>
@@ -188,11 +154,24 @@ function SearchModal(props) {
 							))}
 						</List>
 					) : (
-						<Paper className={classes.noResults}>
-							<Typography className={classes.noResultsTitle} variant="body1">
+						<Paper
+							sx={{
+								height: 200,
+								display: "flex",
+								flexDirection: "column",
+								justifyContent: "center",
+								alignItems: "center",
+							}}
+						>
+							<Typography
+								variant="body1"
+								sx={{
+									mb: 0.75,
+								}}
+							>
 								No results found
 							</Typography>
-							<Typography className={classes.noResultsSubtitle} variant="body2">
+							<Typography variant="body2" sx={{ filter: "brightness(0.8)" }}>
 								Try different search terms
 							</Typography>
 						</Paper>
