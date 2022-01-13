@@ -1,34 +1,11 @@
 import React, { useState } from "react";
+
 import { Paper, Typography } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
+import { alpha } from "@mui/material/styles";
 
 import { palette } from "../theme";
 
-const useStyles = makeStyles({
-	root: {
-		width: "100%",
-		height: "100%",
-
-		display: "flex",
-		flexDirection: "column",
-		alignItems: "center",
-		justifyContent: "center",
-
-		cursor: "pointer",
-		transition: "background .2s",
-
-		"&:hover": {
-			backgroundColor: `${palette.nord3}aa`,
-		},
-	},
-	icon: {
-		width: 50,
-		height: 50,
-	},
-});
-
 export const SquareLink = React.forwardRef((props, ref) => {
-	const classes = useStyles();
 	const { onClick, href, children, openInNewTab } = props;
 	const Icon = props.icon;
 
@@ -36,7 +13,6 @@ export const SquareLink = React.forwardRef((props, ref) => {
 
 	return (
 		<Paper
-			className={classes.root}
 			component="a"
 			href={href}
 			onClick={onClick}
@@ -46,8 +22,21 @@ export const SquareLink = React.forwardRef((props, ref) => {
 			elevation={elevation}
 			onMouseOver={() => setElevation(5)}
 			onMouseOut={() => setElevation(1)}
+			sx={{
+				width: 1,
+				height: 1,
+				display: "flex",
+				flexDirection: "column",
+				alignItems: "center",
+				justifyContent: "center",
+				cursor: "pointer",
+				transition: "background-color 200ms ease-in-out",
+				":hover": {
+					bgcolor: alpha(palette.nord3, 0.75),
+				},
+			}}
 		>
-			<Icon className={classes.icon} />
+			<Icon sx={{ width: 50, height: 50 }} />
 			<Typography variant="button">{children}</Typography>
 		</Paper>
 	);
