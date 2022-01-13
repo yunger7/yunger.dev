@@ -2,23 +2,28 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Container, Grid, Typography, Divider } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
-import { Description as DescriptionIcon } from "@mui/icons-material";
 import Carousel from "react-material-ui-carousel";
+
+import { Box, Container, Grid, Typography, Divider } from "@mui/material";
+import { Description as DescriptionIcon } from "@mui/icons-material";
+
+import {
+	Navbar,
+	Header,
+	FeaturedBlog,
+	BlogPost,
+	Footer,
+} from "../../components";
+import { WaveDivider1, WaveDivider4 } from "../../components/dividers";
 
 import { getBlogPosts } from "../../lib/getBlogPosts";
 import { palette } from "../../theme";
 
-import { Navbar } from "../../components/Navbar";
-import { Header } from "../../components/Header";
-import { FeaturedBlog } from "../../components/FeaturedBlog";
-import { BlogPost } from "../../components/BlogPost";
-import { WaveDivider1 } from "../../components/dividers/WaveDivider1";
-import { WaveDivider4 } from "../../components/dividers/WaveDivider4";
-import { Footer } from "../../components/Footer";
-
 import nordicWallpaper from "../../../public/nordic-wallpaper.jpg";
+
+function ScrollRedirect({ href }) {
+	return <Box id={href} sx={{ position: "relative", bottom: 100 }} />;
+}
 
 const navbarPaths = [
 	{
@@ -51,28 +56,7 @@ const carouselProps = {
 	},
 };
 
-const useStyles = makeStyles(theme => ({
-	sectionTitle: {
-		marginBottom: theme.spacing(2),
-	},
-	scroll: {
-		position: "relative",
-		bottom: 100,
-	},
-	featured: {
-		paddingTop: theme.spacing(5),
-		paddingBottom: theme.spacing(5),
-	},
-	latest: {
-		paddingTop: theme.spacing(2.5),
-		paddingBottom: theme.spacing(10),
-		backgroundColor: "#292e39",
-	},
-}));
-
 export default function Blog({ posts }) {
-	const classes = useStyles();
-
 	return (
 		<>
 			<Head>
@@ -88,63 +72,63 @@ export default function Blog({ posts }) {
 						src={nordicWallpaper}
 						alt="Nordic Wallpaper"
 						layout="fill"
-						placeholder="blur"
 						objectFit="cover"
+						placeholder="blur"
 					/>
 				}
 				dividerColor="#242933"
 			>
-				<DescriptionIcon style={{ fontSize: 80 }} />
+				<DescriptionIcon sx={{ fontSize: 80 }} />
 				<Typography variant="h3" component="h1">
 					Blog posts
 				</Typography>
 			</Header>
 
-			<main className={classes.page}>
-				<section className={classes.featured}>
-					<div id="featured" className={classes.scroll} />
+			<Box component="main">
+				<Box component="section" sx={{ py: 5 }}>
+					<ScrollRedirect href="featured" />
 					<Container maxWidth="lg">
-						<div className={classes.sectionTitle}>
+						<Box sx={{ mb: 2 }}>
 							<Typography variant="h4" component="h2">
 								Featured
 							</Typography>
 							<Divider />
-						</div>
+						</Box>
 						{!!posts.featured.length && (
 							<Carousel {...carouselProps}>
 								{posts.featured.map(post => (
-									<Link href={`/blog/${post.slug}`} passHref key={post.id}>
+									<Link passHref href={`/blog/${post.slug}`} key={post.id}>
 										<FeaturedBlog post={post} />
 									</Link>
 								))}
 							</Carousel>
 						)}
 					</Container>
-				</section>
+				</Box>
 
 				<WaveDivider1 color="#292e39" />
 
-				<section className={classes.latest}>
-					<div id="latest" className={classes.scroll} />
+				<Box component="section" sx={{ bgcolor: "#292e39", pt: 2.5, pb: 10 }}>
+					<ScrollRedirect href="latest" />
 					<Container maxWidth="lg">
-						<div className={classes.sectionTitle}>
+						<Box sx={{ mb: 2 }}>
 							<Typography variant="h4" component="h2">
 								Latest
 							</Typography>
 							<Divider />
-						</div>
+						</Box>
 						<Grid container spacing={4}>
 							{posts.latest.map(post => (
 								<Grid item md={4} sm={6} xs={12} key={post.id}>
-									<Link href={`/blog/${post.slug}`} passHref>
+									<Link passHref href={`/blog/${post.slug}`}>
 										<BlogPost post={post} />
 									</Link>
 								</Grid>
 							))}
 						</Grid>
 					</Container>
-				</section>
-			</main>
+				</Box>
+			</Box>
 
 			<WaveDivider4 backgroundColor="#292e39" />
 
