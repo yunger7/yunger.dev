@@ -1,92 +1,53 @@
 import Image from "next/image";
-import React from "react";
+import { forwardRef } from "react";
 
 import { Chip, Typography, Box } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
+import { alpha } from "@mui/material/styles";
 import { Star as StarIcon } from "@mui/icons-material";
 
-import { RichText } from "./RichText";
+import { RichText } from ".";
 
 import { palette } from "../theme";
 
 import placeholder3 from "../../public/placeholder3.jpg";
 
-const useStyles = makeStyles(theme => ({
-	root: {
-		width: "100%",
-		minHeight: 400,
-
-		display: "flex",
-		alignItems: "center",
-		gap: theme.spacing(2.5),
-
-		cursor: "pointer",
-		transition: "background .2s",
-
-		"&:hover": {
-			backgroundColor: `${palette.nord3}aa`,
-		},
-
-		"& *": {
-			cursor: "pointer",
-		},
-
-		[theme.breakpoints.down("md")]: {
-			flexDirection: "column",
-			alignItems: "stretch",
-		},
-	},
-	image: {
-		position: "relative",
-		width: "50%",
-		height: 400,
-
-		"& img": {
-			borderRadius: theme.shape.borderRadius,
-		},
-
-		[theme.breakpoints.down("md")]: {
-			width: "100%",
-			height: 200,
-		},
-	},
-	information: {
-		width: "50%",
-		[theme.breakpoints.down("md")]: {
-			width: "100%",
-			height: "50%",
-		},
-	},
-	featuredChip: {
-		marginBottom: theme.spacing(1),
-	},
-	date: {
-		fontFamily: "Inter",
-		marginTop: theme.spacing(2),
-	},
-	tags: {
-		marginTop: theme.spacing(1),
-	},
-	tag: {
-		marginRight: theme.spacing(1),
-	},
-}));
-
-export const FeaturedBlog = React.forwardRef((props, ref) => {
-	const classes = useStyles();
-
+export const FeaturedBlog = forwardRef((props, ref) => {
 	const { post, onClick, href } = props;
 	const { title, image, description, createdAt, tags } = post;
 
 	return (
 		<Box
-			className={classes.root}
 			component="a"
 			ref={ref}
 			onClick={onClick}
 			href={href}
+			sx={{
+				width: 1,
+				minHeight: 400,
+				display: "flex",
+				flexDirection: { xs: "column", md: "row" },
+				alignItems: { xs: "stretch", md: "center" },
+				gap: theme => theme.spacing(2.5),
+				cursor: "pointer",
+				transition: "background-color 200ms ease-in-out",
+				":hover": {
+					bgcolor: alpha(palette.nord3, 0.75),
+				},
+				"& *": {
+					cursor: "pointer",
+				},
+			}}
 		>
-			<div className={classes.image}>
+			<Box
+				sx={{
+					position: "relative",
+					width: { xs: 1, md: 1 / 2 },
+					height: { xs: 200, md: 400 },
+					"& img": {
+						borderRadius: 1,
+					},
+				}}
+			>
 				{image ? (
 					<Image
 						src={image.src}
@@ -105,14 +66,24 @@ export const FeaturedBlog = React.forwardRef((props, ref) => {
 						placeholder="blur"
 					/>
 				)}
-			</div>
-			<div className={classes.information}>
+			</Box>
+			<Box
+				sx={theme => ({
+					width: "50%",
+					[theme.breakpoints.down("md")]: {
+						width: "100%",
+						height: "100%",
+					},
+				})}
+			>
 				<Chip
-					className={classes.featuredChip}
-					icon={<StarIcon />}
 					label="Featured"
 					size="small"
 					color="primary"
+					icon={<StarIcon />}
+					sx={{
+						mb: 1,
+					}}
 				/>
 				<Typography variant="h5">
 					<RichText text={title} />
@@ -120,25 +91,24 @@ export const FeaturedBlog = React.forwardRef((props, ref) => {
 				<Typography variant="body2">
 					<RichText text={description} />
 				</Typography>
-				<Typography className={classes.date} variant="subtitle2">
+				<Typography variant="subtitle2" sx={{ fontFamily: "Inter", mt: 2 }}>
 					{new Date(createdAt).toLocaleDateString("en-US", {
 						month: "short",
 						day: "numeric",
 						year: "numeric",
 					})}
 				</Typography>
-				<div className={classes.tags}>
+				<Box sx={{ mt: 1 }}>
 					{tags.map(({ id, name, color }) => (
 						<Chip
-							className={classes.tag}
 							size="small"
 							label={name}
-							style={{ backgroundColor: color }}
 							key={id}
+							sx={{ mr: 1, bgcolor: color }}
 						/>
 					))}
-				</div>
-			</div>
+				</Box>
+			</Box>
 		</Box>
 	);
 });
