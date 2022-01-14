@@ -1,58 +1,36 @@
 import Image from "next/image";
-import React from "react";
+import { forwardRef } from "react";
 
-import { Card, CardContent, Typography, Chip } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
+import { Box, Card, CardContent, Typography, Chip } from "@mui/material";
+import { alpha } from "@mui/material/styles";
 
-import { RichText } from "./RichText";
+import { RichText } from ".";
 
 import { palette } from "../theme";
 
 import placeholder1 from "../../public/placeholder1.jpg";
 
-const useStyles = makeStyles(theme => ({
-	root: {
-		display: "block",
-		height: "100%",
-
-		cursor: "pointer",
-		transition: "background .2s",
-
-		"&:hover": {
-			backgroundColor: `${palette.nord3}aa`,
-		},
-	},
-	image: {
-		height: 200,
-		position: "relative",
-		borderRadius: theme.shape.borderRadius,
-	},
-	date: {
-		marginTop: theme.spacing(1),
-		fontFamily: "Inter",
-	},
-	tags: {
-		marginTop: theme.spacing(1),
-	},
-	tag: {
-		marginRight: theme.spacing(1),
-	},
-}));
-
-export const BlogPost = React.forwardRef((props, ref) => {
-	const classes = useStyles();
+export const BlogPost = forwardRef((props, ref) => {
 	const { post, onClick, href } = props;
 	const { title, image, description, createdAt, tags } = post;
 
 	return (
 		<Card
-			className={classes.root}
 			component="a"
 			ref={ref}
 			onClick={onClick}
 			href={href}
+			sx={{
+				display: "block",
+				height: 1,
+				cursor: "pointer",
+				transition: "background-color 200ms ease-in-out",
+				":hover": {
+					bgcolor: alpha(palette.nord3, 0.75),
+				},
+			}}
 		>
-			<div className={classes.image}>
+			<Box sx={{ height: 200, position: "relative", borderRadius: 1 }}>
 				{image ? (
 					<Image
 						src={image.src}
@@ -71,32 +49,31 @@ export const BlogPost = React.forwardRef((props, ref) => {
 						placeholder="blur"
 					/>
 				)}
-			</div>
+			</Box>
 			<CardContent>
-				<Typography variant="h6" gutterBottom>
+				<Typography gutterBottom variant="h6">
 					<RichText text={title} />
 				</Typography>
 				<Typography variant="body2">
 					<RichText text={description} />
 				</Typography>
-				<Typography className={classes.date} variant="subtitle2">
+				<Typography variant="subtitle2" sx={{ fontFamily: "Inter", mt: 1 }}>
 					{new Date(createdAt).toLocaleDateString("en-US", {
 						month: "short",
 						day: "numeric",
 						year: "numeric",
 					})}
 				</Typography>
-				<div className={classes.tags}>
+				<Box sx={{ mt: 1 }}>
 					{tags.map(({ id, name, color }) => (
 						<Chip
-							className={classes.tag}
 							size="small"
 							label={name}
-							style={{ backgroundColor: color }}
 							key={id}
+							sx={{ mr: 1, bgcolor: color }}
 						/>
 					))}
-				</div>
+				</Box>
 			</CardContent>
 		</Card>
 	);
