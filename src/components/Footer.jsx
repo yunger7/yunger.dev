@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { useState } from "react";
+
 import {
+	Box,
 	Container,
 	Typography,
 	Grid,
@@ -8,8 +10,8 @@ import {
 	Tooltip,
 	Snackbar,
 	Slide,
+	Alert,
 } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
 import {
 	Favorite as FavoriteIcon,
 	Home as HomeIcon,
@@ -18,7 +20,6 @@ import {
 	Settings as SettingsIcon,
 	LocalCafe as LocalCafeIcon,
 } from "@mui/icons-material";
-import { Alert } from "@mui/material";
 
 import { palette } from "../theme";
 
@@ -106,169 +107,161 @@ const footerLinks = [
 	},
 ];
 
-const useStyles = makeStyles(theme => ({
-	root: {
-		minHeight: 300,
-		paddingTop: theme.spacing(2.5),
-		paddingBottom: theme.spacing(5),
-		backgroundColor: palette.nord1,
-	},
-	container: {
-		height: "100%",
-		display: "flex",
-		justifyContent: "space-between",
-		[theme.breakpoints.down("md")]: {
-			flexDirection: "column",
-			alignItems: "center",
-			gap: theme.spacing(5),
-		},
-	},
-	info: {
-		width: "20%",
-		[theme.breakpoints.down("md")]: {
-			width: "30%",
-			textAlign: "center",
-		},
-		[theme.breakpoints.down("sm")]: {
-			width: "65%",
-		},
-	},
-	websiteTitle: {
-		fontWeight: 500,
-		[theme.breakpoints.down("md")]: {
-			marginBottom: theme.spacing(2),
-		},
-	},
-	copyright: {
-		color: palette.nord4,
-	},
-	supportButton: {
-		marginTop: theme.spacing(3),
-		width: "100%",
-	},
-	links: {
-		justifyContent: "flex-end",
-		[theme.breakpoints.down("md")]: {
-			justifyContent: "space-between",
-		},
-	},
-}));
-
 export function Footer() {
-	const classes = useStyles();
-
 	return (
-		<footer className={classes.root}>
-			<Container className={classes.container} maxWidth="lg">
-				<div className={classes.info}>
+		<Box
+			component="footer"
+			sx={{
+				minHeight: 300,
+				pt: 2.5,
+				pb: 5,
+				bgcolor: palette.nord1,
+			}}
+		>
+			<Container
+				maxWidth="lg"
+				sx={theme => ({
+					height: 1,
+					display: "flex",
+					justifyContent: "space-between",
+					[theme.breakpoints.down("md")]: {
+						flexDirection: "column",
+						alignItems: "center",
+						gap: theme.spacing(5),
+					},
+				})}
+			>
+				<Box
+					sx={{
+						width: { xs: "65%", sm: "30%", md: "20%" },
+						textAlign: { xs: "center", md: "left" },
+					}}
+				>
 					<div>
 						<Typography
-							className={classes.websiteTitle}
 							variant="h5"
-							gutterBottom
+							sx={{
+								fontWeight: 500,
+								mb: { xs: 2, md: 1.15 },
+							}}
 						>
 							yunger.dev
 						</Typography>
 						<SocialMedia />
 					</div>
-					<div className={classes.copyright}>
+					<Box sx={{ color: palette.nord4 }}>
 						<Typography variant="body2">
 							&copy; 2021 - {new Date().getFullYear()} yunger
 						</Typography>
 						<Typography variant="body2">
-							Build with{" "}
-							<FavoriteIcon color="primary" style={{ fontSize: 14 }} /> and
-							JavaScript
+							Build with <FavoriteIcon color="primary" sx={{ fontSize: 14 }} />{" "}
+							and JavaScript
 						</Typography>
 						<Typography variant="body2">v0.1.0 (In development)</Typography>
-					</div>
+					</Box>
 					<Button
-						className={classes.supportButton}
-						startIcon={<LocalCafeIcon />}
 						variant="outlined"
 						color="primary"
 						href="https://ko-fi.com/yunger"
 						target="_blank"
 						rel="noreferrer"
+						startIcon={<LocalCafeIcon />}
+						sx={{
+							mt: 3,
+							width: 1,
+						}}
 					>
 						Buy me a coffee
 					</Button>
-				</div>
-				<Grid container className={classes.links}>
+				</Box>
+				<Grid
+					container
+					sx={{
+						justifyContent: { xs: "space-between", md: "flex-end" },
+					}}
+				>
 					{footerLinks.map((item, index) => (
 						<LinkSection item={item} key={index} />
 					))}
 				</Grid>
 			</Container>
-		</footer>
+		</Box>
 	);
 }
 
-const useLinkSectionStyles = makeStyles(theme => ({
-	root: {
-		color: palette.nord4,
-		[theme.breakpoints.down("sm")]: {
-			textAlign: "center",
-			marginBottom: theme.spacing(2.5),
-		},
-	},
-	title: {
-		marginBottom: theme.spacing(2),
-		borderBottom: `1px solid ${palette.nord3}`,
-	},
-	titleText: {
-		fontFamily: "Rubik",
-		fontSize: "large",
-		display: "flex",
-		alignItems: "flex-start",
-		gap: theme.spacing(1),
-		[theme.breakpoints.down("sm")]: {
-			justifyContent: "center",
-		},
-	},
-	linkText: {
-		fontFamily: "Rubik",
-		fontSize: 15,
-		marginBottom: theme.spacing(1),
-		transition: "all .2s",
-		"&:hover": {
-			color: palette.nord5,
-		},
-	},
-}));
-
 function LinkSection({ item }) {
-	const classes = useLinkSectionStyles();
-
 	const { title, links } = item;
 	const Icon = title.icon;
 
 	return (
-		<Grid item className={classes.root} sm={2} xs={12}>
-			<div className={classes.title}>
+		<Grid
+			item
+			sm={2}
+			xs={12}
+			sx={{
+				color: palette.nord4,
+				textAlign: { xs: "center", sm: "left" },
+				mb: { xs: 2.5, sm: 0 },
+			}}
+		>
+			<Box sx={{ mb: 2, borderBottom: `1px solid ${palette.nord3}` }}>
 				{title.href ? (
 					<Link href={title.href}>
 						<a>
-							<Typography className={classes.titleText} component="span">
+							<Typography
+								component="span"
+								sx={theme => ({
+									fontFamily: "Rubik",
+									fontSize: "large",
+									display: "flex",
+									alignItems: "flex-start",
+									gap: theme.spacing(1),
+									[theme.breakpoints.down("sm")]: {
+										justifyContent: "center",
+									},
+								})}
+							>
 								{Icon && <Icon />}
 								{title.name}
 							</Typography>
 						</a>
 					</Link>
 				) : (
-					<Typography className={classes.titleText} component="span">
+					<Typography
+						component="span"
+						sx={theme => ({
+							fontFamily: "Rubik",
+							fontSize: "large",
+							display: "flex",
+							alignItems: "flex-start",
+							gap: theme.spacing(1),
+							[theme.breakpoints.down("sm")]: {
+								justifyContent: "center",
+							},
+						})}
+					>
 						{Icon && <Icon />}
 						{title.name}
 					</Typography>
 				)}
-			</div>
+			</Box>
 			<div>
 				{links.map((link, index) => {
 					if (link.href) {
 						return (
 							<Link href={link.href} key={index}>
 								<a>
-									<Typography className={classes.linkText}>
+									<Typography
+										sx={{
+											fontFamily: "Rubik",
+											fontSize: 15,
+											mb: 1,
+											transition: "all .2s",
+											":hover": {
+												color: palette.nord5,
+											},
+										}}
+									>
 										{link.name}
 									</Typography>
 								</a>
@@ -277,7 +270,18 @@ function LinkSection({ item }) {
 					}
 
 					return (
-						<Typography className={classes.linkText} key={index}>
+						<Typography
+							key={index}
+							sx={{
+								fontFamily: "Rubik",
+								fontSize: 15,
+								mb: 1,
+								transition: "all .2s",
+								":hover": {
+									color: palette.nord5,
+								},
+							}}
+						>
 							{link.name}
 						</Typography>
 					);
@@ -287,26 +291,7 @@ function LinkSection({ item }) {
 	);
 }
 
-const useSocialMediaStyles = makeStyles(theme => ({
-	root: {
-		display: "flex",
-		justifyContent: "space-between",
-		marginBottom: theme.spacing(3),
-	},
-	icon: {
-		fill: palette.nord4,
-		transition: "all .2s",
-		"&:hover": {
-			fill: "#ffffff",
-		},
-	},
-	tooltip: {
-		cursor: "pointer",
-	},
-}));
-
 function SocialMedia() {
-	const classes = useSocialMediaStyles();
 	const [snackbarOpen, setSnackbarOpen] = useState(false);
 
 	async function handleDiscordClick() {
@@ -315,11 +300,25 @@ function SocialMedia() {
 	}
 
 	return (
-		<div className={classes.root}>
+		<Box
+			sx={{
+				display: "flex",
+				justifyContent: "space-between",
+				mb: 3,
+
+				"& svg": {
+					fill: palette.nord4,
+					transition: "all .2s",
+
+					":hover": {
+						fill: "#ffffff",
+					},
+				},
+			}}
+		>
 			{/* GitHub */}
 			<a href="https://github.com/yunger7" target="_blank" rel="noreferrer">
 				<svg
-					className={classes.icon}
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 24 24"
 					width="24"
@@ -337,7 +336,6 @@ function SocialMedia() {
 				rel="noreferrer"
 			>
 				<svg
-					className={classes.icon}
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 24 24"
 					width="24"
@@ -355,7 +353,6 @@ function SocialMedia() {
 				rel="noreferrer"
 			>
 				<svg
-					className={classes.icon}
 					version="1.0"
 					xmlns="http://www.w3.org/2000/svg"
 					width="24"
@@ -391,7 +388,6 @@ function SocialMedia() {
 				rel="noreferrer"
 			>
 				<svg
-					className={classes.icon}
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 24 24"
 					width="24"
@@ -403,22 +399,18 @@ function SocialMedia() {
 			</a>
 
 			{/* Discord */}
-			<Tooltip
-				className={classes.tooltip}
-				title="yunger#3461"
-				arrow
-				onClick={handleDiscordClick}
-			>
-				<svg
-					className={classes.icon}
-					xmlns="http://www.w3.org/2000/svg"
-					viewBox="0 0 24 24"
-					width="24"
-					height="24"
-				>
-					<path fill="none" d="M0 0h24v24H0z" />
-					<path d="M10.076 11c.6 0 1.086.45 1.075 1 0 .55-.474 1-1.075 1C9.486 13 9 12.55 9 12s.475-1 1.076-1zm3.848 0c.601 0 1.076.45 1.076 1s-.475 1-1.076 1c-.59 0-1.075-.45-1.075-1s.474-1 1.075-1zm4.967-9C20.054 2 21 2.966 21 4.163V23l-2.211-1.995-1.245-1.176-1.317-1.25.546 1.943H5.109C3.946 20.522 3 19.556 3 18.359V4.163C3 2.966 3.946 2 5.109 2H18.89zm-3.97 13.713c2.273-.073 3.148-1.596 3.148-1.596 0-3.381-1.482-6.122-1.482-6.122-1.48-1.133-2.89-1.102-2.89-1.102l-.144.168c1.749.546 2.561 1.334 2.561 1.334a8.263 8.263 0 0 0-3.096-1.008 8.527 8.527 0 0 0-2.077.02c-.062 0-.114.011-.175.021-.36.032-1.235.168-2.335.662-.38.178-.607.305-.607.305s.854-.83 2.705-1.376l-.103-.126s-1.409-.031-2.89 1.103c0 0-1.481 2.74-1.481 6.121 0 0 .864 1.522 3.137 1.596 0 0 .38-.472.69-.871-1.307-.4-1.8-1.24-1.8-1.24s.102.074.287.179c.01.01.02.021.041.031.031.022.062.032.093.053.257.147.514.262.75.357.422.168.926.336 1.513.452a7.06 7.06 0 0 0 2.664.01 6.666 6.666 0 0 0 1.491-.451c.36-.137.761-.337 1.183-.62 0 0-.514.861-1.862 1.25.309.399.68.85.68.85z" />
-				</svg>
+			<Tooltip arrow title="yunger#3461" onClick={handleDiscordClick}>
+				<Box component="span" sx={{ cursor: "pointer" }}>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 24 24"
+						width="24"
+						height="24"
+					>
+						<path fill="none" d="M0 0h24v24H0z" />
+						<path d="M10.076 11c.6 0 1.086.45 1.075 1 0 .55-.474 1-1.075 1C9.486 13 9 12.55 9 12s.475-1 1.076-1zm3.848 0c.601 0 1.076.45 1.076 1s-.475 1-1.076 1c-.59 0-1.075-.45-1.075-1s.474-1 1.075-1zm4.967-9C20.054 2 21 2.966 21 4.163V23l-2.211-1.995-1.245-1.176-1.317-1.25.546 1.943H5.109C3.946 20.522 3 19.556 3 18.359V4.163C3 2.966 3.946 2 5.109 2H18.89zm-3.97 13.713c2.273-.073 3.148-1.596 3.148-1.596 0-3.381-1.482-6.122-1.482-6.122-1.48-1.133-2.89-1.102-2.89-1.102l-.144.168c1.749.546 2.561 1.334 2.561 1.334a8.263 8.263 0 0 0-3.096-1.008 8.527 8.527 0 0 0-2.077.02c-.062 0-.114.011-.175.021-.36.032-1.235.168-2.335.662-.38.178-.607.305-.607.305s.854-.83 2.705-1.376l-.103-.126s-1.409-.031-2.89 1.103c0 0-1.481 2.74-1.481 6.121 0 0 .864 1.522 3.137 1.596 0 0 .38-.472.69-.871-1.307-.4-1.8-1.24-1.8-1.24s.102.074.287.179c.01.01.02.021.041.031.031.022.062.032.093.053.257.147.514.262.75.357.422.168.926.336 1.513.452a7.06 7.06 0 0 0 2.664.01 6.666 6.666 0 0 0 1.491-.451c.36-.137.761-.337 1.183-.62 0 0-.514.861-1.862 1.25.309.399.68.85.68.85z" />
+					</svg>
+				</Box>
 			</Tooltip>
 			<Snackbar
 				anchorOrigin={{
@@ -434,6 +426,6 @@ function SocialMedia() {
 					Copied to clipboard!
 				</Alert>
 			</Snackbar>
-		</div>
+		</Box>
 	);
 }
