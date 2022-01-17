@@ -1,6 +1,9 @@
 import Image from "next/image";
 
+import ImageZoom from "react-medium-image-zoom";
+
 import {
+	Box,
 	Typography,
 	Checkbox,
 	FormControlLabel,
@@ -8,64 +11,22 @@ import {
 	AccordionSummary,
 	AccordionDetails,
 } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
 import { ExpandMore as ExpandMoreIcon } from "@mui/icons-material";
 
-import ImageZoom from "react-medium-image-zoom";
-
-import { RichText } from "../components/RichText";
+import { RichText } from "../components";
 import { palette } from "../theme";
 
-const useStyles = makeStyles(theme => ({
-	accordion: {
-		marginBottom: theme.spacing(1),
-		boxShadow: "none",
-	},
-	accordionDetails: {
-		display: "block",
-		borderTop: `1px solid ${theme.palette.divider}`,
-	},
-	listItem: {
-		listStyle: "none",
-		fontSize: 16,
-		display: "flex",
-		margin: `${theme.spacing(1)} 0`,
-	},
-	listItemDot: {
-		marginRight: theme.spacing(1),
-	},
-	checkboxFormControlLabel: {
-		cursor: "default",
-		maxHeight: 30,
-		"&:hover": {
-			backgroundColor: "none",
-		},
-	},
-	checkbox: {
-		cursor: "default",
-		"&:hover": {
-			backgroundColor: "transparent !important",
-		},
-	},
-	image: {
-		position: "relative",
-		height: 500,
-		width: "100%",
-	},
-}));
-
 export function useBlockRenderer(blocks) {
-	const classes = useStyles();
 	const jsxContent = [];
 
 	for (const block of blocks) {
-		jsxContent.push(renderBlock(block, classes));
+		jsxContent.push(renderBlock(block));
 	}
 
 	return jsxContent;
 }
 
-function renderBlock(block, classes) {
+function renderBlock(block) {
 	const { type, id } = block;
 	const value = block[type];
 
@@ -110,55 +71,84 @@ function renderBlock(block, classes) {
 					wrapStyle={{ width: "100%" }}
 					key={id}
 				>
-					<div className={classes.image}>
+					<Box sx={{ position: "relative", height: 500, width: 1 }}>
 						<Image
 							src={value.external.url}
 							alt=""
 							layout="fill"
 							objectFit="contain"
 						/>
-					</div>
+					</Box>
 				</ImageZoom>
 			);
 		case "bulleted_list_item":
 		case "numbered_list_item":
 			return (
-				<li className={classes.listItem} key={id}>
-					<span className={classes.listItemDot}>•</span>
-					<span className={classes.listItemContent}>
+				<Box
+					component="li"
+					key={id}
+					sx={{
+						listStyle: "none",
+						fontSize: 16,
+						display: "flex",
+						my: 1,
+						mx: 0,
+					}}
+				>
+					<Box component="span" sx={{ mr: 1 }}>
+						•
+					</Box>
+					<Box component="span">
 						<RichText text={value.text} />
-					</span>
-				</li>
+					</Box>
+				</Box>
 			);
 		case "to_do":
 			return (
 				<div key={id}>
 					<FormControlLabel
-						className={classes.checkboxFormControlLabel}
 						control={
 							<Checkbox
 								disableRipple
-								className={classes.checkbox}
 								checked={value.checked}
-								classes={{ checked: classes.checkbox }}
+								sx={{
+									cursor: "default",
+									":hover": {
+										bgcolor: "transparent !important",
+									},
+								}}
 							/>
 						}
 						label={<RichText text={value.text} />}
+						sx={{
+							cursor: "default",
+							maxHeight: 30,
+							":hover": {
+								bgcolor: "none",
+							},
+						}}
 					/>
 				</div>
 			);
 		case "toggle":
 			return (
-				<Accordion className={classes.accordion} key={id}>
-					<AccordionSummary
-						expandIcon={<ExpandMoreIcon />}
-						IconButtonProps={{ disableRipple: true }}
-					>
+				<Accordion
+					key={id}
+					sx={{
+						mb: 1,
+						boxShadow: "none",
+					}}
+				>
+					<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 						<RichText text={value.text} />
 					</AccordionSummary>
-					<AccordionDetails className={classes.accordionDetails}>
-						{value.children &&
-							value.children.map(block => renderBlock(block, classes))}
+					<AccordionDetails
+						sx={{
+							display: "block",
+							borderTop: theme => `1px solid ${theme.palette.divider}`,
+						}}
+					>
+						{value.children && value.children.map(block => renderBlock(block))}
 					</AccordionDetails>
 				</Accordion>
 			);
