@@ -35,7 +35,7 @@ const footerLinks = [
 		title: {
 			name: "Home",
 			href: "/",
-			icon: HomeIcon,
+			icon: <HomeIcon />,
 		},
 		links: [
 			{
@@ -56,7 +56,7 @@ const footerLinks = [
 		title: {
 			name: "Blog",
 			href: "/blog",
-			icon: DescriptionIcon,
+			icon: <DescriptionIcon />,
 		},
 		links: [
 			{
@@ -73,7 +73,7 @@ const footerLinks = [
 		title: {
 			name: "Projects",
 			href: "/projects",
-			icon: SettingsIcon,
+			icon: <SettingsIcon />,
 		},
 		links: [
 			{
@@ -86,7 +86,7 @@ const footerLinks = [
 		title: {
 			name: "Info",
 			href: null,
-			icon: InfoIcon,
+			icon: <InfoIcon />,
 		},
 		links: [
 			{
@@ -187,8 +187,8 @@ export function Footer() {
 						justifyContent: { xs: "space-between", md: "flex-end" },
 					}}
 				>
-					{footerLinks.map((item, index) => (
-						<LinkSection item={item} key={index} />
+					{footerLinks.map((section, index) => (
+						<LinkSection section={section} key={index} />
 					))}
 				</Grid>
 			</Container>
@@ -196,9 +196,47 @@ export function Footer() {
 	);
 }
 
-function LinkSection({ item }) {
-	const { title, links } = item;
-	const Icon = title.icon;
+function LinkSection({ section }) {
+	const { title, links } = section;
+
+	const SectionTitle = ({ title }) => {
+		return (
+			<Typography
+				component="span"
+				sx={theme => ({
+					fontFamily: "Rubik",
+					fontSize: "large",
+					display: "flex",
+					alignItems: "flex-start",
+					gap: theme.spacing(1),
+					[theme.breakpoints.down("sm")]: {
+						justifyContent: "center",
+					},
+				})}
+			>
+				{title.icon}
+				{title.name}
+			</Typography>
+		);
+	};
+
+	const SectionLink = ({ link }) => {
+		return (
+			<Typography
+				sx={{
+					fontFamily: "Rubik",
+					fontSize: 15,
+					mb: 1,
+					transition: "all .2s",
+					":hover": {
+						color: palette.nord5,
+					},
+				}}
+			>
+				{link.name}
+			</Typography>
+		);
+	};
 
 	return (
 		<Grid
@@ -215,84 +253,25 @@ function LinkSection({ item }) {
 				{title.href ? (
 					<Link href={title.href}>
 						<a>
-							<Typography
-								component="span"
-								sx={theme => ({
-									fontFamily: "Rubik",
-									fontSize: "large",
-									display: "flex",
-									alignItems: "flex-start",
-									gap: theme.spacing(1),
-									[theme.breakpoints.down("sm")]: {
-										justifyContent: "center",
-									},
-								})}
-							>
-								{Icon && <Icon />}
-								{title.name}
-							</Typography>
+							<SectionTitle title={title} />
 						</a>
 					</Link>
 				) : (
-					<Typography
-						component="span"
-						sx={theme => ({
-							fontFamily: "Rubik",
-							fontSize: "large",
-							display: "flex",
-							alignItems: "flex-start",
-							gap: theme.spacing(1),
-							[theme.breakpoints.down("sm")]: {
-								justifyContent: "center",
-							},
-						})}
-					>
-						{Icon && <Icon />}
-						{title.name}
-					</Typography>
+					<SectionTitle title={title} />
 				)}
 			</Box>
 			<div>
-				{links.map((link, index) => {
-					if (link.href) {
-						return (
-							<Link href={link.href} key={index}>
-								<a>
-									<Typography
-										sx={{
-											fontFamily: "Rubik",
-											fontSize: 15,
-											mb: 1,
-											transition: "all .2s",
-											":hover": {
-												color: palette.nord5,
-											},
-										}}
-									>
-										{link.name}
-									</Typography>
-								</a>
-							</Link>
-						);
-					}
-
-					return (
-						<Typography
-							key={index}
-							sx={{
-								fontFamily: "Rubik",
-								fontSize: 15,
-								mb: 1,
-								transition: "all .2s",
-								":hover": {
-									color: palette.nord5,
-								},
-							}}
-						>
-							{link.name}
-						</Typography>
-					);
-				})}
+				{links.map((link, index) =>
+					link.href ? (
+						<Link href={link.href} key={index}>
+							<a>
+								<SectionLink link={link} />
+							</a>
+						</Link>
+					) : (
+						<SectionLink link={link} />
+					)
+				)}
 			</div>
 		</Grid>
 	);
