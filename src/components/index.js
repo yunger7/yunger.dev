@@ -6,3 +6,4 @@ export * from "./Navbar";
 export * from "./RichText";
 export * from "./Search";
 export * from "./SquareLink";
+export * from "./WaveDivider";
