@@ -273,7 +273,10 @@ export default function Contact() {
 							onClose={() => setSnackbarOpen(false)}
 							TransitionComponent={Slide}
 						>
-							<Alert severity={formResponse.status} variant="filled">
+							<Alert
+								severity={formResponse.status || undefined}
+								variant="filled"
+							>
 								{formResponse.message}
 							</Alert>
 						</Snackbar>
