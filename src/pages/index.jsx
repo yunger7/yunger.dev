@@ -29,12 +29,9 @@ import {
 	BlogPost,
 	Footer,
 	Header,
+	WaveDivider,
 } from "../components";
-import {
-	WaveDivider3,
-	WaveDivider4,
-	WaveDivider5,
-} from "../components/dividers";
+import { WaveDivider4 } from "../components/dividers";
 
 import { palette } from "../theme";
 import { getBlogPosts } from "../lib/getBlogPosts";
@@ -122,11 +119,12 @@ export default function Home({ posts }) {
 				<Box
 					component="section"
 					sx={{
+						position: "relative",
 						pt: {
 							xs: 5,
 							md: 2.5,
 						},
-						pb: 10,
+						pb: 20,
 						bgcolor: "#292e39",
 					}}
 				>
@@ -165,9 +163,14 @@ export default function Home({ posts }) {
 							</Grid>
 						</Grid>
 					</Container>
+					<WaveDivider
+						invert
+						position="bottom"
+						color="#242933"
+						height={100}
+						width={200}
+					/>
 				</Box>
-
-				<WaveDivider5 backgroundColor="#292e39" color="#242933" />
 
 				<Box component="section" sx={{ pb: 10, pt: { xs: 5, md: 0 } }}>
 					<ScrollRedirect href="posts" />
@@ -201,12 +204,16 @@ export default function Home({ posts }) {
 					</Container>
 				</Box>
 
-				<WaveDivider3 color="#292e39" />
-
 				<Box
 					component="section"
-					sx={{ bgcolor: "#292e39", pb: 10, pt: { xs: 5, md: 0 } }}
+					sx={{
+						position: "relative",
+						bgcolor: "#292e39",
+						pb: 10,
+						pt: 20,
+					}}
 				>
+					<WaveDivider invert height={110} width={120} color="#242933" />
 					<ScrollRedirect href="more" />
 					<Container maxWidth="lg">
 						<Box sx={{ mb: 2 }}>

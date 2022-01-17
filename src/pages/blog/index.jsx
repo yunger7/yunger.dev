@@ -13,8 +13,9 @@ import {
 	FeaturedBlog,
 	BlogPost,
 	Footer,
+	WaveDivider,
 } from "../../components";
-import { WaveDivider1, WaveDivider4 } from "../../components/dividers";
+import { WaveDivider4 } from "../../components/dividers";
 
 import { getBlogPosts } from "../../lib/getBlogPosts";
 import { palette } from "../../theme";
@@ -85,7 +86,7 @@ export default function Blog({ posts }) {
 			</Header>
 
 			<Box component="main">
-				<Box component="section" sx={{ py: 5 }}>
+				<Box component="section" sx={{ position: "relative", pt: 5, pb: 20 }}>
 					<ScrollRedirect href="featured" />
 					<Container maxWidth="lg">
 						<Box sx={{ mb: 2 }}>
@@ -104,9 +105,14 @@ export default function Blog({ posts }) {
 							</Carousel>
 						)}
 					</Container>
+					<WaveDivider
+						invert
+						height={120}
+						width={150}
+						position="bottom"
+						color="#292e39"
+					/>
 				</Box>
-
-				<WaveDivider1 color="#292e39" />
 
 				<Box component="section" sx={{ bgcolor: "#292e39", pt: 2.5, pb: 10 }}>
 					<ScrollRedirect href="latest" />

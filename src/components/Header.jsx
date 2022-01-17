@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 
-import { WaveDivider1 } from "./dividers";
+import { WaveDivider } from ".";
 
 function ScrollRedirect({ href }) {
 	return <Box id={href} sx={{ position: "relative", bottom: 100 }} />;
@@ -14,7 +14,7 @@ export function Header(props) {
 			component="section"
 			sx={{
 				position: "relative",
-				minHeight: 500,
+				minHeight: 575,
 				display: "flex",
 				justifyContent: "center",
 				alignItems: "center",
@@ -40,7 +40,7 @@ export function Header(props) {
 			<Box
 				sx={{
 					position: "relative",
-					bottom: 25,
+					bottom: 50,
 					width: 700,
 					minHeight: 300,
 					p: 2.5,
@@ -60,16 +60,13 @@ export function Header(props) {
 			>
 				{children}
 			</Box>
-
-			<Box
-				sx={{
-					position: "absolute",
-					width: "100%",
-					bottom: 0,
-				}}
-			>
-				<WaveDivider1 color={dividerColor ? dividerColor : "#292e39"} />
-			</Box>
+			<WaveDivider
+				invert
+				position="bottom"
+				height={75}
+				width={150}
+				color={dividerColor ? dividerColor : "#292e39"}
+			/>
 		</Box>
 	);
 }
