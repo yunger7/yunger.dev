@@ -15,7 +15,6 @@ import {
 	Footer,
 	WaveDivider,
 } from "../../components";
-import { WaveDivider4 } from "../../components/dividers";
 
 import { getBlogPosts } from "../../lib/getBlogPosts";
 import { palette } from "../../theme";
@@ -135,10 +134,7 @@ export default function Blog({ posts }) {
 					</Container>
 				</Box>
 			</Box>
-
-			<WaveDivider4 backgroundColor="#292e39" />
-
-			<Footer />
+			<Footer backgroundColor="#292e39" />
 		</>
 	);
 }

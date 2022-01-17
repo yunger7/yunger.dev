@@ -7,7 +7,6 @@ import { Box, Stack, Container, Typography, Chip } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
 import { Navbar, Header, RichText, Footer } from "../../components";
-import { WaveDivider4 } from "../../components/dividers";
 
 import {
 	getNordColor,
@@ -136,12 +135,6 @@ export default function BlogPost({ post }) {
 					<Container maxWidth="md">{jsxContent}</Container>
 				</Box>
 			</Box>
-
-			<WaveDivider4
-				backgroundColor={theme.palette.background.paper}
-				color="#242933"
-			/>
-
 			<Footer />
 		</>
 	);

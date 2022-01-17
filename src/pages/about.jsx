@@ -5,7 +5,6 @@ import { Box, Container, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
 import { Navbar, Header, Footer } from "../components";
-import { WaveDivider4 } from "../components/dividers";
 
 import { getNotionPageContent } from "../lib/getNotionPageContent";
 import { useBlockRenderer } from "../hooks/useBlockRenderer";
@@ -79,12 +78,6 @@ export default function About({ content }) {
 					<Container maxWidth="md">{jsxContent}</Container>
 				</Box>
 			</Box>
-
-			<WaveDivider4
-				backgroundColor={theme.palette.background.paper}
-				color="#242933"
-			/>
-
 			<Footer />
 		</>
 	);

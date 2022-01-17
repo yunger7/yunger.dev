@@ -17,7 +17,6 @@ import {
 import { Email as MessageIcon, Send as SendIcon } from "@mui/icons-material";
 
 import { Navbar, Header, Footer } from "../components";
-import { WaveDivider4 } from "../components/dividers";
 
 import placeholder3 from "../../public/placeholder3.jpg";
 
@@ -281,10 +280,7 @@ export default function Contact() {
 					</Container>
 				</Box>
 			</Box>
-
-			<WaveDivider4 backgroundColor="#292e39" />
-
-			<Footer />
+			<Footer backgroundColor="#292e39" />
 		</>
 	);
 }
