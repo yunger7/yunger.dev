@@ -9,7 +9,7 @@ import { ArrowForwardIos as ExpandIcon } from "@mui/icons-material";
 
 import { palette } from ".";
 
-export let base = createTheme({
+export let theme = createTheme({
 	palette: {
 		primary: {
 			light: lighten(palette.nord8, 0.1),
@@ -224,4 +224,4 @@ export let base = createTheme({
 	},
 });
 
-base = responsiveFontSizes(base);
+theme = responsiveFontSizes(theme);

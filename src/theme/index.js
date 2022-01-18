@@ -1,3 +1,3 @@
 export * from "./palette";
-export * from "./base";
+export * from "./theme";
 export * from "./dark";
