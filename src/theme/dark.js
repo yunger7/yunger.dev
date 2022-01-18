@@ -1,52 +1,47 @@
-import { createTheme, alpha } from "@mui/material/styles";
-import { palette, base } from ".";
+import { createTheme, alpha, darken, lighten } from "@mui/material/styles";
+import { palette, base as theme } from ".";
 
-export const dark = createTheme(base, {
+export const dark = createTheme(theme, {
 	palette: {
 		mode: "dark",
-		primary: {
-			main: palette.nord8,
-			dark: "#79b8ca",
-			contrastText: palette.nord1,
-		},
-		secondary: {
-			main: palette.nord9,
-		},
-		error: {
-			main: palette.nord11,
-		},
-		warning: {
-			main: palette.nord13,
-		},
-		info: {
-			main: palette.nord9,
-		},
-		success: {
-			main: palette.nord14,
-		},
 		text: {
 			primary: palette.nord6,
-			secondary: palette.nord5,
-			disabled: palette.nord4,
+			secondary: alpha(palette.nord6, 0.7),
+			disabled: alpha(palette.nord6, 0.5),
 		},
 		background: {
-			default: "#242933",
+			default: darken(palette.nord0, 0.2),
 			paper: palette.nord0,
 		},
-		divider: alpha(palette.nord4, 0.25),
+		divider: alpha(palette.nord4, 0.5),
 	},
 	components: {
 		MuiAccordion: {
 			styleOverrides: {
 				root: {
+					border: `1px solid ${alpha(palette.nord4, 0.15)}`,
 					backgroundColor: palette.nord1,
 				},
 			},
 		},
 		MuiAccordionSummary: {
 			styleOverrides: {
+				root: {
+					backgroundColor: palette.nord2,
+					"& .MuiAccordionSummary-content": {
+						marginLeft: theme.spacing(1),
+					},
+				},
 				expandIconWrapper: {
 					color: palette.nord4,
+				},
+			},
+		},
+		MuiAccordionDetails: {
+			styleOverrides: {
+				root: {
+					padding: theme.spacing(2),
+					borderTop: `1px solid ${alpha(palette.nord4, 0.15)}`,
 				},
 			},
 		},
