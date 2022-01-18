@@ -132,22 +132,11 @@ function renderBlock(block) {
 			);
 		case "toggle":
 			return (
-				<Accordion
-					key={id}
-					sx={{
-						mb: 1,
-						boxShadow: "none",
-					}}
-				>
-					<AccordionSummary expandIcon={<ExpandMoreIcon />}>
+				<Accordion key={id} sx={{ mb: 1 }}>
+					<AccordionSummary>
 						<RichText text={value.text} />
 					</AccordionSummary>
-					<AccordionDetails
-						sx={{
-							display: "block",
-							borderTop: theme => `1px solid ${theme.palette.divider}`,
-						}}
-					>
+					<AccordionDetails>
 						{value.children && value.children.map(block => renderBlock(block))}
 					</AccordionDetails>
 				</Accordion>

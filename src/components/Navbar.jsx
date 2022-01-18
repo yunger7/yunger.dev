@@ -39,6 +39,7 @@ export function Navbar({ paths = defaultPaths }) {
 										key={path.name}
 										sx={theme => ({
 											display: "block",
+											color: theme.palette.text.primary,
 											[theme.breakpoints.down("sm")]: {
 												maxWidth: 100,
 											},
@@ -71,6 +72,7 @@ export function Navbar({ paths = defaultPaths }) {
 									key={path.name}
 									sx={theme => ({
 										display: "block",
+										color: theme.palette.text.primary,
 										[theme.breakpoints.down("sm")]: {
 											maxWidth: 100,
 										},
@@ -99,6 +101,7 @@ export function Navbar({ paths = defaultPaths }) {
 							variant="inherit"
 							sx={theme => ({
 								display: "block",
+								color: theme.palette.text.primary,
 								[theme.breakpoints.down("sm")]: {
 									maxWidth: 100,
 								},
