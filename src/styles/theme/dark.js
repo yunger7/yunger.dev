@@ -16,10 +16,19 @@ export const dark = createTheme(theme, {
 		divider: alpha(palette.nord4, 0.5),
 	},
 	components: {
+		MuiLink: {
+			styleOverrides: {
+				root: {
+					"&:hover": {
+						backgroundColor: alpha(palette.nord3, 0.8),
+					},
+				},
+			},
+		},
 		MuiAccordion: {
 			styleOverrides: {
 				root: {
-					border: `1px solid ${alpha(palette.nord4, 0.15)}`,
+					border: `1px solid ${alpha(palette.nord4, 0.1)}`,
 					backgroundColor: palette.nord1,
 				},
 			},
@@ -28,9 +37,6 @@ export const dark = createTheme(theme, {
 			styleOverrides: {
 				root: {
 					backgroundColor: palette.nord2,
-					"& .MuiAccordionSummary-content": {
-						marginLeft: theme.spacing(1),
-					},
 				},
 				expandIconWrapper: {
 					color: palette.nord4,
@@ -40,7 +46,6 @@ export const dark = createTheme(theme, {
 		MuiAccordionDetails: {
 			styleOverrides: {
 				root: {
-					padding: theme.spacing(2),
 					borderTop: `1px solid ${alpha(palette.nord4, 0.15)}`,
 				},
 			},

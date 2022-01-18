@@ -198,14 +198,6 @@ export let theme = createTheme({
 			defaultProps: {
 				underline: "none",
 			},
-			styleOverrides: {
-				root: {
-					transition: "background-color .2s ease-in-out",
-					"&:hover": {
-						backgroundColor: alpha(palette.nord3, 0.75),
-					},
-				},
-			},
 		},
 		MuiAppBar: {
 			styleOverrides: {
@@ -219,6 +211,45 @@ export let theme = createTheme({
 		MuiTooltip: {
 			defaultProps: {
 				arrow: true,
+			},
+		},
+	},
+});
+
+/* Using theme composition to access theme values */
+theme = createTheme(theme, {
+	components: {
+		MuiLink: {
+			styleOverrides: {
+				root: {
+					transition: theme.transitions.create("background-color", {
+						duration: theme.transitions.duration.shorter,
+					}),
+				},
+			},
+		},
+		MuiAccordion: {
+			styleOverrides: {
+				root: {
+					marginBottom: theme.spacing(2),
+					borderRadius: theme.shape.borderRadius,
+				},
+			},
+		},
+		MuiAccordionSummary: {
+			styleOverrides: {
+				root: {
+					"& .MuiAccordionSummary-content": {
+						marginLeft: theme.spacing(1),
+					},
+				},
+			},
+		},
+		MuiAccordionDetails: {
+			styleOverrides: {
+				root: {
+					padding: theme.spacing(2),
+				},
 			},
 		},
 	},
