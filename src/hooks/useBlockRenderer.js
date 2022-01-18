@@ -132,7 +132,7 @@ function renderBlock(block) {
 			);
 		case "toggle":
 			return (
-				<Accordion key={id} sx={{ mb: 1 }}>
+				<Accordion key={id}>
 					<AccordionSummary>
 						<RichText text={value.text} />
 					</AccordionSummary>
