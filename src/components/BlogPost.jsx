@@ -6,7 +6,7 @@ import { alpha } from "@mui/material/styles";
 
 import { RichText } from ".";
 
-import { palette } from "../theme";
+import { palette } from "../styles/theme";
 
 import placeholder1 from "../../public/placeholder1.jpg";
 

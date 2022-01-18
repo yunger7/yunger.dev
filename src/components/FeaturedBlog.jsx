@@ -7,7 +7,7 @@ import { Star as StarIcon } from "@mui/icons-material";
 
 import { RichText } from ".";
 
-import { palette } from "../theme";
+import { palette } from "../styles/theme";
 
 import placeholder3 from "../../public/placeholder3.jpg";
 

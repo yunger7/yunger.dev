@@ -32,7 +32,7 @@ import {
 	WaveDivider,
 } from "../components";
 
-import { palette } from "../theme";
+import { palette } from "../styles/theme";
 import { getBlogPosts } from "../lib/getBlogPosts";
 
 import nordicWallpaper from "../../public/nordic-wallpaper.jpg";

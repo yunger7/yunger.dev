@@ -17,7 +17,7 @@ import {
 } from "../../components";
 
 import { getBlogPosts } from "../../lib/getBlogPosts";
-import { palette } from "../../theme";
+import { palette } from "../../styles/theme";
 
 import nordicWallpaper from "../../../public/nordic-wallpaper.jpg";
 

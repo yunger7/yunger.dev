@@ -14,7 +14,7 @@ import {
 import { ExpandMore as ExpandMoreIcon } from "@mui/icons-material";
 
 import { RichText } from "../components";
-import { palette } from "../theme";
+import { palette } from "../styles/theme";
 
 export function useBlockRenderer(blocks) {
 	const jsxContent = [];

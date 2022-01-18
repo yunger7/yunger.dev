@@ -8,7 +8,7 @@ import { Links } from "./Links";
 import { SocialMedia } from "./SocialMedia";
 import { Divider } from "./Divider";
 
-import { palette } from "../../theme";
+import { palette } from "../../styles/theme";
 
 export default function Footer({ backgroundColor }) {
 	return (

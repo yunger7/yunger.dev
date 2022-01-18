@@ -5,7 +5,7 @@ import { CssBaseline } from "@mui/material";
 import { ThemeProvider, StyledEngineProvider } from "@mui/material/styles";
 
 import { createEmotionCache } from "../lib/createEmotionCache";
-import { dark } from "../theme";
+import { dark } from "../styles/theme";
 
 import "../styles/globals.css";
 
