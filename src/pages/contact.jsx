@@ -13,6 +13,7 @@ import {
 	Slide,
 	CircularProgress,
 	Alert,
+	useTheme,
 } from "@mui/material";
 import { Email as MessageIcon, Send as SendIcon } from "@mui/icons-material";
 
@@ -42,6 +43,8 @@ export default function Contact() {
 		status: "",
 		message: "",
 	});
+
+	const theme = useTheme();
 
 	async function handleSubmit(event) {
 		event.preventDefault();
@@ -143,7 +146,7 @@ export default function Contact() {
 						placeholder="blur"
 					/>
 				}
-				dividerColor="#292e39"
+				dividerColor={theme.palette.background.default}
 			>
 				<MessageIcon sx={{ fontSize: 80 }} />
 				<Typography variant="h3" component="h1">
@@ -155,7 +158,7 @@ export default function Contact() {
 			</Header>
 
 			<Box component="main">
-				<Box sx={{ bgcolor: "#292e39", pt: 5, pb: 10 }}>
+				<Box sx={{ bgcolor: theme.palette.background.default, pt: 5, pb: 10 }}>
 					<Container maxWidth="md">
 						<form noValidate autoComplete="off" onSubmit={handleSubmit}>
 							<Grid container spacing={4}>
@@ -283,7 +286,7 @@ export default function Contact() {
 					</Container>
 				</Box>
 			</Box>
-			<Footer backgroundColor="#292e39" />
+			<Footer backgroundColor={theme.palette.background.default} />
 		</>
 	);
 }

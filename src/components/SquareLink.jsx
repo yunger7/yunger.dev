@@ -30,9 +30,15 @@ export const SquareLink = React.forwardRef((props, ref) => {
 				alignItems: "center",
 				justifyContent: "center",
 				cursor: "pointer",
-				transition: "background-color 200ms ease-in-out",
+				transition: theme =>
+					theme.transitions.create("all", {
+						duration: theme.transitions.duration.short,
+					}),
 				":hover": {
-					bgcolor: alpha(palette.nord3, 0.75),
+					bgcolor: theme =>
+						theme.palette.mode === "light"
+							? theme.palette.background.paper
+							: alpha(palette.nord3, 0.75),
 				},
 			}}
 		>

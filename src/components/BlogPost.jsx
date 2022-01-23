@@ -24,9 +24,15 @@ export const BlogPost = forwardRef((props, ref) => {
 				display: "block",
 				height: 1,
 				cursor: "pointer",
-				transition: "background-color 200ms ease-in-out",
+				transition: theme =>
+					theme.transitions.create("background-color", {
+						duration: theme.transitions.duration.short,
+					}),
 				":hover": {
-					bgcolor: alpha(palette.nord3, 0.75),
+					bgcolor: theme =>
+						theme.palette.mode === "light"
+							? alpha(palette.nord6, 0.05)
+							: alpha(palette.nord3, 0.75),
 				},
 			}}
 		>
@@ -70,7 +76,11 @@ export const BlogPost = forwardRef((props, ref) => {
 							size="small"
 							label={name}
 							key={id}
-							sx={{ mr: 1, bgcolor: color }}
+							sx={{
+								mr: 1,
+								bgcolor: color,
+								color: theme => theme.palette.getContrastText(color),
+							}}
 						/>
 					))}
 				</Box>

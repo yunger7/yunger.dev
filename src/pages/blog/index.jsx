@@ -4,7 +4,14 @@ import Link from "next/link";
 
 import Carousel from "react-material-ui-carousel";
 
-import { Box, Container, Grid, Typography, Divider } from "@mui/material";
+import {
+	Box,
+	Container,
+	Grid,
+	Typography,
+	Divider,
+	useTheme,
+} from "@mui/material";
 import { Description as DescriptionIcon } from "@mui/icons-material";
 
 import {
@@ -36,27 +43,26 @@ const navbarPaths = [
 	},
 ];
 
-const carouselProps = {
-	navButtonsAlwaysInvisible: true,
-	indicatorIconButtonProps: {
-		style: {
-			color: palette.nord1,
-			"&:hover": {
-				backgroundColor: palette.nord1,
-			},
-			"&:active": {
-				backgroundColor: palette.nord1,
-			},
-		},
-	},
-	activeIndicatorIconButtonProps: {
-		style: {
-			color: palette.nord9,
-		},
-	},
-};
-
 export default function Blog({ posts }) {
+	const theme = useTheme();
+
+	const carouselProps = {
+		navButtonsAlwaysInvisible: true,
+		indicatorIconButtonProps: {
+			style: {
+				color: theme.palette.mode === "light" ? palette.nord4 : palette.nord1,
+				"&:active": {
+					backgroundColor: theme.palette.secondary.main,
+				},
+			},
+		},
+		activeIndicatorIconButtonProps: {
+			style: {
+				color: theme.palette.secondary.main,
+			},
+		},
+	};
+
 	return (
 		<>
 			<Head>
@@ -76,7 +82,11 @@ export default function Blog({ posts }) {
 						placeholder="blur"
 					/>
 				}
-				dividerColor="#242933"
+				dividerColor={
+					theme.palette.mode === "light"
+						? "#ffffff"
+						: theme.palette.background.paper
+				}
 			>
 				<DescriptionIcon sx={{ fontSize: 80 }} />
 				<Typography variant="h3" component="h1">
@@ -85,7 +95,15 @@ export default function Blog({ posts }) {
 			</Header>
 
 			<Box component="main">
-				<Box component="section" sx={{ position: "relative", pt: 5, pb: 20 }}>
+				<Box
+					component="section"
+					sx={{
+						position: "relative",
+						pt: 5,
+						pb: 20,
+						bgcolor: theme => theme.palette.background.paper,
+					}}
+				>
 					<ScrollRedirect href="featured" />
 					<Container maxWidth="lg">
 						<Box sx={{ mb: 2 }}>
@@ -109,11 +127,18 @@ export default function Blog({ posts }) {
 						height={120}
 						width={150}
 						position="bottom"
-						color="#292e39"
+						color={theme.palette.background.default}
 					/>
 				</Box>
 
-				<Box component="section" sx={{ bgcolor: "#292e39", pt: 2.5, pb: 10 }}>
+				<Box
+					component="section"
+					sx={{
+						bgcolor: theme => theme.palette.background.default,
+						pt: 2.5,
+						pb: 10,
+					}}
+				>
 					<ScrollRedirect href="latest" />
 					<Container maxWidth="lg">
 						<Box sx={{ mb: 2 }}>
@@ -134,7 +159,7 @@ export default function Blog({ posts }) {
 					</Container>
 				</Box>
 			</Box>
-			<Footer backgroundColor="#292e39" />
+			<Footer backgroundColor={theme.palette.background.default} />
 		</>
 	);
 }

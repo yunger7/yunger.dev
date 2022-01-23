@@ -26,6 +26,7 @@ export default function WorkInProgress() {
 					height: "100vh",
 					overflow: "hidden",
 					background: alpha(palette.nord0, 0.6),
+					color: palette.nord6,
 					display: "flex",
 					flexDirection: "column",
 					alignItems: "center",

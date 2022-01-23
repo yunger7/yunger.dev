@@ -1,4 +1,4 @@
-import { Box, Container, Typography, Button } from "@mui/material";
+import { Box, Container, Typography, Button, lighten } from "@mui/material";
 import {
 	LocalCafe as LocalCafeIcon,
 	Favorite as FavoriteIcon,
@@ -19,7 +19,10 @@ export default function Footer({ backgroundColor }) {
 					minHeight: 300,
 					pt: 2.5,
 					pb: 5,
-					bgcolor: palette.nord1,
+					bgcolor: theme =>
+						theme.palette.mode === "light"
+							? lighten(palette.nord6, 0.8)
+							: palette.nord1,
 				}}
 			>
 				<Container
@@ -53,7 +56,7 @@ export default function Footer({ backgroundColor }) {
 							</Typography>
 							<SocialMedia />
 						</div>
-						<Box sx={{ color: palette.nord4 }}>
+						<Box>
 							<Typography variant="body2">
 								&copy; 2021 - {new Date().getFullYear()} yunger
 							</Typography>

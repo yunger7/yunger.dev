@@ -1,6 +1,7 @@
-import { Box } from "@mui/material";
+import { Box, useTheme, alpha } from "@mui/material";
 
 import { WaveDivider } from ".";
+import { palette } from "../styles/theme";
 
 function ScrollRedirect({ href }) {
 	return <Box id={href} sx={{ position: "relative", bottom: 100 }} />;
@@ -8,6 +9,8 @@ function ScrollRedirect({ href }) {
 
 export function Header(props) {
 	const { backgroundImage, dividerColor, children } = props;
+
+	const theme = useTheme();
 
 	return (
 		<Box
@@ -46,7 +49,8 @@ export function Header(props) {
 					p: 2.5,
 					textAlign: "center",
 
-					backgroundColor: "#eceff41a",
+					backgroundColor: alpha(palette.nord6, 0.1),
+					color: palette.nord6,
 					boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.37)",
 					backdropFilter: "blur(4px)",
 					borderRadius: 2.5,
@@ -65,7 +69,7 @@ export function Header(props) {
 				position="bottom"
 				height={75}
 				width={150}
-				color={dividerColor ? dividerColor : "#292e39"}
+				color={dividerColor ? dividerColor : theme.palette.background.default}
 			/>
 		</Box>
 	);

@@ -1,4 +1,5 @@
-import { styled } from "@mui/material/styles";
+import { styled, lighten } from "@mui/material/styles";
+import { palette } from "../../styles/theme";
 
 const Svg = styled("svg", {
 	shouldForwardProp: prop => prop !== "backgroundColor",
@@ -21,13 +22,16 @@ const Svg = styled("svg", {
 	},
 
 	"& .layer-1": {
-		fill: "#373d4c",
+		fill:
+			theme.palette.mode === "light" ? lighten(palette.nord6, 0.4) : "#373d4c",
 	},
 	"& .layer-2": {
-		fill: "#39404f",
+		fill:
+			theme.palette.mode === "light" ? lighten(palette.nord6, 0.6) : "#39404f",
 	},
 	"& .layer-3": {
-		fill: "#3b4252",
+		fill:
+			theme.palette.mode === "light" ? lighten(palette.nord6, 0.8) : "#3b4252",
 	},
 }));
 

@@ -29,9 +29,15 @@ export const FeaturedBlog = forwardRef((props, ref) => {
 				alignItems: { xs: "stretch", md: "center" },
 				gap: theme => theme.spacing(2.5),
 				cursor: "pointer",
-				transition: "background-color 200ms ease-in-out",
+				transition: theme =>
+					theme.transitions.create("background-color", {
+						duration: theme.transitions.duration.short,
+					}),
 				":hover": {
-					bgcolor: alpha(palette.nord3, 0.75),
+					bgcolor: theme =>
+						theme.palette.mode === "light"
+							? alpha(palette.nord5, 0.75)
+							: alpha(palette.nord3, 0.75),
 				},
 				"& *": {
 					cursor: "pointer",
@@ -104,7 +110,11 @@ export const FeaturedBlog = forwardRef((props, ref) => {
 							size="small"
 							label={name}
 							key={id}
-							sx={{ mr: 1, bgcolor: color }}
+							sx={{
+								mr: 1,
+								bgcolor: color,
+								color: theme => theme.palette.getContrastText(color),
+							}}
 						/>
 					))}
 				</Box>

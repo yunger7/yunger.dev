@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Grid, Typography, Box } from "@mui/material";
+import { Grid, Typography, Box, alpha } from "@mui/material";
 import {
 	Home as HomeIcon,
 	Info as InfoIcon,
@@ -122,9 +122,13 @@ export function Links() {
 					fontFamily: "Rubik",
 					fontSize: 15,
 					mb: 1,
-					transition: "all .2s",
+					transition: theme =>
+						theme.transitions.create("all", {
+							duration: theme.transitions.duration.shorter,
+						}),
+					color: theme => theme.palette.text.secondary,
 					":hover": {
-						color: palette.nord5,
+						color: theme => theme.palette.text.primary,
 					},
 				}}
 			>
@@ -145,12 +149,16 @@ export function Links() {
 					xs={12}
 					key={index}
 					sx={{
-						color: palette.nord4,
 						textAlign: { xs: "center", sm: "left" },
 						mb: { xs: 2.5, sm: 0 },
 					}}
 				>
-					<Box sx={{ mb: 2, borderBottom: `1px solid ${palette.nord3}` }}>
+					<Box
+						sx={{
+							mb: 2,
+							borderBottom: theme => `1px solid ${theme.palette.divider}`,
+						}}
+					>
 						{title.href ? (
 							<Link href={title.href}>
 								<a>

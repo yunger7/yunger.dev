@@ -11,6 +11,8 @@ import {
 	Typography,
 	Divider,
 	Link as MuiLink,
+	useTheme,
+	lighten,
 } from "@mui/material";
 import {
 	LocalCafe as CafeIcon,
@@ -42,27 +44,26 @@ function ScrollRedirect({ href }) {
 	return <Box id={href} sx={{ position: "relative", bottom: 100 }} />;
 }
 
-const carouselProps = {
-	navButtonsAlwaysInvisible: true,
-	indicatorIconButtonProps: {
-		style: {
-			color: palette.nord1,
-			"&:hover": {
-				backgroundColor: palette.nord1,
-			},
-			"&:active": {
-				backgroundColor: palette.nord1,
-			},
-		},
-	},
-	activeIndicatorIconButtonProps: {
-		style: {
-			color: palette.nord9,
-		},
-	},
-};
-
 export default function Home({ posts }) {
+	const theme = useTheme();
+
+	const carouselProps = {
+		navButtonsAlwaysInvisible: true,
+		indicatorIconButtonProps: {
+			style: {
+				color: theme.palette.mode === "light" ? palette.nord4 : palette.nord1,
+				"&:active": {
+					backgroundColor: theme.palette.secondary.main,
+				},
+			},
+		},
+		activeIndicatorIconButtonProps: {
+			style: {
+				color: theme.palette.secondary.main,
+			},
+		},
+	};
+
 	return (
 		<>
 			<Head>
@@ -81,6 +82,11 @@ export default function Home({ posts }) {
 						placeholder="blur"
 						objectFit="cover"
 					/>
+				}
+				dividerColor={
+					theme.palette.mode === "light"
+						? lighten(palette.nord6, 0.8)
+						: theme.palette.background.paper
 				}
 			>
 				<Box
@@ -108,7 +114,9 @@ export default function Home({ posts }) {
 					taught myself how to code to turn my dumb ideas into reality, and
 					I&apos;ve created this place to share them with the world. Check out{" "}
 					<Link passHref href="/about">
-						<MuiLink>my bio</MuiLink>
+						<MuiLink sx={{ "&:hover": { bgcolor: "transparent" } }}>
+							my bio
+						</MuiLink>
 					</Link>{" "}
 					for more information.
 				</Typography>
@@ -124,7 +132,10 @@ export default function Home({ posts }) {
 							md: 2.5,
 						},
 						pb: 20,
-						bgcolor: "#292e39",
+						bgcolor: theme =>
+							theme.palette.mode === "light"
+								? lighten(palette.nord6, 0.8)
+								: theme.palette.background.paper,
 					}}
 				>
 					<ScrollRedirect href="quick-access" />
@@ -165,7 +176,7 @@ export default function Home({ posts }) {
 					<WaveDivider
 						invert
 						position="bottom"
-						color="#242933"
+						color={theme.palette.background.default}
 						height={100}
 						width={200}
 					/>
@@ -207,12 +218,18 @@ export default function Home({ posts }) {
 					component="section"
 					sx={{
 						position: "relative",
-						bgcolor: "#292e39",
+						bgcolor:
+							theme.palette.mode === "light" ? palette.nord5 : palette.nord0,
 						pb: 10,
 						pt: 20,
 					}}
 				>
-					<WaveDivider invert height={110} width={120} color="#242933" />
+					<WaveDivider
+						invert
+						height={110}
+						width={120}
+						color={theme.palette.background.default}
+					/>
 					<ScrollRedirect href="more" />
 					<Container maxWidth="lg">
 						<Box sx={{ mb: 2 }}>
@@ -241,7 +258,11 @@ export default function Home({ posts }) {
 					</Container>
 				</Box>
 			</main>
-			<Footer backgroundColor="#292e39" />
+			<Footer
+				backgroundColor={
+					theme.palette.mode === "light" ? palette.nord5 : palette.nord0
+				}
+			/>
 		</>
 	);
 }

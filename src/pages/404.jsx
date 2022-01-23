@@ -24,6 +24,7 @@ export default function NotFound() {
 					height: "100vh",
 					overflow: "hidden",
 					bgcolor: alpha(palette.nord0, 0.6),
+					color: palette.nord6,
 					display: "flex",
 					flexDirection: "column",
 					alignItems: "center",

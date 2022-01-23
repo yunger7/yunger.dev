@@ -10,11 +10,10 @@ import {
 	Accordion,
 	AccordionSummary,
 	AccordionDetails,
+	alpha,
 } from "@mui/material";
-import { ExpandMore as ExpandMoreIcon } from "@mui/icons-material";
 
 import { RichText } from "../components";
-import { palette } from "../styles/theme";
 
 export function useBlockRenderer(blocks) {
 	const jsxContent = [];
@@ -66,8 +65,8 @@ function renderBlock(block) {
 
 			return (
 				<ImageZoom
-					overlayBgColorStart={`${palette.nord0}ee`}
-					overlayBgColorEnd={`${palette.nord0}ee`}
+					overlayBgColorStart="rgba(0, 0, 0, 0.5)"
+					overlayBgColorEnd="rgba(0, 0, 0, 0.5)"
 					wrapStyle={{ width: "100%" }}
 					key={id}
 				>

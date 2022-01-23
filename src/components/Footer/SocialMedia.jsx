@@ -33,13 +33,18 @@ export function SocialMedia() {
 				},
 
 				"& svg": {
-					fill: palette.nord4,
-					transition: "all .2s",
+					fill: theme =>
+						theme.palette.mode === "light" ? palette.nord3 : palette.nord4,
+					transition: theme =>
+						theme.transitions.create("all", {
+							duration: theme.transitions.duration.shorter,
+						}),
 					width: { xs: 24, md: 22 },
 					height: { xs: 24, md: 22 },
 
 					":hover": {
-						fill: "#ffffff",
+						fill: theme =>
+							theme.palette.mode === "light" ? "#000000" : "#ffffff",
 					},
 				},
 			}}

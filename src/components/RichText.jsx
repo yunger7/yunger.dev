@@ -35,7 +35,8 @@ export function RichText({ text: richText }) {
 							borderRadius: 1,
 							py: 0.05,
 							px: 0.75,
-							bgcolor: palette.nord1,
+							bgcolor: theme =>
+								theme.palette.mode === "light" ? palette.nord6 : palette.nord1,
 							color: "primary.main",
 						},
 						italic && {
