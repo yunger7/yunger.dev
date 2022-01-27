@@ -56,8 +56,16 @@ const footerLinks = [
 		},
 		links: [
 			{
+				name: "Progretion",
+				href: "https://progretion.com/",
+			},
+			{
 				name: "Animelist",
 				href: "/animelist",
+			},
+			{
+				name: "Utils",
+				href: "/utils",
 			},
 		],
 	},
@@ -71,6 +79,10 @@ const footerLinks = [
 			{
 				name: "About me",
 				href: "/about",
+			},
+			{
+				name: "Work website",
+				href: "https://luisgalete.com.br/",
 			},
 		],
 	},
