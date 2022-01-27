@@ -16,6 +16,10 @@ module.exports = {
 				source: "/animelist",
 				destination: "/work-in-progress",
 			},
+			{
+				source: "/utils",
+				destination: "/work-in-progress",
+			},
 		];
 	},
 	async redirects() {
