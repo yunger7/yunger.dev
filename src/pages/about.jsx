@@ -61,8 +61,7 @@ export default function About({ content }) {
 					About me
 				</Typography>
 				<Typography variant="subtitle1">
-					A little bit of info about <strong>yunger</strong>, the creator of
-					this website.
+					A little bit of info about the creator of this website.
 				</Typography>
 			</Header>
 
