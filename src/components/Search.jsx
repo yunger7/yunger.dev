@@ -114,7 +114,7 @@ function SearchModal(props) {
 				"& .MuiDialog-scrollPaper": {
 					alignItems: "flex-start",
 				},
-				"& .MuiPaper-root": {
+				"& .MuiDialog-paper": {
 					mt: "15vh",
 				},
 			}}
@@ -125,12 +125,17 @@ function SearchModal(props) {
 				id="search"
 				variant="outlined"
 				placeholder="Search"
+				autoComplete="off"
 				value={query}
 				onChange={e => setQuery(e.target.value)}
 				InputProps={{
 					startAdornment: (
 						<InputAdornment position="start">
-							{loading ? <CircularProgress size={24} /> : <SearchIcon />}
+							{loading ? (
+								<CircularProgress size={24} />
+							) : (
+								<SearchIcon sx={{ color: "text.primary" }} />
+							)}
 						</InputAdornment>
 					),
 				}}
