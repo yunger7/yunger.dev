@@ -106,20 +106,22 @@ export default function Blog({ posts }) {
 				>
 					<ScrollRedirect href="featured" />
 					<Container maxWidth="lg">
-						<Box sx={{ mb: 2 }}>
-							<Typography variant="h4" component="h2">
-								Featured
-							</Typography>
-							<Divider />
-						</Box>
 						{!!posts.featured.length && (
-							<Carousel {...carouselProps}>
-								{posts.featured.map(post => (
-									<Link passHref href={`/blog/${post.slug}`} key={post.id}>
-										<FeaturedBlog post={post} />
-									</Link>
-								))}
-							</Carousel>
+							<>
+								<Box sx={{ mb: 2 }}>
+									<Typography variant="h4" component="h2">
+										Featured
+									</Typography>
+									<Divider />
+								</Box>
+								<Carousel {...carouselProps}>
+									{posts.featured.map(post => (
+										<Link passHref href={`/blog/${post.slug}`} key={post.id}>
+											<FeaturedBlog post={post} />
+										</Link>
+									))}
+								</Carousel>
+							</>
 						)}
 					</Container>
 					<WaveDivider
