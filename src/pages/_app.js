@@ -1,8 +1,10 @@
+import Head from "next/head";
+
 import { CacheProvider } from "@emotion/react";
 import PropTypes from "prop-types";
 
 import { CssBaseline } from "@mui/material";
-import { ThemeProvider, StyledEngineProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 
 import { createEmotionCache } from "../lib/createEmotionCache";
 import { dark, light } from "../styles/theme";
@@ -16,12 +18,13 @@ export default function App(props) {
 
 	return (
 		<CacheProvider value={emotionCache}>
-			<StyledEngineProvider injectFirst>
-				<ThemeProvider theme={dark}>
-					<CssBaseline />
-					<Component {...pageProps} />
-				</ThemeProvider>
-			</StyledEngineProvider>
+			<Head>
+				<meta name="viewport" content="initial-scale=1, width=device-width" />
+			</Head>
+			<ThemeProvider theme={dark}>
+				<CssBaseline />
+				<Component {...pageProps} />
+			</ThemeProvider>
 		</CacheProvider>
 	);
 }
