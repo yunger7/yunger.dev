@@ -28,5 +28,8 @@ $ npm run dev
 ```
 Open http://localhost:3000 on your browser to see the result
 
+# 📄 License
+Licensed under Apache-2.0 License. See `LICENSE` for more details.
+
 # 💬 Contact
 You can send me a [direct message](https://yunger.dev/contact) or contact me at **contact@yunger.dev**.
