@@ -1,4 +1,3 @@
-<!-- Project Logo -->
 <p align="center">
   <a href="https://yunger.dev/">
     <img src="/public/logo.png" alt="Logo" width="100" height="100" />
@@ -7,11 +6,9 @@
   <h4 align="center">A cozy place to share knowledge, host projects and do networking.</h4>
 </p>
 
-<!-- About -->
 # 📝 About
 This is my personal website, a cozy place to host my projects, do networking and write about things that I'm interested about. It started as a coding challenge and gradually evolved into something more. I still have lots of ideas in mind and there is still plenty of work to do, but I'll get there eventually.
 
-<!-- Techs -->
 # 💻 Technologies
 - [Next.js](https://nextjs.org/)
 - [MUI](https://mui.com/)
