@@ -3,7 +3,7 @@
     <img src="/public/logo.png" alt="Logo" width="100" height="100" />
   </a>
   <h1 align="center">yunger.dev</h1>
-  <h4 align="center">A cozy place to share knowledge, host projects and do networking.</h4>
+  <h4 align="center">My workshop. A cozy place to host projects, share knowledge and do networking</h4>
 </p>
 
 # 📝 About
