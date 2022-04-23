@@ -10,8 +10,6 @@ import { createEmotionCache } from "../lib/createEmotionCache";
 import { dark, light } from "../styles/theme";
 
 import "../styles/globals.css";
-import "@fontsource/rubik";
-import "@fontsource/inter";
 
 const clientSideEmotionCache = createEmotionCache();
 
