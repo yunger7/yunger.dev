@@ -142,6 +142,15 @@ export let theme = createTheme({
 				disableElevation: true,
 			},
 		},
+		MuiTextField: {
+			styleOverrides: {
+				root: {
+					"& .MuiInputBase-root": {
+						backgroundColor: palette.nord0,
+					},
+				},
+			},
+		},
 		MuiButtonBase: {
 			defaultProps: {
 				disableRipple: true,
