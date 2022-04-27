@@ -5,11 +5,10 @@ import { Chip, Typography, Box } from "@mui/material";
 import { alpha } from "@mui/material/styles";
 import { Star as StarIcon } from "@mui/icons-material";
 
-import { RichText } from ".";
+import { palette } from "@styles/theme";
+import { RichText } from "./RichText";
 
-import { palette } from "../styles/theme";
-
-import placeholder3 from "../../public/placeholder3.jpg";
+import placeholder3 from "public/placeholder3.jpg";
 
 export const FeaturedBlog = forwardRef((props, ref) => {
 	const { post, onClick, href } = props;

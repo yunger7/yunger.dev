@@ -4,8 +4,8 @@ import Link from "next/link";
 
 import { Box, Link as MuiLink } from "@mui/material";
 
-import { getNordColor } from "../utils";
-import { palette } from "../styles/theme";
+import { getNordColor } from "@utils";
+import { palette } from "@styles/theme";
 
 export function RichText({ text: richText }) {
 	if (!richText) {

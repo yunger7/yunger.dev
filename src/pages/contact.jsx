@@ -20,9 +20,9 @@ import {
 import { LoadingButton } from "@mui/lab";
 import { Email as MessageIcon, Send as SendIcon } from "@mui/icons-material";
 
-import { Navbar, Header, Footer } from "../components";
+import { Navbar, Header, Footer } from "@components";
 
-import placeholder3 from "../../public/placeholder3.jpg";
+import placeholder3 from "public/placeholder3.jpg";
 
 const navbarPaths = [
 	{

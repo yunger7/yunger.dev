@@ -6,17 +6,16 @@ import readingTime from "reading-time";
 import { Box, Stack, Container, Typography, Chip } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
-import { Navbar, Header, RichText, Footer } from "../../components";
-
+import { useBlockRenderer } from "@hooks/useBlockRenderer";
+import { getNotionPageContent } from "@lib/getNotionPageContent";
+import { getPostCoverImage } from "@lib/getPostCoverImage";
+import { notion } from "@services/notion";
 import {
 	getNordColor,
 	getPlainTextFromBlocks,
 	getPlainTextFromRichText,
-} from "../../utils";
-import { useBlockRenderer } from "../../hooks/useBlockRenderer";
-import { getNotionPageContent } from "../../lib/getNotionPageContent";
-import { getPostCoverImage } from "../../lib/getPostCoverImage";
-import { notion } from "../../services/notion";
+} from "@utils";
+import { Navbar, Header, RichText, Footer } from "@components";
 
 import placeholder3 from "../../../public/placeholder3.jpg";
 

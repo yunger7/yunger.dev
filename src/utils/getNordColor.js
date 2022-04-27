@@ -1,4 +1,4 @@
-import { palette } from "../styles/theme";
+import { palette } from "@styles/theme";
 
 export function getNordColor(color) {
 	let nordColor;

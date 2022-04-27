@@ -1,5 +1,5 @@
-import { notion } from "../../../services/notion";
-import { getNotionAPIError } from "../../../lib/getNotionAPIError";
+import { notion } from "@services/notion";
+import { getNotionAPIError } from "@lib/getNotionAPIError";
 
 export default async function handler(request, response) {
 	console.log(`[${request.method}]: api/v1/contact`);

@@ -18,7 +18,7 @@ import {
 	Language as WebpageIcon,
 } from "@mui/icons-material";
 
-import { sleep } from "../utils";
+import { sleep } from "@utils";
 
 export function Search() {
 	const [dialogOpen, setDialogOpen] = useState(false);

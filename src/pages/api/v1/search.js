@@ -1,6 +1,6 @@
-import { getNotionAPIError } from "../../../lib/getNotionAPIError";
-import { notion } from "../../../services/notion";
-import { getPlainTextFromRichText } from "../../../utils/getPlainText";
+import { getNotionAPIError } from "@lib/getNotionAPIError";
+import { notion } from "@services/notion";
+import { getPlainTextFromRichText } from "@utils/getPlainText";
 
 const PAGES_DATABASE_ID = process.env.NOTION_PAGES_DATABASE_ID;
 const BLOG_DATABASE_ID = process.env.NOTION_BLOG_DATABASE_ID;

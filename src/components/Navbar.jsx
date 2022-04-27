@@ -8,7 +8,7 @@ import {
 	Typography,
 } from "@mui/material";
 
-import { Search } from ".";
+import { Search } from "./Search";
 
 const defaultPaths = [
 	{

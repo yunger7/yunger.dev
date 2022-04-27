@@ -24,6 +24,8 @@ import {
 	ContactMail as ContactMailIcon,
 } from "@mui/icons-material";
 
+import { getBlogPosts } from "@lib/getBlogPosts";
+import { palette } from "@styles/theme";
 import {
 	Navbar,
 	SquareLink,
@@ -32,13 +34,10 @@ import {
 	Footer,
 	Header,
 	WaveDivider,
-} from "../components";
+} from "@components";
 
-import { palette } from "../styles/theme";
-import { getBlogPosts } from "../lib/getBlogPosts";
-
-import nordicWallpaper from "../../public/nordic-wallpaper.jpg";
-import profilePicture from "../../public/profile-picture.jpg";
+import nordicWallpaper from "public/nordic-wallpaper.jpg";
+import profilePicture from "public/profile-picture.jpg";
 
 function ScrollRedirect({ href }) {
 	return <Box id={href} sx={{ position: "relative", bottom: 100 }} />;

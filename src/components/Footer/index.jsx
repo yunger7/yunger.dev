@@ -4,11 +4,10 @@ import {
 	Favorite as FavoriteIcon,
 } from "@mui/icons-material";
 
+import { palette } from "@styles/theme";
 import { Links } from "./Links";
 import { SocialMedia } from "./SocialMedia";
 import { Divider } from "./Divider";
-
-import { palette } from "../../styles/theme";
 
 export default function Footer({ backgroundColor }) {
 	return (

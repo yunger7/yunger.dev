@@ -4,13 +4,12 @@ import Image from "next/image";
 import { Box, Container, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
-import { Navbar, Header, Footer } from "../components";
+import { getNotionPageContent } from "@lib/getNotionPageContent";
+import { useBlockRenderer } from "@hooks/useBlockRenderer";
+import { Navbar, Header, Footer } from "@components";
 
-import { getNotionPageContent } from "../lib/getNotionPageContent";
-import { useBlockRenderer } from "../hooks/useBlockRenderer";
-
-import nordicWallpaper from "../../public/nordic-wallpaper.jpg";
-import profilePicture from "../../public/profile-picture.jpg";
+import nordicWallpaper from "public/nordic-wallpaper.jpg";
+import profilePicture from "public/profile-picture.jpg";
 
 const navbarPaths = [
 	{

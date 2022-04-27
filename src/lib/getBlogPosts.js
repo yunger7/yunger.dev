@@ -1,6 +1,6 @@
-import { notion } from "../services/notion";
+import { notion } from "@services/notion";
 
-import { getNordColor } from "../utils/getNordColor";
+import { getNordColor } from "@utils/getNordColor";
 import { getPostCoverImage } from "./getPostCoverImage";
 
 export async function getBlogPosts() {

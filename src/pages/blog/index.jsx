@@ -14,6 +14,8 @@ import {
 } from "@mui/material";
 import { Description as DescriptionIcon } from "@mui/icons-material";
 
+import { getBlogPosts } from "@lib/getBlogPosts";
+import { palette } from "@styles/theme";
 import {
 	Navbar,
 	Header,
@@ -21,12 +23,9 @@ import {
 	BlogPost,
 	Footer,
 	WaveDivider,
-} from "../../components";
+} from "@components";
 
-import { getBlogPosts } from "../../lib/getBlogPosts";
-import { palette } from "../../styles/theme";
-
-import nordicWallpaper from "../../../public/nordic-wallpaper.jpg";
+import nordicWallpaper from "public/nordic-wallpaper.jpg";
 
 function ScrollRedirect({ href }) {
 	return <Box id={href} sx={{ position: "relative", bottom: 100 }} />;

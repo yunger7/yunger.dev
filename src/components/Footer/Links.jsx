@@ -7,7 +7,7 @@ import {
 	Settings as SettingsIcon,
 } from "@mui/icons-material";
 
-import { palette } from "../../styles/theme";
+import { palette } from "@styles/theme";
 
 const footerLinks = [
 	{

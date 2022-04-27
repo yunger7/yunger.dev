@@ -13,7 +13,7 @@ import {
 	alpha,
 } from "@mui/material";
 
-import { RichText } from "../components";
+import { RichText } from "@components";
 
 export function useBlockRenderer(blocks) {
 	const jsxContent = [];

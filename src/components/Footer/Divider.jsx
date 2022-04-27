@@ -1,5 +1,5 @@
 import { styled, lighten } from "@mui/material/styles";
-import { palette } from "../../styles/theme";
+import { palette } from "@styles/theme";
 
 const Svg = styled("svg", {
 	shouldForwardProp: prop => prop !== "backgroundColor",
