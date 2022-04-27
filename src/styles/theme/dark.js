@@ -25,6 +25,15 @@ export const dark = createTheme(theme, {
 				},
 			},
 		},
+		MuiTextField: {
+			styleOverrides: {
+				root: {
+					"& .MuiInputBase-root": {
+						backgroundColor: palette.nord0,
+					},
+				},
+			},
+		},
 		MuiAccordion: {
 			styleOverrides: {
 				root: {
