@@ -52,7 +52,7 @@ function SearchModal(props) {
 	const [loading, setLoading] = useState(false);
 
 	const getResults = async query => {
-		const responseRaw = await fetch("/api/search", {
+		const responseRaw = await fetch("/api/v1/search", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -62,8 +62,8 @@ function SearchModal(props) {
 			}),
 		});
 
-		const data = await responseRaw.json();
-		return data;
+		const { data } = await responseRaw.json();
+		return data || [];
 	};
 
 	useEffect(() => {
