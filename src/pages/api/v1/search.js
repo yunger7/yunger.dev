@@ -21,7 +21,7 @@ export default async function handler(request, response) {
 			status: 200,
 		};
 
-		console.log({ ...apiResponse, data: formattedData });
+		console.log(apiResponse);
 
 		return response
 			.status(apiResponse.status)
