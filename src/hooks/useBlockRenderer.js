@@ -10,7 +10,6 @@ import {
 	Accordion,
 	AccordionSummary,
 	AccordionDetails,
-	alpha,
 } from "@mui/material";
 
 import { RichText } from "@components";
@@ -38,19 +37,19 @@ function renderBlock(block) {
 			);
 		case "heading_1":
 			return (
-				<Typography variant="h3" component="h2" key={id}>
+				<Typography variant="h3" component="h2" key={id} sx={{ mt: 5 }}>
 					<RichText text={value.text} />
 				</Typography>
 			);
 		case "heading_2":
 			return (
-				<Typography variant="h4" component="h3" key={id}>
+				<Typography variant="h4" component="h3" key={id} sx={{ mt: 4 }}>
 					<RichText text={value.text} />
 				</Typography>
 			);
 		case "heading_3":
 			return (
-				<Typography variant="h5" component="h4" key={id}>
+				<Typography variant="h5" component="h4" key={id} sx={{ mt: 3 }}>
 					<RichText text={value.text} />
 				</Typography>
 			);
@@ -94,7 +93,7 @@ function renderBlock(block) {
 						mx: 0,
 					}}
 				>
-					<Box component="span" sx={{ mr: 1 }}>
+					<Box component="span" sx={{ mr: 1, ml: 0.5 }}>
 						•
 					</Box>
 					<Box component="span">
@@ -104,7 +103,7 @@ function renderBlock(block) {
 			);
 		case "to_do":
 			return (
-				<div key={id}>
+				<Box key={id} sx={{ my: 0.5, mx: 0 }}>
 					<FormControlLabel
 						control={
 							<Checkbox
@@ -127,7 +126,7 @@ function renderBlock(block) {
 							},
 						}}
 					/>
-				</div>
+				</Box>
 			);
 		case "toggle":
 			return (
