@@ -77,7 +77,7 @@ const footerLinks = [
 		},
 		links: [
 			{
-				name: "About me",
+				name: "About",
 				href: "/about",
 			},
 			{

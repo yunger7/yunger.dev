@@ -238,7 +238,7 @@ export default function Home({ papers }) {
 						<Grid container justifyContent="space-between" spacing={4}>
 							<Grid item sm={4} xs={12} sx={{ width: 200, height: 200 }}>
 								<Link passHref href="/about">
-									<SquareLink icon={AboutIcon}>About me</SquareLink>
+									<SquareLink icon={AboutIcon}>About</SquareLink>
 								</Link>
 							</Grid>
 							<Grid item sm={4} xs={12} sx={{ width: 200, height: 200 }}>
