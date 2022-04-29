@@ -18,7 +18,7 @@ import {
 	LocalCafe as CafeIcon,
 	Construction as ToolsIcon,
 	Description as DescriptionIcon,
-	KeyboardArrowRight as KeyboardArrowRightIcon,
+	Settings as ProjectsIcon,
 	Info as InfoIcon,
 	Book as BookIcon,
 	ContactMail as ContactMailIcon,
@@ -165,9 +165,7 @@ export default function Home({ posts }) {
 							</Grid>
 							<Grid item md={3} sm={6} xs={12} sx={{ width: 200, height: 200 }}>
 								<Link passHref href="/projects">
-									<SquareLink icon={KeyboardArrowRightIcon}>
-										All projects
-									</SquareLink>
+									<SquareLink icon={ProjectsIcon}>Projects</SquareLink>
 								</Link>
 							</Grid>
 						</Grid>
