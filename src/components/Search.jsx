@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import {
 	Search as SearchIcon,
-	Description as PostIcon,
+	HistoryEdu as PaperIcon,
 	Language as WebpageIcon,
 } from "@mui/icons-material";
 
@@ -150,7 +150,9 @@ function SearchModal(props) {
 										{result.pageType === "webpage" && (
 											<WebpageIcon sx={{ mr: 1 }} />
 										)}
-										{result.pageType === "post" && <PostIcon sx={{ mr: 1 }} />}
+										{result.pageType === "paper" && (
+											<PaperIcon sx={{ mr: 1 }} />
+										)}
 										<Typography noWrap variant="inherit">
 											{result.title}
 										</Typography>

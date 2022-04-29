@@ -1,6 +1,6 @@
 import { getPlaiceholder } from "plaiceholder";
 
-export async function getPostCoverImage(page) {
+export async function getPaperCoverImage(page) {
 	const image = page.cover;
 
 	if (image && image.type === "external") {

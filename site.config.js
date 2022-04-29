@@ -1,3 +1,1 @@
-export const allowedPostImageDomains = [
-  "i.imgur.com",
-];
+export const allowedImageDomains = ["i.imgur.com"];

@@ -17,20 +17,20 @@ import {
 import {
 	LocalCafe as CoffeeIcon,
 	Construction as ToolsIcon,
-	Description as DescriptionIcon,
+	HistoryEdu as PaperIcon,
 	Settings as ProjectsIcon,
 	Info as AboutIcon,
 	Book as NotesIcon,
 	ContactMail as ContactIcon,
 } from "@mui/icons-material";
 
-import { getBlogPosts } from "@lib/getBlogPosts";
+import { getPapers } from "@lib/getPapers";
 import { palette } from "@styles/theme";
 import {
 	Navbar,
 	SquareLink,
-	FeaturedBlog,
-	BlogPost,
+	FeaturedPaper,
+	PaperCard,
 	Footer,
 	Header,
 	WaveDivider,
@@ -43,7 +43,7 @@ function ScrollRedirect({ href }) {
 	return <Box id={href} sx={{ position: "relative", bottom: 100 }} />;
 }
 
-export default function Home({ posts }) {
+export default function Home({ papers }) {
 	const theme = useTheme();
 
 	const carouselProps = {
@@ -154,8 +154,8 @@ export default function Home({ posts }) {
 								</Link>
 							</Grid>
 							<Grid item md={3} sm={6} xs={12} sx={{ width: 200, height: 200 }}>
-								<Link passHref href="/blog">
-									<SquareLink icon={DescriptionIcon}>Blog</SquareLink>
+								<Link passHref href="/papers">
+									<SquareLink icon={PaperIcon}>Papers</SquareLink>
 								</Link>
 							</Grid>
 							<Grid item md={3} sm={6} xs={12} sx={{ width: 200, height: 200 }}>
@@ -180,29 +180,29 @@ export default function Home({ posts }) {
 				</Box>
 
 				<Box component="section" sx={{ pb: 10, pt: { xs: 5, md: 0 } }}>
-					<ScrollRedirect href="posts" />
+					<ScrollRedirect href="papers" />
 					<Container maxWidth="lg">
 						<Box sx={{ mb: 2 }}>
 							<Typography variant="h4" component="h2">
-								Blog posts
+								Papers
 							</Typography>
 							<Divider />
 						</Box>
-						{!!posts.featured.length && (
+						{!!papers.featured.length && (
 							<Carousel {...carouselProps}>
-								{posts.featured.map(post => (
-									<Link passHref href={`/blog/${post.slug}`} key={post.id}>
-										<FeaturedBlog post={post} />
+								{papers.featured.map(paper => (
+									<Link passHref href={`/papers/${paper.slug}`} key={paper.id}>
+										<FeaturedPaper paper={paper} />
 									</Link>
 								))}
 							</Carousel>
 						)}
 						<Box sx={{ mt: 5 }}>
 							<Grid container spacing={4}>
-								{posts.latest.map(post => (
-									<Grid item md={4} sm={6} xs={12} key={post.id}>
-										<Link passHref href={`/blog/${post.slug}`}>
-											<BlogPost post={post} />
+								{papers.latest.map(paper => (
+									<Grid item md={4} sm={6} xs={12} key={paper.id}>
+										<Link passHref href={`/papers/${paper.slug}`}>
+											<PaperCard paper={paper} />
 										</Link>
 									</Grid>
 								))}
@@ -265,11 +265,11 @@ export default function Home({ posts }) {
 }
 
 export async function getStaticProps() {
-	const posts = await getBlogPosts();
+	const papers = await getPapers();
 
 	return {
 		props: {
-			posts,
+			papers,
 		},
 		revalidate: 60 * 60 * 8, // 8 hours
 	};

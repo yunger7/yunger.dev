@@ -1,13 +1,13 @@
 import { notion } from "@services/notion";
 
 import { getNordColor } from "@utils/getNordColor";
-import { getPostCoverImage } from "./getPostCoverImage";
+import { getPaperCoverImage } from "./getPaperCoverImage";
 
-export async function getBlogPosts() {
-	const blogDatabaseId = process.env.NOTION_BLOG_DATABASE_ID;
+export async function getPapers() {
+	const PAPERS_DATABASE_ID = process.env.NOTION_PAPERS_DATABASE_ID;
 
 	const response = await notion.databases.query({
-		database_id: blogDatabaseId,
+		database_id: PAPERS_DATABASE_ID,
 		filter: {
 			property: "Status",
 			select: {
@@ -22,7 +22,7 @@ export async function getBlogPosts() {
 		],
 	});
 
-	const posts = {
+	const papers = {
 		featured: [],
 		latest: [],
 	};
@@ -31,16 +31,16 @@ export async function getBlogPosts() {
 		const isFeatured = page.properties.Featured.checkbox;
 
 		if (isFeatured) {
-			const post = await buildPostFromPage(page);
-			posts.featured.push(post);
+			const paper = await buildPaperFromPage(page);
+			papers.featured.push(paper);
 		} else {
-			const post = await buildPostFromPage(page);
-			posts.latest.push(post);
+			const paper = await buildPaperFromPage(page);
+			papers.latest.push(paper);
 		}
 
-		async function buildPostFromPage(page) {
+		async function buildPaperFromPage(page) {
 			const { id, created_time, properties } = page;
-			const image = await getPostCoverImage(page);
+			const image = await getPaperCoverImage(page);
 
 			return {
 				id,
@@ -60,5 +60,5 @@ export async function getBlogPosts() {
 		}
 	}
 
-	return posts;
+	return papers;
 }

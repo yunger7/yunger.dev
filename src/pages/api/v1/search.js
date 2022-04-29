@@ -3,7 +3,7 @@ import { notion } from "@services/notion";
 import { getPlainTextFromRichText } from "@utils/getPlainText";
 
 const PAGES_DATABASE_ID = process.env.NOTION_PAGES_DATABASE_ID;
-const BLOG_DATABASE_ID = process.env.NOTION_BLOG_DATABASE_ID;
+const PAPERS_DATABASE_ID = process.env.NOTION_PAPERS_DATABASE_ID;
 
 export default async function handler(request, response) {
 	console.log(`[${request.method}]: api/v1/search`);
@@ -93,7 +93,7 @@ async function filterResults(results) {
 			}
 
 			const parentDatabaseId = page.parent.database_id.replace(/[-]/g, "");
-			const acceptedParentIds = [PAGES_DATABASE_ID, BLOG_DATABASE_ID];
+			const acceptedParentIds = [PAGES_DATABASE_ID, PAPERS_DATABASE_ID];
 
 			if (!acceptedParentIds.includes(parentDatabaseId)) {
 				continue;
@@ -107,7 +107,7 @@ async function filterResults(results) {
 			}
 
 			if (
-				parentDatabaseId === BLOG_DATABASE_ID &&
+				parentDatabaseId === PAPERS_DATABASE_ID &&
 				page.properties["Status"]?.select?.name !== "Published"
 			) {
 				continue;
@@ -142,15 +142,15 @@ async function formatData(results) {
 			let href = "";
 			let pageType = "";
 
-			// Get href and page type (webpage, post, etc.)
+			// Get href and page type (webpage, paper, etc.)
 			if (page.parent.database_id.replace(/[-]/g, "") === PAGES_DATABASE_ID) {
 				href = getPlainTextFromRichText(page.properties["Href"].rich_text);
 				pageType = "webpage";
 			}
 
-			if (page.parent.database_id.replace(/[-]/g, "") === BLOG_DATABASE_ID) {
-				href = `/blog/${page.properties["Slug"].formula.string}`;
-				pageType = "post";
+			if (page.parent.database_id.replace(/[-]/g, "") === PAPERS_DATABASE_ID) {
+				href = `/papers/${page.properties["Slug"].formula.string}`;
+				pageType = "paper";
 			}
 
 			data.push({
