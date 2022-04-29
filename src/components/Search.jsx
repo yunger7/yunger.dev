@@ -11,6 +11,7 @@ import {
 	ListItem,
 	Typography,
 	CircularProgress,
+	lighten,
 } from "@mui/material";
 import {
 	Search as SearchIcon,
@@ -18,6 +19,7 @@ import {
 	Language as WebpageIcon,
 } from "@mui/icons-material";
 
+import { palette } from "@styles/theme";
 import { sleep } from "@utils";
 
 export function Search() {
@@ -143,7 +145,13 @@ function SearchModal(props) {
 			{!isFirstSearch && (
 				<>
 					{results.length ? (
-						<List sx={{ maxHeight: 200, overflow: "auto" }}>
+						<List
+							sx={{
+								maxHeight: 200,
+								overflow: "auto",
+								bgcolor: theme => lighten(theme.palette.background.paper, 0.1),
+							}}
+						>
 							{results.map(result => (
 								<Link passHref href={result.href} key={result.id}>
 									<ListItem button disableRipple component="a">
