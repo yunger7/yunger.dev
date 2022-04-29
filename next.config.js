@@ -18,7 +18,7 @@ const nextConfig = {
 				destination: "/work-in-progress",
 			},
 			{
-				source: "/utils",
+				source: "/tools",
 				destination: "/work-in-progress",
 			},
 		];

@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import {
 	LocalCafe as CafeIcon,
-	Construction as UtilsIcon,
+	Construction as ToolsIcon,
 	Description as DescriptionIcon,
 	KeyboardArrowRight as KeyboardArrowRightIcon,
 	Info as InfoIcon,
@@ -159,8 +159,8 @@ export default function Home({ posts }) {
 								</Link>
 							</Grid>
 							<Grid item md={3} sm={6} xs={12} sx={{ width: 200, height: 200 }}>
-								<Link passHref href="/utils">
-									<SquareLink icon={UtilsIcon}>Utils</SquareLink>
+								<Link passHref href="/tools">
+									<SquareLink icon={ToolsIcon}>Tools</SquareLink>
 								</Link>
 							</Grid>
 							<Grid item md={3} sm={6} xs={12} sx={{ width: 200, height: 200 }}>

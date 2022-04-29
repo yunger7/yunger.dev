@@ -64,8 +64,8 @@ const footerLinks = [
 				href: "/animelist",
 			},
 			{
-				name: "Utils",
-				href: "/utils",
+				name: "Tools",
+				href: "/tools",
 			},
 		],
 	},
