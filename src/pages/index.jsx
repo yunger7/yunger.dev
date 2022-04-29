@@ -15,13 +15,13 @@ import {
 	lighten,
 } from "@mui/material";
 import {
-	LocalCafe as CafeIcon,
+	LocalCafe as CoffeeIcon,
 	Construction as ToolsIcon,
 	Description as DescriptionIcon,
 	Settings as ProjectsIcon,
-	Info as InfoIcon,
-	Book as BookIcon,
-	ContactMail as ContactMailIcon,
+	Info as AboutIcon,
+	Book as NotesIcon,
+	ContactMail as ContactIcon,
 } from "@mui/icons-material";
 
 import { getBlogPosts } from "@lib/getBlogPosts";
@@ -148,7 +148,7 @@ export default function Home({ posts }) {
 						<Grid container justifyContent="space-between" spacing={4}>
 							<Grid item md={3} sm={6} xs={12} sx={{ width: 200, height: 200 }}>
 								<Link passHref href="/support">
-									<SquareLink openInNewTab icon={CafeIcon}>
+									<SquareLink openInNewTab icon={CoffeeIcon}>
 										Buy me a coffee
 									</SquareLink>
 								</Link>
@@ -238,17 +238,17 @@ export default function Home({ posts }) {
 						<Grid container justifyContent="space-between" spacing={4}>
 							<Grid item sm={4} xs={12} sx={{ width: 200, height: 200 }}>
 								<Link passHref href="/about">
-									<SquareLink icon={InfoIcon}>About me</SquareLink>
+									<SquareLink icon={AboutIcon}>About me</SquareLink>
 								</Link>
 							</Grid>
 							<Grid item sm={4} xs={12} sx={{ width: 200, height: 200 }}>
 								<Link passHref href="/notes">
-									<SquareLink icon={BookIcon}>Random notes</SquareLink>
+									<SquareLink icon={NotesIcon}>Random notes</SquareLink>
 								</Link>
 							</Grid>
 							<Grid item sm={4} xs={12} sx={{ width: 200, height: 200 }}>
 								<Link passHref href="/contact">
-									<SquareLink icon={ContactMailIcon}>Contact me</SquareLink>
+									<SquareLink icon={ContactIcon}>Contact me</SquareLink>
 								</Link>
 							</Grid>
 						</Grid>
