@@ -102,7 +102,7 @@ export default function Contact() {
 	return (
 		<>
 			<Head>
-				<title>Contact me</title>
+				<title>Contact | yunger.dev</title>
 			</Head>
 
 			<Navbar paths={navbarPaths} />
