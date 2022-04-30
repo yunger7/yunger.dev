@@ -1,9 +1,12 @@
 import Image from "next/image";
 
 import ImageZoom from "react-medium-image-zoom";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 import {
 	Box,
+	Paper,
 	Typography,
 	Checkbox,
 	FormControlLabel,
@@ -12,6 +15,7 @@ import {
 	AccordionDetails,
 } from "@mui/material";
 
+import { getSyntaxHighlightingLanguage } from "@lib/getSyntaxHighlightingLanguage";
 import { RichText } from "@components";
 
 export function useBlockRenderer(blocks) {
@@ -138,6 +142,22 @@ function renderBlock(block) {
 						{value.children && value.children.map(block => renderBlock(block))}
 					</AccordionDetails>
 				</Accordion>
+			);
+		case "code":
+			const codeStr = value.rich_text
+				.map(({ plain_text }) => plain_text)
+				.join("");
+
+			return (
+				<Paper elevation={4} key={id}>
+					<SyntaxHighlighter
+						showLineNumbers
+						language={getSyntaxHighlightingLanguage(value.language)}
+						style={nord}
+					>
+						{codeStr}
+					</SyntaxHighlighter>
+				</Paper>
 			);
 		case "child_page":
 			return <p key={id}>{value.title}</p>; // Temp
