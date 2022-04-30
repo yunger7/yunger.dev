@@ -180,7 +180,7 @@ export async function getStaticProps({ params: { slug } }) {
 				{
 					property: "Slug",
 					formula: {
-						text: { contains: slug },
+						string: { contains: slug },
 					},
 				},
 			],

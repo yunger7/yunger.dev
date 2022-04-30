@@ -32,25 +32,25 @@ function renderBlock(block) {
 		case "paragraph":
 			return (
 				<Typography paragraph variant="body1" key={id}>
-					<RichText text={value.text} />
+					<RichText text={value.rich_text} />
 				</Typography>
 			);
 		case "heading_1":
 			return (
 				<Typography variant="h3" component="h2" key={id} sx={{ mt: 5 }}>
-					<RichText text={value.text} />
+					<RichText text={value.rich_text} />
 				</Typography>
 			);
 		case "heading_2":
 			return (
 				<Typography variant="h4" component="h3" key={id} sx={{ mt: 4 }}>
-					<RichText text={value.text} />
+					<RichText text={value.rich_text} />
 				</Typography>
 			);
 		case "heading_3":
 			return (
 				<Typography variant="h5" component="h4" key={id} sx={{ mt: 3 }}>
-					<RichText text={value.text} />
+					<RichText text={value.rich_text} />
 				</Typography>
 			);
 		case "image":
@@ -97,7 +97,7 @@ function renderBlock(block) {
 						•
 					</Box>
 					<Box component="span">
-						<RichText text={value.text} />
+						<RichText text={value.rich_text} />
 					</Box>
 				</Box>
 			);
@@ -117,7 +117,7 @@ function renderBlock(block) {
 								}}
 							/>
 						}
-						label={<RichText text={value.text} />}
+						label={<RichText text={value.rich_text} />}
 						sx={{
 							cursor: "default",
 							maxHeight: 30,
@@ -132,7 +132,7 @@ function renderBlock(block) {
 			return (
 				<Accordion key={id}>
 					<AccordionSummary>
-						<RichText text={value.text} />
+						<RichText text={value.rich_text} />
 					</AccordionSummary>
 					<AccordionDetails>
 						{value.children && value.children.map(block => renderBlock(block))}
