@@ -154,7 +154,7 @@ function renderBlock(block) {
 				.join("");
 
 			return (
-				<Paper elevation={4} id={id} key={id}>
+				<Paper elevation={4} id={id} key={id} sx={{ my: 2 }}>
 					<SyntaxHighlighter
 						showLineNumbers
 						language={getSyntaxHighlightingLanguage(value.language)}
