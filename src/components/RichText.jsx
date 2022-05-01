@@ -36,8 +36,12 @@ export function RichText({ text: richText }) {
 							py: 0.05,
 							px: 0.75,
 							bgcolor: theme =>
-								theme.palette.mode === "light" ? palette.nord6 : palette.nord1,
-							color: "primary.main",
+								color.includes("background")
+									? getNordColor(color.split("_")[0])
+									: theme.palette.mode === "light"
+									? palette.nord6
+									: palette.nord1,
+							color: color === "default" ? palette.nord8 : getNordColor(color),
 						},
 						italic && {
 							fontStyle: "italic",
