@@ -149,6 +149,10 @@ function renderBlock(block) {
 				</Accordion>
 			);
 		case "code":
+			if (!value.rich_text.length) {
+				return null;
+			}
+
 			const codeStr = value.rich_text
 				.map(({ plain_text }) => plain_text)
 				.join("");
