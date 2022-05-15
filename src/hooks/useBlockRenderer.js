@@ -154,15 +154,22 @@ function renderBlock(block) {
 				.join("");
 
 			return (
-				<Paper elevation={4} id={id} key={id} sx={{ my: 2 }}>
-					<SyntaxHighlighter
-						showLineNumbers
-						language={getSyntaxHighlightingLanguage(value.language)}
-						style={nord}
-					>
-						{codeStr}
-					</SyntaxHighlighter>
-				</Paper>
+				<Box key={id} sx={{ my: 2 }}>
+					<Paper elevation={4} sx={{ "& > *": { m: "0 !important" } }}>
+						<SyntaxHighlighter
+							showLineNumbers
+							language={getSyntaxHighlightingLanguage(value.language)}
+							style={nord}
+						>
+							{codeStr}
+						</SyntaxHighlighter>
+					</Paper>
+					{!!value.caption.length && (
+						<Typography variant="caption">
+							<RichText text={value.caption} />
+						</Typography>
+					)}
+				</Box>
 			);
 		case "embed":
 			if (!value.url) {
@@ -170,12 +177,19 @@ function renderBlock(block) {
 			}
 
 			return (
-				<Paper elevation={4} key={id} sx={{ my: 2, height: 650 }}>
-					<iframe
-						src={value.url}
-						style={{ border: "none", width: "100%", height: "100%" }}
-					></iframe>
-				</Paper>
+				<Box key={id} sx={{ my: 2 }}>
+					<Paper elevation={4} sx={{ height: 650 }}>
+						<iframe
+							src={value.url}
+							style={{ border: "none", width: "100%", height: "100%" }}
+						></iframe>
+					</Paper>
+					{!!value.caption.length && (
+						<Typography variant="caption">
+							<RichText text={value.caption} />
+						</Typography>
+					)}
+				</Box>
 			);
 		case "child_page":
 			// Temp
