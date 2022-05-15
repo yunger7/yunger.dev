@@ -164,6 +164,19 @@ function renderBlock(block) {
 					</SyntaxHighlighter>
 				</Paper>
 			);
+		case "embed":
+			if (!value.url) {
+				return null;
+			}
+
+			return (
+				<Paper elevation={4} key={id} sx={{ my: 2, height: 650 }}>
+					<iframe
+						src={value.url}
+						style={{ border: "none", width: "100%", height: "100%" }}
+					></iframe>
+				</Paper>
+			);
 		case "child_page":
 			// Temp
 			return (
