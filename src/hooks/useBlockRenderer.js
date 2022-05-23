@@ -13,6 +13,7 @@ import {
 	Accordion,
 	AccordionSummary,
 	AccordionDetails,
+	Divider,
 } from "@mui/material";
 
 import { getSyntaxHighlightingLanguage } from "@lib/getSyntaxHighlightingLanguage";
@@ -195,6 +196,8 @@ function renderBlock(block) {
 					)}
 				</Box>
 			);
+		case "divider":
+			return <Divider key={id} sx={{ my: 1 }} />;
 		case "child_page":
 			// Temp
 			return (
