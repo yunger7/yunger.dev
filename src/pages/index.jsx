@@ -111,13 +111,14 @@ export default function Home({ papers }) {
 					Hello world! I&apos;m <strong>Luís</strong>, a self-proclaimed digital
 					craftsman, music enthusiast, anime connoisseur and coffee addict. I
 					taught myself how to code to turn my dumb ideas into reality, and
-					I&apos;ve created this place to share them with the world. Check out{" "}
+					I&apos;ve created this place to share them with the world. Check out
+					the{" "}
 					<Link passHref href="/about">
 						<MuiLink sx={{ "&:hover": { bgcolor: "transparent" } }}>
-							my bio
+							about
 						</MuiLink>
 					</Link>{" "}
-					for more information.
+					page for more information.
 				</Typography>
 			</Header>
 
