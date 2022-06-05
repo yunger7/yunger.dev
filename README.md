@@ -38,5 +38,7 @@ Open http://localhost:3000 on your browser and voilà!
 ## License
 Licensed under Apache-2.0 License. See `LICENSE` for more details.
 
-## Contact
-You can send me a [direct message](https://yunger.dev/contact) or contact me at **contact@yunger.dev**.
+<hr /><br />
+
+<p align="center">Powered by ☕ and JavaScript <br/> Made with 💙 by <a href="https://github.com/yunger7">yunger</a></p>
+  
