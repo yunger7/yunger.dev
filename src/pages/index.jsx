@@ -150,7 +150,7 @@ export default function Home({ papers }) {
 							<Grid item md={3} sm={6} xs={12} sx={{ width: 200, height: 200 }}>
 								<Link passHref href="/support">
 									<SquareLink openInNewTab icon={CoffeeIcon}>
-										Buy me a coffee
+										Cafeteria
 									</SquareLink>
 								</Link>
 							</Grid>
