@@ -24,6 +24,7 @@ export function RichText({ text: richText }) {
 				<Box
 					component="span"
 					sx={[
+						{ whiteSpace: "pre-wrap" },
 						color !== "default" && {
 							color: getNordColor(color),
 						},
