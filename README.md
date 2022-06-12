@@ -17,7 +17,7 @@
 <br />
 
 ## About
-This is my personal website, a cozy place to host my projects, do networking and write about things that I'm interested about. It started as a coding challenge and gradually evolved into something more. I still have lots of ideas in mind and there is still plenty of work to do, but I'll get there eventually.
+This is my workshop. A cozy place that I use to host my projects, develop tools, do networking, share ideas and write about things that I'm intrested in. It's essentially the home of a digital craftsman. Check out the [about](https://yunger.dev/about) page for more information.
 
 ## Tech stack
 - [Next.js](https://nextjs.org/)
