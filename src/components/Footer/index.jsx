@@ -4,11 +4,11 @@ import {
 	Favorite as FavoriteIcon,
 } from "@mui/icons-material";
 
+import { websiteConfig } from "website.config";
+import { palette } from "@styles/theme";
 import { Links } from "./Links";
 import { SocialMedia } from "./SocialMedia";
 import { Divider } from "./Divider";
-
-import { palette } from "../../styles/theme";
 
 export default function Footer({ backgroundColor }) {
 	return (
@@ -61,11 +61,11 @@ export default function Footer({ backgroundColor }) {
 								&copy; 2021 - {new Date().getFullYear()} yunger
 							</Typography>
 							<Typography variant="body2">
-								Build with{" "}
+								Built with{" "}
 								<FavoriteIcon color="primary" sx={{ fontSize: 14 }} /> and
 								JavaScript
 							</Typography>
-							<Typography variant="body2">v0.1.0 (In development)</Typography>
+							<Typography variant="body2">{websiteConfig.version}</Typography>
 						</Box>
 						<Button
 							variant="outlined"

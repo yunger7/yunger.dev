@@ -5,15 +5,14 @@ import { Chip, Typography, Box } from "@mui/material";
 import { alpha } from "@mui/material/styles";
 import { Star as StarIcon } from "@mui/icons-material";
 
-import { RichText } from ".";
+import { palette } from "@styles/theme";
+import { RichText } from "./RichText";
 
-import { palette } from "../styles/theme";
+import placeholder3 from "public/placeholder3.jpg";
 
-import placeholder3 from "../../public/placeholder3.jpg";
-
-export const FeaturedBlog = forwardRef((props, ref) => {
-	const { post, onClick, href } = props;
-	const { title, image, description, createdAt, tags } = post;
+export const FeaturedPaper = forwardRef((props, ref) => {
+	const { paper, onClick, href } = props;
+	const { title, image, description, createdAt, tags } = paper;
 
 	return (
 		<Box
@@ -57,7 +56,7 @@ export const FeaturedBlog = forwardRef((props, ref) => {
 				{image ? (
 					<Image
 						src={image.src}
-						alt="Post cover"
+						alt="Paper cover"
 						layout="fill"
 						objectFit="cover"
 						placeholder="blur"
@@ -66,7 +65,7 @@ export const FeaturedBlog = forwardRef((props, ref) => {
 				) : (
 					<Image
 						src={placeholder3}
-						alt="Post cover"
+						alt="Paper cover"
 						layout="fill"
 						objectFit="cover"
 						placeholder="blur"
@@ -123,4 +122,4 @@ export const FeaturedBlog = forwardRef((props, ref) => {
 	);
 });
 
-FeaturedBlog.displayName = "FeaturedBlog";
+FeaturedPaper.displayName = "FeaturedPaper";

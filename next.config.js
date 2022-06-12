@@ -1,4 +1,5 @@
-module.exports = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
 	images: {
 		domains: ["i.imgur.com", "www.notion.so", "images.unsplash.com"],
 	},
@@ -17,7 +18,7 @@ module.exports = {
 				destination: "/work-in-progress",
 			},
 			{
-				source: "/utils",
+				source: "/tools",
 				destination: "/work-in-progress",
 			},
 		];
@@ -37,3 +38,5 @@ module.exports = {
 		];
 	},
 };
+
+module.exports = nextConfig;

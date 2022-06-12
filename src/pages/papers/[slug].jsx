@@ -6,21 +6,20 @@ import readingTime from "reading-time";
 import { Box, Stack, Container, Typography, Chip } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
-import { Navbar, Header, RichText, Footer } from "../../components";
-
+import { useBlockRenderer } from "@hooks/useBlockRenderer";
+import { getNotionPageContent } from "@lib/getNotionPageContent";
+import { getPaperCoverImage } from "@lib/getPaperCoverImage";
+import { notion } from "@services/notion";
 import {
 	getNordColor,
 	getPlainTextFromBlocks,
 	getPlainTextFromRichText,
-} from "../../utils";
-import { useBlockRenderer } from "../../hooks/useBlockRenderer";
-import { getNotionPageContent } from "../../lib/getNotionPageContent";
-import { getPostCoverImage } from "../../lib/getPostCoverImage";
-import { notion } from "../../services/notion";
+} from "@utils";
+import { Navbar, Header, RichText, Footer } from "@components";
 
 import placeholder3 from "../../../public/placeholder3.jpg";
 
-export default function BlogPost({ post }) {
+export default function Paper({ paper }) {
 	const {
 		title,
 		titleAsPlainText,
@@ -32,7 +31,7 @@ export default function BlogPost({ post }) {
 		createdAt,
 		content,
 		readingTime,
-	} = post;
+	} = paper;
 
 	const theme = useTheme();
 	const jsxContent = useBlockRenderer(content);
@@ -43,8 +42,8 @@ export default function BlogPost({ post }) {
 			href: "/",
 		},
 		{
-			name: "Blog",
-			href: "/blog",
+			name: "Papers",
+			href: "/papers",
 		},
 		{
 			name: titleAsPlainText,
@@ -66,7 +65,7 @@ export default function BlogPost({ post }) {
 						<Image
 							priority
 							src={image.src}
-							alt="Post cover"
+							alt="Paper cover"
 							layout="fill"
 							objectFit="cover"
 							placeholder="blur"
@@ -76,7 +75,7 @@ export default function BlogPost({ post }) {
 						<Image
 							priority
 							src={placeholder3}
-							alt="Post cover"
+							alt="Paper cover"
 							layout="fill"
 							objectFit="cover"
 							placeholder="blur"
@@ -90,7 +89,7 @@ export default function BlogPost({ post }) {
 						<Image
 							priority
 							src={icon.external.url}
-							alt="Post icon"
+							alt="Paper icon"
 							width={100}
 							height={100}
 							objectFit="contain"
@@ -140,11 +139,11 @@ export default function BlogPost({ post }) {
 	);
 }
 
-const blogDatabaseId = process.env.NOTION_BLOG_DATABASE_ID;
+const PAPERS_DATABASE_ID = process.env.NOTION_PAPERS_DATABASE_ID;
 
 export async function getStaticPaths() {
 	const response = await notion.databases.query({
-		database_id: blogDatabaseId,
+		database_id: PAPERS_DATABASE_ID,
 		filter: {
 			property: "Status",
 			select: {
@@ -154,10 +153,10 @@ export async function getStaticPaths() {
 	});
 
 	const paths = response.results.map(page => {
-		const postSlug = page.properties["Slug"].formula.string;
+		const paperSlug = page.properties["Slug"].formula.string;
 
 		return {
-			params: { slug: postSlug },
+			params: { slug: paperSlug },
 		};
 	});
 
@@ -169,7 +168,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params: { slug } }) {
 	const dataResponse = await notion.databases.query({
-		database_id: blogDatabaseId,
+		database_id: PAPERS_DATABASE_ID,
 		filter: {
 			and: [
 				{
@@ -181,7 +180,7 @@ export async function getStaticProps({ params: { slug } }) {
 				{
 					property: "Slug",
 					formula: {
-						text: { contains: slug },
+						string: { contains: slug },
 					},
 				},
 			],
@@ -189,38 +188,38 @@ export async function getStaticProps({ params: { slug } }) {
 		page_size: 1,
 	});
 
-	const notionPost = dataResponse.results[0];
-	const postImage = await getPostCoverImage(notionPost);
-	const blogContent = await getNotionPageContent(notionPost.id);
-	const blogContentRaw = getPlainTextFromBlocks(blogContent);
+	const notionPaper = dataResponse.results[0];
+	const paperImage = await getPaperCoverImage(notionPaper);
+	const paperContent = await getNotionPageContent(notionPaper.id);
+	const paperContentRaw = getPlainTextFromBlocks(paperContent);
 
-	const post = {
-		id: notionPost.id,
-		image: postImage,
-		icon: notionPost.icon,
-		createdAt: notionPost.created_time,
-		readingTime: readingTime(blogContentRaw),
-		title: notionPost.properties["Name"].title,
+	const paper = {
+		id: notionPaper.id,
+		image: paperImage,
+		icon: notionPaper.icon,
+		createdAt: notionPaper.created_time,
+		readingTime: readingTime(paperContentRaw),
+		title: notionPaper.properties["Name"].title,
 		titleAsPlainText: getPlainTextFromRichText(
-			notionPost.properties["Name"].title
+			notionPaper.properties["Name"].title
 		),
-		content: blogContent,
-		slug: notionPost.properties.Slug.formula.string,
-		description: notionPost.properties["Description"].rich_text,
-		tags: notionPost.properties["Tags"].multi_select.map(option => ({
+		content: paperContent,
+		slug: notionPaper.properties.Slug.formula.string,
+		description: notionPaper.properties["Description"].rich_text,
+		tags: notionPaper.properties["Tags"].multi_select.map(option => ({
 			id: option.id,
 			name: option.name,
 			color: getNordColor(option.color),
 		})),
-		language: notionPost.properties.Language
-			? notionPost.properties.Language.select.name
+		language: notionPaper.properties.Language
+			? notionPaper.properties.Language.select.name
 			: null,
-		notionUrl: notionPost.url,
+		notionUrl: notionPaper.url,
 	};
 
 	return {
 		props: {
-			post,
+			paper,
 		},
 		revalidate: 60 * 60 * 8, // 8 hours
 	};

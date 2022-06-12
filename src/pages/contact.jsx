@@ -1,6 +1,9 @@
 import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 import {
 	Box,
@@ -8,18 +11,18 @@ import {
 	Typography,
 	Grid,
 	TextField,
-	Button,
 	Snackbar,
 	Slide,
-	CircularProgress,
 	Alert,
 	useTheme,
+	alpha,
 } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
 import { Email as MessageIcon, Send as SendIcon } from "@mui/icons-material";
 
-import { Navbar, Header, Footer } from "../components";
+import { Navbar, Header, Footer } from "@components";
 
-import placeholder3 from "../../public/placeholder3.jpg";
+import placeholder3 from "public/placeholder3.jpg";
 
 const navbarPaths = [
 	{
@@ -32,11 +35,27 @@ const navbarPaths = [
 	},
 ];
 
+const schema = yup.object({
+	subject: yup.string("Invalid value"),
+	name: yup.string("Invalid value"),
+	email: yup.string("Invalid value").email("Invalid e-mail"),
+	message: yup
+		.string("Invalid value")
+		.required("This field is required")
+		.max(2000, "Your message is too big"),
+});
+
 export default function Contact() {
-	const [subject, setSubject] = useState({ value: "", error: false });
-	const [name, setName] = useState({ value: "", error: false });
-	const [email, setEmail] = useState({ value: "", error: false });
-	const [message, setMessage] = useState({ value: "", error: false });
+	const { control, handleSubmit, reset } = useForm({
+		defaultValues: {
+			subject: "",
+			name: "",
+			email: "",
+			message: "",
+		},
+		resolver: yupResolver(schema),
+	});
+
 	const [snackbarOpen, setSnackbarOpen] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const [formResponse, setFormResponse] = useState({
@@ -46,64 +65,22 @@ export default function Contact() {
 
 	const theme = useTheme();
 
-	async function handleSubmit(event) {
-		event.preventDefault();
-
-		setSubject({ ...subject, error: false });
-		setName({ ...name, error: false });
-		setEmail({ ...email, error: false });
-		setMessage({ ...message, error: false });
-		resetFormResponse();
+	async function sendMessage(data) {
 		setSnackbarOpen(false);
-
-		if (!subject.value) {
-			setSubject({ ...subject, error: "This field is required" });
-			return;
-		}
-
-		if (!message.value) {
-			setMessage({ ...message, error: "This field is required" });
-			return;
-		}
-
-		if (email.value) {
-			const emailRegEx =
-				/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-			if (!emailRegEx.test(email.value)) {
-				setEmail({ ...email, error: "Invalid email" });
-				return;
-			}
-		}
-
 		setLoading(true);
 
 		try {
-			const responseRaw = await fetch("/api/contact", {
+			const responseRaw = await fetch("/api/v1/contact", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify({
-					subject: subject.value,
-					name: name.value,
-					email: email.value,
-					message: message.value,
-				}),
+				body: JSON.stringify(data),
 			});
 
-			const data = await responseRaw.json();
+			const { success } = await responseRaw.json();
 
-			if (data.error) {
-				setFormResponse({
-					status: "error",
-					message: "Sorry! Looks like something went wrong.",
-				});
-				setSnackbarOpen(true);
-				setLoading(false);
-
-				return;
-			}
+			if (!success) throw new Error();
 
 			setFormResponse({
 				status: "success",
@@ -111,27 +88,21 @@ export default function Contact() {
 			});
 			setSnackbarOpen(true);
 			setLoading(false);
+			reset();
 		} catch (error) {
 			setFormResponse({
 				status: "error",
-				message: "Sorry! Looks like something went wrong.",
+				message: "Sorry, looks like something went wrong :(",
 			});
 			setSnackbarOpen(true);
 			setLoading(false);
 		}
 	}
 
-	function resetFormResponse() {
-		setFormResponse({
-			status: "",
-			message: "",
-		});
-	}
-
 	return (
 		<>
 			<Head>
-				<title>Contact me</title>
+				<title>Contact | yunger.dev</title>
 			</Head>
 
 			<Navbar paths={navbarPaths} />
@@ -160,71 +131,88 @@ export default function Contact() {
 			<Box component="main">
 				<Box sx={{ bgcolor: theme.palette.background.default, pt: 5, pb: 10 }}>
 					<Container maxWidth="md">
-						<form noValidate autoComplete="off" onSubmit={handleSubmit}>
+						<form
+							noValidate
+							autoComplete="off"
+							onSubmit={handleSubmit(sendMessage)}
+						>
 							<Grid container spacing={4}>
 								<Grid item xs={12}>
-									<TextField
-										fullWidth
-										required
-										id="subject"
-										variant="outlined"
-										label="Subject"
-										value={subject.value}
-										error={!!subject.error}
-										helperText={subject.error}
-										onChange={event =>
-											setSubject({ ...subject, value: event.target.value })
-										}
-										autoComplete="off"
+									<Controller
+										name="subject"
+										control={control}
+										render={({ field, fieldState: { error } }) => (
+											<TextField
+												{...field}
+												fullWidth
+												id="subject"
+												variant="outlined"
+												label="Subject"
+												error={Boolean(error)}
+												helperText={error?.message}
+												autoComplete="off"
+											/>
+										)}
 									/>
 								</Grid>
 								<Grid item sm={6} xs={12}>
-									<TextField
-										fullWidth
-										id="name"
-										variant="outlined"
-										label="Name"
-										value={name.value}
-										error={!!name.error}
-										helperText={name.error}
-										onChange={event =>
-											setName({ ...name, value: event.target.value })
-										}
-										autoComplete="off"
+									<Controller
+										name="name"
+										control={control}
+										render={({ field, fieldState: { error } }) => (
+											<TextField
+												{...field}
+												fullWidth
+												id="name"
+												variant="outlined"
+												label="Name"
+												error={Boolean(error)}
+												helperText={error?.message}
+												autoComplete="off"
+											/>
+										)}
 									/>
 								</Grid>
 								<Grid item sm={6} xs={12}>
-									<TextField
-										fullWidth
-										id="email"
-										type="email"
-										variant="outlined"
-										label="Email"
-										value={email.value}
-										error={!!email.error}
-										helperText={email.error}
-										onChange={event =>
-											setEmail({ ...email, value: event.target.value })
-										}
-										autoComplete="off"
+									<Controller
+										name="email"
+										control={control}
+										render={({ field, fieldState: { error } }) => (
+											<TextField
+												{...field}
+												fullWidth
+												id="email"
+												type="email"
+												variant="outlined"
+												label="Email"
+												error={Boolean(error)}
+												helperText={error?.message}
+												autoComplete="off"
+											/>
+										)}
 									/>
 								</Grid>
 								<Grid item xs={12}>
-									<TextField
-										fullWidth
-										multiline
-										required
-										id="message"
-										variant="outlined"
-										label="Message"
-										rows={5}
-										value={message.value}
-										error={!!message.error}
-										helperText={message.error}
-										onChange={event =>
-											setMessage({ ...message, value: event.target.value })
-										}
-										autoComplete="off"
+									<Controller
+										name="message"
+										control={control}
+										render={({ field, fieldState: { error } }) => (
+											<TextField
+												{...field}
+												fullWidth
+												multiline
+												required
+												id="message"
+												variant="outlined"
+												label="Message"
+												rows={5}
+												error={Boolean(error)}
+												helperText={
+													error?.message || `${field.value.length}/2000`
+												}
+												autoComplete="off"
+											/>
+										)}
 									/>
 								</Grid>
 								<Grid
@@ -238,34 +226,22 @@ export default function Contact() {
 										},
 									})}
 								>
-									{loading ? (
-										<Button
-											disableRipple
-											disabled
-											type="submit"
-											variant="contained"
-											color="primary"
-											startIcon={
-												<CircularProgress
-													color="primary"
-													sx={{ mr: 0.5 }}
-													size={20}
-												/>
-											}
-										>
-											Sending message
-										</Button>
-									) : (
-										<Button
-											disableRipple
-											type="submit"
-											variant="contained"
-											color="primary"
-											startIcon={<SendIcon />}
-										>
-											Send message
-										</Button>
-									)}
+									<LoadingButton
+										loading={loading}
+										variant="contained"
+										color="primary"
+										type="submit"
+										startIcon={<SendIcon />}
+										loadingPosition="start"
+										sx={{
+											"&.MuiLoadingButton-loading": {
+												backgroundColor: theme =>
+													alpha(theme.palette.primary.dark, 0.25),
+											},
+										}}
+									>
+										{loading ? "Sending..." : "Send message"}
+									</LoadingButton>
 								</Grid>
 							</Grid>
 						</form>

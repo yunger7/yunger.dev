@@ -1,7 +1,7 @@
 import { Box, useTheme, alpha } from "@mui/material";
 
-import { WaveDivider } from ".";
-import { palette } from "../styles/theme";
+import { palette } from "@styles/theme";
+import { WaveDivider } from "./WaveDivider";
 
 function ScrollRedirect({ href }) {
 	return <Box id={href} sx={{ position: "relative", bottom: 100 }} />;

@@ -9,7 +9,7 @@ import {
 	SiDiscord as DiscordIcon,
 } from "react-icons/si";
 
-import { palette } from "../../styles/theme";
+import { palette } from "@styles/theme";
 
 export function SocialMedia() {
 	const [snackbarOpen, setSnackbarOpen] = useState(false);

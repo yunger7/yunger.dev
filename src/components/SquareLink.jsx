@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Paper, Typography } from "@mui/material";
 import { alpha } from "@mui/material/styles";
 
-import { palette } from "../styles/theme";
+import { palette } from "@styles/theme";
 
 export const SquareLink = React.forwardRef((props, ref) => {
 	const { onClick, href, children, openInNewTab } = props;

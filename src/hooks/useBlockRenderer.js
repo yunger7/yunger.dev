@@ -1,19 +1,24 @@
 import Image from "next/image";
 
 import ImageZoom from "react-medium-image-zoom";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 import {
 	Box,
+	Paper,
 	Typography,
 	Checkbox,
 	FormControlLabel,
 	Accordion,
 	AccordionSummary,
 	AccordionDetails,
-	alpha,
+	Divider,
 } from "@mui/material";
 
-import { RichText } from "../components";
+import { getSyntaxHighlightingLanguage } from "@lib/getSyntaxHighlightingLanguage";
+import { UUID } from "@utils";
+import { RichText } from "@components";
 
 export function useBlockRenderer(blocks) {
 	const jsxContent = [];
@@ -26,32 +31,34 @@ export function useBlockRenderer(blocks) {
 }
 
 function renderBlock(block) {
-	const { type, id } = block;
+	const { type, id: uuid } = block;
 	const value = block[type];
+
+	const id = UUID.removeDashes(uuid);
 
 	switch (type) {
 		case "paragraph":
 			return (
-				<Typography paragraph variant="body1" key={id}>
-					<RichText text={value.text} />
+				<Typography paragraph variant="body1" id={id} key={id}>
+					<RichText text={value.rich_text} />
 				</Typography>
 			);
 		case "heading_1":
 			return (
-				<Typography variant="h3" component="h2" key={id}>
-					<RichText text={value.text} />
+				<Typography variant="h3" component="h2" id={id} key={id} sx={{ mt: 5 }}>
+					<RichText text={value.rich_text} />
 				</Typography>
 			);
 		case "heading_2":
 			return (
-				<Typography variant="h4" component="h3" key={id}>
-					<RichText text={value.text} />
+				<Typography variant="h4" component="h3" id={id} key={id} sx={{ mt: 4 }}>
+					<RichText text={value.rich_text} />
 				</Typography>
 			);
 		case "heading_3":
 			return (
-				<Typography variant="h5" component="h4" key={id}>
-					<RichText text={value.text} />
+				<Typography variant="h5" component="h4" id={id} key={id} sx={{ mt: 3 }}>
+					<RichText text={value.rich_text} />
 				</Typography>
 			);
 		case "image":
@@ -68,6 +75,7 @@ function renderBlock(block) {
 					overlayBgColorStart="rgba(0, 0, 0, 0.5)"
 					overlayBgColorEnd="rgba(0, 0, 0, 0.5)"
 					wrapStyle={{ width: "100%" }}
+					id={id}
 					key={id}
 				>
 					<Box sx={{ position: "relative", height: 500, width: 1 }}>
@@ -85,6 +93,7 @@ function renderBlock(block) {
 			return (
 				<Box
 					component="li"
+					id={id}
 					key={id}
 					sx={{
 						listStyle: "none",
@@ -94,17 +103,17 @@ function renderBlock(block) {
 						mx: 0,
 					}}
 				>
-					<Box component="span" sx={{ mr: 1 }}>
+					<Box component="span" sx={{ mr: 1, ml: 0.5 }}>
 						•
 					</Box>
 					<Box component="span">
-						<RichText text={value.text} />
+						<RichText text={value.rich_text} />
 					</Box>
 				</Box>
 			);
 		case "to_do":
 			return (
-				<div key={id}>
+				<Box id={id} key={id} sx={{ my: 0.5, mx: 0 }}>
 					<FormControlLabel
 						control={
 							<Checkbox
@@ -118,7 +127,7 @@ function renderBlock(block) {
 								}}
 							/>
 						}
-						label={<RichText text={value.text} />}
+						label={<RichText text={value.rich_text} />}
 						sx={{
 							cursor: "default",
 							maxHeight: 30,
@@ -127,21 +136,75 @@ function renderBlock(block) {
 							},
 						}}
 					/>
-				</div>
+				</Box>
 			);
 		case "toggle":
 			return (
-				<Accordion key={id}>
+				<Accordion id={id} key={id}>
 					<AccordionSummary>
-						<RichText text={value.text} />
+						<RichText text={value.rich_text} />
 					</AccordionSummary>
 					<AccordionDetails>
 						{value.children && value.children.map(block => renderBlock(block))}
 					</AccordionDetails>
 				</Accordion>
 			);
+		case "code":
+			if (!value.rich_text.length) {
+				return null;
+			}
+
+			const codeStr = value.rich_text
+				.map(({ plain_text }) => plain_text)
+				.join("");
+
+			return (
+				<Box key={id} sx={{ my: 2 }}>
+					<Paper elevation={4} sx={{ "& > *": { m: "0 !important" } }}>
+						<SyntaxHighlighter
+							showLineNumbers
+							language={getSyntaxHighlightingLanguage(value.language)}
+							style={nord}
+						>
+							{codeStr}
+						</SyntaxHighlighter>
+					</Paper>
+					{!!value.caption.length && (
+						<Typography variant="caption">
+							<RichText text={value.caption} />
+						</Typography>
+					)}
+				</Box>
+			);
+		case "embed":
+			if (!value.url) {
+				return null;
+			}
+
+			return (
+				<Box key={id} sx={{ my: 2 }}>
+					<Paper elevation={4} sx={{ height: 650 }}>
+						<iframe
+							src={value.url}
+							style={{ border: "none", width: "100%", height: "100%" }}
+						></iframe>
+					</Paper>
+					{!!value.caption.length && (
+						<Typography variant="caption">
+							<RichText text={value.caption} />
+						</Typography>
+					)}
+				</Box>
+			);
+		case "divider":
+			return <Divider key={id} sx={{ my: 1 }} />;
 		case "child_page":
-			return <p key={id}>{value.title}</p>; // Temp
+			// Temp
+			return (
+				<p id={id} key={id}>
+					{value.title}
+				</p>
+			);
 		default:
 			return (
 				<p key={id}>

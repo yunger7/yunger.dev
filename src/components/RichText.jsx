@@ -4,8 +4,8 @@ import Link from "next/link";
 
 import { Box, Link as MuiLink } from "@mui/material";
 
-import { getNordColor } from "../utils";
-import { palette } from "../styles/theme";
+import { getNordColor } from "@utils";
+import { palette } from "@styles/theme";
 
 export function RichText({ text: richText }) {
 	if (!richText) {
@@ -24,6 +24,7 @@ export function RichText({ text: richText }) {
 				<Box
 					component="span"
 					sx={[
+						{ whiteSpace: "pre-wrap" },
 						color !== "default" && {
 							color: getNordColor(color),
 						},
@@ -36,8 +37,12 @@ export function RichText({ text: richText }) {
 							py: 0.05,
 							px: 0.75,
 							bgcolor: theme =>
-								theme.palette.mode === "light" ? palette.nord6 : palette.nord1,
-							color: "primary.main",
+								color.includes("background")
+									? getNordColor(color.split("_")[0])
+									: theme.palette.mode === "light"
+									? palette.nord6
+									: palette.nord1,
+							color: color === "default" ? palette.nord8 : getNordColor(color),
 						},
 						italic && {
 							fontStyle: "italic",

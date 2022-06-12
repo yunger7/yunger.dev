@@ -228,11 +228,22 @@ theme = createTheme(theme, {
 				},
 			},
 		},
+		MuiTypography: {
+			styleOverrides: {
+				paragraph: {
+					marginBottom: theme.spacing(1.5),
+				},
+			},
+		},
 		MuiAccordion: {
 			styleOverrides: {
 				root: {
-					marginBottom: theme.spacing(2),
+					marginBottom: theme.spacing(1.5),
 					borderRadius: theme.shape.borderRadius,
+
+					"&.Mui-expanded:last-of-type": {
+						marginBottom: theme.spacing(1.5),
+					},
 				},
 			},
 		},

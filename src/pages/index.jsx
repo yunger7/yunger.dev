@@ -15,36 +15,35 @@ import {
 	lighten,
 } from "@mui/material";
 import {
-	LocalCafe as CafeIcon,
-	Construction as UtilsIcon,
-	Description as DescriptionIcon,
-	KeyboardArrowRight as KeyboardArrowRightIcon,
-	Info as InfoIcon,
-	Book as BookIcon,
-	ContactMail as ContactMailIcon,
+	LocalCafe as CoffeeIcon,
+	Construction as ToolsIcon,
+	HistoryEdu as PaperIcon,
+	Settings as ProjectsIcon,
+	Info as AboutIcon,
+	Book as NotesIcon,
+	ContactMail as ContactIcon,
 } from "@mui/icons-material";
 
+import { getPapers } from "@lib/getPapers";
+import { palette } from "@styles/theme";
 import {
 	Navbar,
 	SquareLink,
-	FeaturedBlog,
-	BlogPost,
+	FeaturedPaper,
+	PaperCard,
 	Footer,
 	Header,
 	WaveDivider,
-} from "../components";
+} from "@components";
 
-import { palette } from "../styles/theme";
-import { getBlogPosts } from "../lib/getBlogPosts";
-
-import nordicWallpaper from "../../public/nordic-wallpaper.jpg";
-import profilePicture from "../../public/profile-picture.jpg";
+import nordicWallpaper from "public/nordic-wallpaper.jpg";
+import profilePicture from "public/profile-picture.jpg";
 
 function ScrollRedirect({ href }) {
 	return <Box id={href} sx={{ position: "relative", bottom: 100 }} />;
 }
 
-export default function Home({ posts }) {
+export default function Home({ papers }) {
 	const theme = useTheme();
 
 	const carouselProps = {
@@ -112,13 +111,14 @@ export default function Home({ posts }) {
 					Hello world! I&apos;m <strong>Luís</strong>, a self-proclaimed digital
 					craftsman, music enthusiast, anime connoisseur and coffee addict. I
 					taught myself how to code to turn my dumb ideas into reality, and
-					I&apos;ve created this place to share them with the world. Check out{" "}
+					I&apos;ve created this place to share them with the world. Check out
+					the{" "}
 					<Link passHref href="/about">
 						<MuiLink sx={{ "&:hover": { bgcolor: "transparent" } }}>
-							my bio
+							about
 						</MuiLink>
 					</Link>{" "}
-					for more information.
+					page for more information.
 				</Typography>
 			</Header>
 
@@ -149,26 +149,24 @@ export default function Home({ posts }) {
 						<Grid container justifyContent="space-between" spacing={4}>
 							<Grid item md={3} sm={6} xs={12} sx={{ width: 200, height: 200 }}>
 								<Link passHref href="/support">
-									<SquareLink openInNewTab icon={CafeIcon}>
-										Buy me a coffee
+									<SquareLink openInNewTab icon={CoffeeIcon}>
+										Cafeteria
 									</SquareLink>
 								</Link>
 							</Grid>
 							<Grid item md={3} sm={6} xs={12} sx={{ width: 200, height: 200 }}>
-								<Link passHref href="/blog">
-									<SquareLink icon={DescriptionIcon}>Blog</SquareLink>
+								<Link passHref href="/papers">
+									<SquareLink icon={PaperIcon}>Papers</SquareLink>
 								</Link>
 							</Grid>
 							<Grid item md={3} sm={6} xs={12} sx={{ width: 200, height: 200 }}>
-								<Link passHref href="/utils">
-									<SquareLink icon={UtilsIcon}>Utils</SquareLink>
+								<Link passHref href="/tools">
+									<SquareLink icon={ToolsIcon}>Tools</SquareLink>
 								</Link>
 							</Grid>
 							<Grid item md={3} sm={6} xs={12} sx={{ width: 200, height: 200 }}>
 								<Link passHref href="/projects">
-									<SquareLink icon={KeyboardArrowRightIcon}>
-										All projects
-									</SquareLink>
+									<SquareLink icon={ProjectsIcon}>Projects</SquareLink>
 								</Link>
 							</Grid>
 						</Grid>
@@ -183,29 +181,29 @@ export default function Home({ posts }) {
 				</Box>
 
 				<Box component="section" sx={{ pb: 10, pt: { xs: 5, md: 0 } }}>
-					<ScrollRedirect href="posts" />
+					<ScrollRedirect href="papers" />
 					<Container maxWidth="lg">
 						<Box sx={{ mb: 2 }}>
 							<Typography variant="h4" component="h2">
-								Blog posts
+								Papers
 							</Typography>
 							<Divider />
 						</Box>
-						{!!posts.featured.length && (
+						{!!papers.featured.length && (
 							<Carousel {...carouselProps}>
-								{posts.featured.map(post => (
-									<Link passHref href={`/blog/${post.slug}`} key={post.id}>
-										<FeaturedBlog post={post} />
+								{papers.featured.map(paper => (
+									<Link passHref href={`/papers/${paper.slug}`} key={paper.id}>
+										<FeaturedPaper paper={paper} />
 									</Link>
 								))}
 							</Carousel>
 						)}
 						<Box sx={{ mt: 5 }}>
 							<Grid container spacing={4}>
-								{posts.latest.map(post => (
-									<Grid item md={4} sm={6} xs={12} key={post.id}>
-										<Link passHref href={`/blog/${post.slug}`}>
-											<BlogPost post={post} />
+								{papers.latest.map(paper => (
+									<Grid item md={4} sm={6} xs={12} key={paper.id}>
+										<Link passHref href={`/papers/${paper.slug}`}>
+											<PaperCard paper={paper} />
 										</Link>
 									</Grid>
 								))}
@@ -241,17 +239,17 @@ export default function Home({ posts }) {
 						<Grid container justifyContent="space-between" spacing={4}>
 							<Grid item sm={4} xs={12} sx={{ width: 200, height: 200 }}>
 								<Link passHref href="/about">
-									<SquareLink icon={InfoIcon}>About me</SquareLink>
+									<SquareLink icon={AboutIcon}>About</SquareLink>
 								</Link>
 							</Grid>
 							<Grid item sm={4} xs={12} sx={{ width: 200, height: 200 }}>
 								<Link passHref href="/notes">
-									<SquareLink icon={BookIcon}>Random notes</SquareLink>
+									<SquareLink icon={NotesIcon}>Random notes</SquareLink>
 								</Link>
 							</Grid>
 							<Grid item sm={4} xs={12} sx={{ width: 200, height: 200 }}>
 								<Link passHref href="/contact">
-									<SquareLink icon={ContactMailIcon}>Contact me</SquareLink>
+									<SquareLink icon={ContactIcon}>Contact me</SquareLink>
 								</Link>
 							</Grid>
 						</Grid>
@@ -268,11 +266,11 @@ export default function Home({ posts }) {
 }
 
 export async function getStaticProps() {
-	const posts = await getBlogPosts();
+	const papers = await getPapers();
 
 	return {
 		props: {
-			posts,
+			papers,
 		},
 		revalidate: 60 * 60 * 8, // 8 hours
 	};

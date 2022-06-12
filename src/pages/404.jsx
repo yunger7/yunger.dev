@@ -6,9 +6,9 @@ import { Box, Button, Typography } from "@mui/material";
 import { alpha } from "@mui/material/styles";
 import { Home as HomeIcon } from "@mui/icons-material";
 
-import { palette } from "../styles/theme";
+import { palette } from "@styles/theme";
 
-import placeholder2 from "../../public/placeholder2.jpg";
+import placeholder2 from "public/placeholder2.jpg";
 
 export default function NotFound() {
 	return (
