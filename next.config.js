@@ -4,24 +4,33 @@ const nextConfig = {
 		domains: ["i.imgur.com", "www.notion.so", "images.unsplash.com"],
 	},
 	async rewrites() {
-		return [
-			{
-				source: "/projects",
-				destination: "/work-in-progress",
-			},
-			{
-				source: "/notes",
-				destination: "/work-in-progress",
-			},
-			{
-				source: "/animelist",
-				destination: "/work-in-progress",
-			},
-			{
-				source: "/tools",
-				destination: "/work-in-progress",
-			},
-		];
+    return {
+			beforeFiles: [
+				{
+					source: "/:asset*",
+					has: [{ type: "host", value: "assets.yunger.dev" }],
+					destination: "/:asset*",
+				},
+			],
+			afterFiles: [
+				{
+					source: "/projects",
+					destination: "/work-in-progress",
+				},
+				{
+					source: "/notes",
+					destination: "/work-in-progress",
+				},
+				{
+					source: "/animelist",
+					destination: "/work-in-progress",
+				},
+				{
+					source: "/tools",
+					destination: "/work-in-progress",
+				},
+			],
+		};
 	},
 	async redirects() {
 		return [
@@ -32,6 +41,11 @@ const nextConfig = {
 			},
 			{
 				source: "/support",
+				destination: "https://ko-fi.com/yunger/",
+				permanent: false,
+			},
+      {
+				source: "/coffee",
 				destination: "https://ko-fi.com/yunger/",
 				permanent: false,
 			},
