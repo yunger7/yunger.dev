@@ -1,5 +1,5 @@
-export * from "./BlogPost";
-export * from "./FeaturedBlog";
+export * from "./PaperCard";
+export * from "./FeaturedPaper";
 export * from "./Header";
 export * from "./Navbar";
 export * from "./RichText";

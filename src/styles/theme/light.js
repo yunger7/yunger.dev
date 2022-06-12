@@ -1,5 +1,6 @@
-import { createTheme, alpha, darken, lighten } from "@mui/material/styles";
-import { palette, theme } from ".";
+import { createTheme, alpha, lighten } from "@mui/material/styles";
+import { theme } from "./theme";
+import { palette } from "./palette";
 
 export const light = createTheme(theme, {
 	palette: {
@@ -21,6 +22,15 @@ export const light = createTheme(theme, {
 				root: {
 					"&:hover": {
 						backgroundColor: alpha(palette.nord6, 0.45),
+					},
+				},
+			},
+		},
+		MuiTextField: {
+			styleOverrides: {
+				root: {
+					"& .MuiInputBase-root": {
+						backgroundColor: theme.palette.common.white,
 					},
 				},
 			},

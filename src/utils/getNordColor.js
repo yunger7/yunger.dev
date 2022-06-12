@@ -1,12 +1,9 @@
-import { palette } from "../styles/theme";
+import { palette } from "@styles/theme";
 
 export function getNordColor(color) {
 	let nordColor;
 
 	switch (color) {
-		case "default":
-			nordColor = palette.nord1;
-			break;
 		case "gray":
 			nordColor = palette.nord3;
 			break;
@@ -34,6 +31,9 @@ export function getNordColor(color) {
 		case "red":
 			nordColor = palette.nord11;
 			break;
+		case "default":
+		default:
+			nordColor = "inherit";
 	}
 
 	return nordColor;

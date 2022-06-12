@@ -12,21 +12,20 @@ import {
 	Divider,
 	useTheme,
 } from "@mui/material";
-import { Description as DescriptionIcon } from "@mui/icons-material";
+import { HistoryEdu as PaperIcon } from "@mui/icons-material";
 
+import { getPapers } from "@lib/getPapers";
+import { palette } from "@styles/theme";
 import {
 	Navbar,
 	Header,
-	FeaturedBlog,
-	BlogPost,
+	FeaturedPaper,
+	PaperCard,
 	Footer,
 	WaveDivider,
-} from "../../components";
+} from "@components";
 
-import { getBlogPosts } from "../../lib/getBlogPosts";
-import { palette } from "../../styles/theme";
-
-import nordicWallpaper from "../../../public/nordic-wallpaper.jpg";
+import nordicWallpaper from "public/nordic-wallpaper.jpg";
 
 function ScrollRedirect({ href }) {
 	return <Box id={href} sx={{ position: "relative", bottom: 100 }} />;
@@ -38,12 +37,12 @@ const navbarPaths = [
 		href: "/",
 	},
 	{
-		name: "Blog",
-		href: "/blog",
+		name: "Papers",
+		href: "/papers",
 	},
 ];
 
-export default function Blog({ posts }) {
+export default function Papers({ papers }) {
 	const theme = useTheme();
 
 	const carouselProps = {
@@ -66,7 +65,7 @@ export default function Blog({ posts }) {
 	return (
 		<>
 			<Head>
-				<title>Blog | yunger.dev</title>
+				<title>Papers | yunger.dev</title>
 			</Head>
 
 			<Navbar paths={navbarPaths} />
@@ -88,9 +87,16 @@ export default function Blog({ posts }) {
 						: theme.palette.background.paper
 				}
 			>
-				<DescriptionIcon sx={{ fontSize: 80 }} />
+				<PaperIcon sx={{ fontSize: 80, position: "relative", right: 5 }} />
 				<Typography variant="h3" component="h1">
-					Blog posts
+					Papers
+				</Typography>
+				<Typography
+					variant="subtitle1"
+					sx={{ maxWidth: { xs: "unset", sm: "70%" } }}
+				>
+					Bits of information scattered around. Pick up anything you find
+					valuable
 				</Typography>
 			</Header>
 
@@ -106,7 +112,7 @@ export default function Blog({ posts }) {
 				>
 					<ScrollRedirect href="featured" />
 					<Container maxWidth="lg">
-						{!!posts.featured.length && (
+						{!!papers.featured.length && (
 							<>
 								<Box sx={{ mb: 2 }}>
 									<Typography variant="h4" component="h2">
@@ -115,9 +121,13 @@ export default function Blog({ posts }) {
 									<Divider />
 								</Box>
 								<Carousel {...carouselProps}>
-									{posts.featured.map(post => (
-										<Link passHref href={`/blog/${post.slug}`} key={post.id}>
-											<FeaturedBlog post={post} />
+									{papers.featured.map(paper => (
+										<Link
+											passHref
+											href={`/papers/${paper.slug}`}
+											key={paper.id}
+										>
+											<FeaturedPaper paper={paper} />
 										</Link>
 									))}
 								</Carousel>
@@ -150,10 +160,10 @@ export default function Blog({ posts }) {
 							<Divider />
 						</Box>
 						<Grid container spacing={4}>
-							{posts.latest.map(post => (
-								<Grid item md={4} sm={6} xs={12} key={post.id}>
-									<Link passHref href={`/blog/${post.slug}`}>
-										<BlogPost post={post} />
+							{papers.latest.map(paper => (
+								<Grid item md={4} sm={6} xs={12} key={paper.id}>
+									<Link passHref href={`/papers/${paper.slug}`}>
+										<PaperCard paper={paper} />
 									</Link>
 								</Grid>
 							))}
@@ -167,11 +177,11 @@ export default function Blog({ posts }) {
 }
 
 export async function getStaticProps() {
-	const posts = await getBlogPosts();
+	const papers = await getPapers();
 
 	return {
 		props: {
-			posts,
+			papers,
 		},
 		revalidate: 60 * 60 * 8, // 8 hours
 	};

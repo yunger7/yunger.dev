@@ -3,11 +3,11 @@ import { Grid, Typography, Box, alpha } from "@mui/material";
 import {
 	Home as HomeIcon,
 	Info as InfoIcon,
-	Description as DescriptionIcon,
+	HistoryEdu as PaperIcon,
 	Settings as SettingsIcon,
 } from "@mui/icons-material";
 
-import { palette } from "../../styles/theme";
+import { palette } from "@styles/theme";
 
 const footerLinks = [
 	{
@@ -22,8 +22,8 @@ const footerLinks = [
 				href: "/#quick-access",
 			},
 			{
-				name: "Latest posts",
-				href: "/#posts",
+				name: "Latest papers",
+				href: "/#papers",
 			},
 			{
 				name: "More",
@@ -33,18 +33,18 @@ const footerLinks = [
 	},
 	{
 		title: {
-			name: "Blog",
-			href: "/blog",
-			icon: <DescriptionIcon />,
+			name: "Papers",
+			href: "/papers",
+			icon: <PaperIcon />,
 		},
 		links: [
 			{
 				name: "Featured",
-				href: "/blog/#featured",
+				href: "/papers/#featured",
 			},
 			{
 				name: "Latest",
-				href: "/blog/#latest",
+				href: "/papers/#latest",
 			},
 		],
 	},
@@ -64,8 +64,8 @@ const footerLinks = [
 				href: "/animelist",
 			},
 			{
-				name: "Utils",
-				href: "/utils",
+				name: "Tools",
+				href: "/tools",
 			},
 		],
 	},
@@ -77,7 +77,7 @@ const footerLinks = [
 		},
 		links: [
 			{
-				name: "About me",
+				name: "About",
 				href: "/about",
 			},
 			{

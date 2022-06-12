@@ -1,9 +1,10 @@
-module.exports = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
 	images: {
 		domains: ["i.imgur.com", "www.notion.so", "images.unsplash.com"],
 	},
 	async rewrites() {
-		return {
+    return {
 			beforeFiles: [
 				{
 					source: "/:asset*",
@@ -25,7 +26,7 @@ module.exports = {
 					destination: "/work-in-progress",
 				},
 				{
-					source: "/utils",
+					source: "/tools",
 					destination: "/work-in-progress",
 				},
 			],
@@ -43,6 +44,13 @@ module.exports = {
 				destination: "https://ko-fi.com/yunger/",
 				permanent: false,
 			},
+      {
+				source: "/coffee",
+				destination: "https://ko-fi.com/yunger/",
+				permanent: false,
+			},
 		];
 	},
 };
+
+module.exports = nextConfig;

@@ -9,8 +9,9 @@ import {
 	Settings as SettingsIcon,
 } from "@mui/icons-material";
 
-import { palette } from "../styles/theme";
-import placeholder2 from "../../public/placeholder2.jpg";
+import { palette } from "@styles/theme";
+
+import placeholder2 from "public/placeholder2.jpg";
 
 export default function WorkInProgress() {
 	return (

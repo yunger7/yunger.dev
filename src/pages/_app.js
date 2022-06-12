@@ -6,10 +6,10 @@ import PropTypes from "prop-types";
 import { CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 
-import { createEmotionCache } from "../lib/createEmotionCache";
-import { dark, light } from "../styles/theme";
+import { createEmotionCache } from "@lib/createEmotionCache";
+import { dark, light } from "@styles/theme";
 
-import "../styles/globals.css";
+import "@styles/globals.css";
 
 const clientSideEmotionCache = createEmotionCache();
 

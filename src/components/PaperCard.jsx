@@ -4,15 +4,14 @@ import { forwardRef } from "react";
 import { Box, Card, CardContent, Typography, Chip } from "@mui/material";
 import { alpha } from "@mui/material/styles";
 
-import { RichText } from ".";
+import { palette } from "@styles/theme";
+import { RichText } from "./RichText";
 
-import { palette } from "../styles/theme";
+import placeholder1 from "public/placeholder1.jpg";
 
-import placeholder1 from "../../public/placeholder1.jpg";
-
-export const BlogPost = forwardRef((props, ref) => {
-	const { post, onClick, href } = props;
-	const { title, image, description, createdAt, tags } = post;
+export const PaperCard = forwardRef((props, ref) => {
+	const { paper, onClick, href } = props;
+	const { title, image, description, createdAt, tags } = paper;
 
 	return (
 		<Card
@@ -40,7 +39,7 @@ export const BlogPost = forwardRef((props, ref) => {
 				{image ? (
 					<Image
 						src={image.src}
-						alt="Post cover"
+						alt="Paper cover"
 						layout="fill"
 						objectFit="cover"
 						placeholder="blur"
@@ -49,7 +48,7 @@ export const BlogPost = forwardRef((props, ref) => {
 				) : (
 					<Image
 						src={placeholder1}
-						alt="Post cover"
+						alt="Paper cover"
 						layout="fill"
 						objectFit="cover"
 						placeholder="blur"
@@ -89,4 +88,4 @@ export const BlogPost = forwardRef((props, ref) => {
 	);
 });
 
-BlogPost.displayName = "BlogPost";
+PaperCard.displayName = "PaperCard";

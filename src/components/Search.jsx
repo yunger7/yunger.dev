@@ -11,14 +11,16 @@ import {
 	ListItem,
 	Typography,
 	CircularProgress,
+	lighten,
 } from "@mui/material";
 import {
 	Search as SearchIcon,
-	Description as PostIcon,
+	HistoryEdu as PaperIcon,
 	Language as WebpageIcon,
 } from "@mui/icons-material";
 
-import { sleep } from "../utils";
+import { palette } from "@styles/theme";
+import { sleep } from "@utils";
 
 export function Search() {
 	const [dialogOpen, setDialogOpen] = useState(false);
@@ -52,7 +54,7 @@ function SearchModal(props) {
 	const [loading, setLoading] = useState(false);
 
 	const getResults = async query => {
-		const responseRaw = await fetch("/api/search", {
+		const responseRaw = await fetch("/api/v1/search", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -62,8 +64,8 @@ function SearchModal(props) {
 			}),
 		});
 
-		const data = await responseRaw.json();
-		return data;
+		const { data } = await responseRaw.json();
+		return data || [];
 	};
 
 	useEffect(() => {
@@ -143,14 +145,22 @@ function SearchModal(props) {
 			{!isFirstSearch && (
 				<>
 					{results.length ? (
-						<List sx={{ maxHeight: 200, overflow: "auto" }}>
+						<List
+							sx={{
+								maxHeight: 200,
+								overflow: "auto",
+								bgcolor: theme => lighten(theme.palette.background.paper, 0.1),
+							}}
+						>
 							{results.map(result => (
 								<Link passHref href={result.href} key={result.id}>
 									<ListItem button disableRipple component="a">
 										{result.pageType === "webpage" && (
 											<WebpageIcon sx={{ mr: 1 }} />
 										)}
-										{result.pageType === "post" && <PostIcon sx={{ mr: 1 }} />}
+										{result.pageType === "paper" && (
+											<PaperIcon sx={{ mr: 1 }} />
+										)}
 										<Typography noWrap variant="inherit">
 											{result.title}
 										</Typography>

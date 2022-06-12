@@ -4,13 +4,12 @@ import Image from "next/image";
 import { Box, Container, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
-import { Navbar, Header, Footer } from "../components";
+import { getNotionPageContent } from "@lib/getNotionPageContent";
+import { useBlockRenderer } from "@hooks/useBlockRenderer";
+import { Navbar, Header, Footer } from "@components";
 
-import { getNotionPageContent } from "../lib/getNotionPageContent";
-import { useBlockRenderer } from "../hooks/useBlockRenderer";
-
-import nordicWallpaper from "../../public/nordic-wallpaper.jpg";
-import profilePicture from "../../public/profile-picture.jpg";
+import nordicWallpaper from "public/nordic-wallpaper.jpg";
+import profilePicture from "public/profile-picture.jpg";
 
 const navbarPaths = [
 	{
@@ -30,7 +29,7 @@ export default function About({ content }) {
 	return (
 		<>
 			<Head>
-				<title>About me</title>
+				<title>About | yunger.dev</title>
 			</Head>
 
 			<Navbar paths={navbarPaths} />
@@ -58,10 +57,14 @@ export default function About({ content }) {
 					/>
 				</Box>
 				<Typography variant="h3" component="h1">
-					About me
+					About
 				</Typography>
-				<Typography variant="subtitle1">
-					A little bit of info about the creator of this website.
+				<Typography
+					variant="subtitle1"
+					sx={{ maxWidth: { xs: "unset", sm: "70%" } }}
+				>
+					Where am I? Who are you? What is this place and why is it so cold in
+					here?
 				</Typography>
 			</Header>
 
