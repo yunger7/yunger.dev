@@ -38,6 +38,7 @@ import {
 
 import nordicWallpaper from "public/nordic-wallpaper.jpg";
 import profilePicture from "public/profile-picture.jpg";
+import Logo from "public/logo.png";
 
 function ScrollRedirect({ href }) {
 	return <Box id={href} sx={{ position: "relative", bottom: 100 }} />;
@@ -96,13 +97,7 @@ export default function Home({ papers }) {
 						},
 					}}
 				>
-					<Image
-						priority
-						src={profilePicture}
-						alt="yunger profile picture"
-						width={150}
-						height={150}
-					/>
+					<Image priority src={Logo} alt="yunger.dev" width={98} height={98} />
 				</Box>
 				<Typography gutterBottom variant="h3" component="h1">
 					yunger.dev
