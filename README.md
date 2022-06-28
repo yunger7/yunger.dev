@@ -17,7 +17,7 @@
 <br />
 
 ## About
-This is my workshop. A cozy place that I use to host my projects, develop tools, do networking, share ideas and write about things that I'm intrested in. It's essentially the home of a digital craftsman. Check out the [about](https://yunger.dev/about) page for more information.
+This is my workshop. A cozy place that I use to host my projects, develop tools, do networking, share ideas and write about things that I'm interested in. It's essentially the home of a digital craftsman. Check out the [about](https://yunger.dev/about) page for more information.
 
 ## Tech stack
 - [Next.js](https://nextjs.org/)
