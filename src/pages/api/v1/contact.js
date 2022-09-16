@@ -95,7 +95,7 @@ async function sendMessage(data) {
 				{
 					type: "paragraph",
 					paragraph: {
-						text: [
+						rich_text: [
 							{
 								type: "text",
 								text: { content: message },
